@@ -1,0 +1,33 @@
+{
+  "name": "localisation",
+  "version": "1.0.0",
+  "description": "api for localising translations, currency, number and date",
+  "main": "index.js",
+  "scripts": {
+        "test": "grunt process_js"
+  },
+  "repository": {
+        "type": "git",
+        "url": "http://github.brislabs.com/web/localisation.git"
+  },
+  "author": "",
+  "licenses": [
+        "2014-Present, MixRadio"
+  ],
+  "dependencies": {
+        "lodash": "2.4.1"
+  },
+  "devDependencies": {
+        "grunt": "0.4.5",
+        "grunt-bump": "0.0.15",
+        "webpack": "1.4.3",
+        "grunt-contrib-jshint": "0.10.0",
+        "grunt-contrib-watch": "0.6.1",
+        "grunt-contrib-jasmine": "0.8.1",
+        "grunt-webpack": "1.0.8",
+        "rewire-webpack": "0.2.0",
+        "grunt-contrib-jasmine": "0.8.1",
+        "jasmine-expect": "^1.22.2"
+
+  }  
+}
