@@ -34,13 +34,13 @@ registerTasks = function (grunt) {
     grunt.registerTask('process_js', [
         'jshint',
         'webpack',
-        'jasmine:client',
-        'jsdoc'
+        'jasmine:client'
     ]);
 
     // ci task to give a uniform entry point for jenkins - might not be needed?
     grunt.registerTask('ci', [
-        'process_js'
+        'process_js',
+        'jsdoc'
     ]);
 
     /**

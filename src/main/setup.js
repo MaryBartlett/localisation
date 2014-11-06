@@ -1,5 +1,7 @@
 /**
- * Setup for localisation
+ * @module Setup for localisation
+ * @requires supportedTerritories config
+ * @requires supportedLanguages config
  */
 'use strict';
 
@@ -10,8 +12,9 @@ var _ = require("lodash"),
     languageConfig,
 
     /**
-    * @function function that checks if given territory is supported
-    * @param {string} territory - the territory, two character lower case expected.
+    * @function determineTerritory  
+    * @desc function that checks if given territory is supported 
+    * @param {string} territory - the territory, two character lower case expected
     * @returns {string} the determined territory
     */
     determineTerritory = function (territory) {
@@ -23,6 +26,13 @@ var _ = require("lodash"),
         return territory;
     },
 
+    /**
+    * @function determineLanguage 
+    * @desc function that checks if given language is supported 
+    * @param {string} territory - the territory, two character lower case expected
+    * @param {string} [language] - the language, two character lower case expected
+    * @returns {string} the determined language
+    */
     determineLanguage = function (territory, language) {
         if (supportedLanguages.hasOwnProperty(language)) {
             language = language;
@@ -34,6 +44,13 @@ var _ = require("lodash"),
         return language;
     },
 
+    /**
+    * @function determineTerritoryConfig 
+    * @desc function that determines the config for a given territory 
+    * @param {string} territory - the territory, two character lower case expected
+    * @param {string} language - the language, two character lower case expected
+    * @returns {object} the determined territory config
+    */
     determineTerritoryConfig = function (territory, language) {
         if (supportedTerritories.hasOwnProperty(territory) && 
             supportedTerritories[territory].hasOwnProperty('languageOverrides') && 
@@ -45,6 +62,13 @@ var _ = require("lodash"),
         return territoryConfig;
     },
 
+    /**
+    * @function determineLanguageConfig 
+    * @desc function that determines the config for a given language 
+    * @param {string} territory - the territory, two character lower case expected
+    * @param {string} language - the language, two character lower case expected
+    * @returns {object} the determined language config
+    */
     determineLanguageConfig = function (territory, language) {
         if (supportedLanguages.hasOwnProperty(language) && 
             supportedLanguages[language].hasOwnProperty('territoryOverrides') && 
@@ -56,6 +80,13 @@ var _ = require("lodash"),
         return languageConfig;
     },
 
+    /**
+    * @function getLocale 
+    * @desc function that determines the locale 
+    * @param {string} territory - the territory, two character lower case expected
+    * @param {string} [language] - the language, two character lower case expected
+    * @returns {string} the determined locale
+    */
     getLocale = function (territory, language) {
         var locale = false,
             defaultLocale = 'default-DEFAULT';
@@ -70,6 +101,13 @@ var _ = require("lodash"),
         return locale;        
     },
 
+    /**
+    * @function getConfig  
+    * @desc function that determines the config 
+    * @param {string} territory - the territory, two character lower case expected
+    * @param {string} [language] - the language, two character lower case expected
+    * @returns {object} the determined config
+    */
     getConfig = function (territory, language) {
         var config = {};
 
