@@ -9,6 +9,10 @@ var _ = require("lodash"),
     territoryConfig,
     languageConfig,
 
+    /**
+    * Represents a book.
+    * @param {string} territory - The territory. Lower case expected.
+    */
     determineTerritory = function (territory) {
         if (supportedTerritories.hasOwnProperty(territory)) {
             territory = territory;
