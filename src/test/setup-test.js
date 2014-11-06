@@ -4,7 +4,8 @@
 'use strict';
 
 
-var rewire = require('rewire'),
+var _ = require("lodash"),
+    rewire = require('rewire'),
     setup = rewire('../../src/main/setup.js');
 
 describe('setup', function () {

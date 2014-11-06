@@ -2,8 +2,8 @@ module.exports = {
     all: [
         './Gruntfile.js',
         './grunt/**/*.js',
-        './src/main/js/**/*.js',
-        './src/test/js/**/*.js'
+        './src/main/**/*.js',
+        './src/test/**/*.js'
     ],
     options: {
         bitwise: true,

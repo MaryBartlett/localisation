@@ -1,4 +1,4 @@
-/*
+/**
  * Setup for localisation
  */
 'use strict';
@@ -10,8 +10,9 @@ var _ = require("lodash"),
     languageConfig,
 
     /**
-    * Represents a book.
-    * @param {string} territory - The territory. Lower case expected.
+    * @function function that checks if given territory is supported
+    * @param {string} territory - the territory, two character lower case expected.
+    * @returns {string} the determined territory
     */
     determineTerritory = function (territory) {
         if (supportedTerritories.hasOwnProperty(territory)) {
@@ -34,7 +35,9 @@ var _ = require("lodash"),
     },
 
     determineTerritoryConfig = function (territory, language) {
-        if (supportedTerritories.hasOwnProperty(territory) && supportedTerritories[territory].hasOwnProperty('languageOverrides') && supportedTerritories[territory].languageOverrides.hasOwnProperty(language)) {
+        if (supportedTerritories.hasOwnProperty(territory) && 
+            supportedTerritories[territory].hasOwnProperty('languageOverrides') && 
+            supportedTerritories[territory].languageOverrides.hasOwnProperty(language)) {
             territoryConfig = _.extend(supportedTerritories[territory], supportedTerritories[territory].languageOverrides[language]);
         } else {
             territoryConfig = supportedTerritories[territory];
@@ -43,7 +46,9 @@ var _ = require("lodash"),
     },
 
     determineLanguageConfig = function (territory, language) {
-        if (supportedLanguages.hasOwnProperty(language) && supportedLanguages[language].hasOwnProperty('territoryOverrides') && supportedLanguages[language].territoryOverrides.hasOwnProperty(territory)) {
+        if (supportedLanguages.hasOwnProperty(language) && 
+            supportedLanguages[language].hasOwnProperty('territoryOverrides') && 
+            supportedLanguages[language].territoryOverrides.hasOwnProperty(territory)) {
             languageConfig = _.extend(supportedLanguages[language], supportedLanguages[language].territoryOverrides[territory]);
         } else {
             languageConfig = supportedLanguages[language];
