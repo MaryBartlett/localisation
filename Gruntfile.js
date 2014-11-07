@@ -19,7 +19,6 @@ module.exports = function(grunt) {
     registerReleaseTasks(grunt);
 };
 
-
 registerTasks = function (grunt) {
 
     /**
@@ -36,11 +35,13 @@ registerTasks = function (grunt) {
         'jasmine:client'
     ]);
 
+    //TODO kill
     // ci task to give a uniform entry point for jenkins - might not be needed?
     grunt.registerTask('ci', [
         'process_js'
     ]);
 
+    //TODO kill
     /**
      * Prepares the JS for distribution
      * Does the common tasks, but then minimises the JS using uglify
@@ -61,8 +62,6 @@ registerTasks = function (grunt) {
         'process_js',
         'watch'
     ]);
-
-
 };
 
 registerReleaseTasks = function (grunt) {

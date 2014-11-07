@@ -28,6 +28,5 @@
         "rewire-webpack": "0.2.0",
         "grunt-contrib-jasmine": "0.8.1",
         "jasmine-expect": "^1.22.2"
-
   }  
 }

@@ -1,6 +1,7 @@
 var RewirePlugin = require("rewire-webpack");
 
 module.exports = {
+    //TODO rename deployable
     app: {
         context: "./src/main",
         entry: "./index.js",
