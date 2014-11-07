@@ -1,13 +1,12 @@
 var RewirePlugin = require("rewire-webpack");
 
 module.exports = {
-    //TODO rename deployable
     app: {
         context: "./src/main",
         entry: "./index.js",
         output: {
             path: "./target",
-            filename: "mixrad-app.js"
+            filename: "localisation.js"
         },
         plugins: [
             new RewirePlugin()

@@ -61,7 +61,7 @@ describe('setup determineLanguage', function () {
 
     it('should return default language for a territory if unsupported language given', function () {
         expect(setup.determineLanguage('gb', 'ke')).toEqual('en');
-    });    
+    });
 
     it('should return "default" language if unsupported language given', function () {
         expect(setup.determineLanguage('fa', 'ke')).toEqual('default');
@@ -73,11 +73,11 @@ describe('setup determineLanguage', function () {
 
     it('should return language if supported language given', function () {
         expect(setup.determineLanguage('fr', 'fr')).toEqual('fr');
-    });    
+    });
 
     it('should return language if supported language given, even with a fake territory', function () {
         expect(setup.determineLanguage('fa', 'fr')).toEqual('fr');
-    });    
+    });
 
     it('should return language if supported language given, even with a false territory', function () {
         expect(setup.determineLanguage(false, 'fr')).toEqual('fr');
@@ -128,7 +128,27 @@ describe('setup determineLanguage', function () {
         });
 
         it('should return correct object for territory and language combination', function () {
-            expect(setup.getConfig('gb', 'fr')).toEqual(_.extend(supportedTerritoriesFixture.gb, supportedLanguagesFixture.fr));
-        });        
+            expect(setup.getConfig('gb', 'de')).toEqual(_.extend(supportedTerritoriesFixture.gb, supportedLanguagesFixture.de));
+        });
+
+        it('should return correct object for territory with language overrides', function () {
+            var vndeTerritoryConfig =  _.omit(_.extend(supportedTerritoriesFixture.vn, supportedTerritoriesFixture.vn.languageOverrides.de), 'languageOverrides');
+
+            expect(setup.getConfig('vn', 'de')).toEqual(_.extend(vndeTerritoryConfig, supportedLanguagesFixture.de));
+        });
+
+        it('should return correct object for language with territory overrides', function () {
+            var brptLanguageConfig =  _.omit(_.extend(supportedLanguagesFixture.pt, supportedLanguagesFixture.pt.territoryOverrides.br), 'territoryOverrides');
+
+            expect(setup.getConfig('br', 'pt')).toEqual(_.extend(supportedTerritoriesFixture.br, brptLanguageConfig));
+        });
+
+        it('should return correct object for territory with language and territory overrides', function () {
+            var cafrTerritoryConfig = _.omit(_.extend(supportedTerritoriesFixture.ca, supportedTerritoriesFixture.ca.languageOverrides.fr), 'languageOverrides'),
+                cafrLanguageConfig =  _.omit(_.extend(supportedLanguagesFixture.fr, supportedLanguagesFixture.fr.territoryOverrides.ca), 'territoryOverrides');
+
+            expect(setup.getConfig('ca', 'fr')).toEqual(_.extend(cafrTerritoryConfig, cafrLanguageConfig));
+        });
+
     });
 });

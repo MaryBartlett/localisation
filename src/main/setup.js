@@ -8,8 +8,53 @@
 var _ = require("lodash"),
     supportedTerritories = require('./supportedTerritories'),
     supportedLanguages = require('./supportedLanguages'),
+    defaultLocale = 'default-DEFAULT',
     territoryConfig,
     languageConfig,
+
+    /**
+    * @function defaultLanguageExistsForTerritory  
+    * @desc function that checks if there is a default language for a territory 
+    * @param {string} territory - the territory, two character lower case expected
+    * @returns {bool} whether a territory has a default language or not
+    */    
+    defaultLanguageExistsForTerritory = function (territory) {
+        if (supportedTerritories.hasOwnProperty(territory) && 
+            supportedTerritories[territory].hasOwnProperty("territoryDefaultLanguage")) {
+            return true;
+        } return false;
+
+    },
+
+    /**
+    * @function languageOverridesExistForTerritory 
+    * @desc function that checks if given territory has language overrides 
+    * @param {string} territory - the territory, two character lower case expected
+    * @param {string} language - the language, two character lower case expected
+    * @returns {bool} whether a territory has language overrides or not
+    */
+    languageOverridesExistForTerritory = function (territory, language) {
+        if (supportedTerritories.hasOwnProperty(territory) && 
+            supportedTerritories[territory].hasOwnProperty('languageOverrides') && 
+            supportedTerritories[territory].languageOverrides.hasOwnProperty(language)) {
+            return true;
+        } return false;
+    },
+
+    /**
+    * @function territoryOverridesExistForLanguage 
+    * @desc function that checks if given language has territory overrides 
+    * @param {string} territory - the territory, two character lower case expected
+    * @param {string} language - the language, two character lower case expected
+    * @returns {bool} whether a language has territory overrides or not
+    */
+    territoryOverridesExistForLanguage = function (territory, language) {
+        if (supportedLanguages.hasOwnProperty(language) && 
+            supportedLanguages[language].hasOwnProperty('territoryOverrides') && 
+            supportedLanguages[language].territoryOverrides.hasOwnProperty(territory)) {
+            return true;
+        } return false;
+    },    
 
     /**
     * @function determineTerritory  
@@ -18,10 +63,7 @@ var _ = require("lodash"),
     * @returns {string} the determined territory
     */    
     determineTerritory = function (territory) {
-        //TODO inverse and just have else clause
-        if (supportedTerritories.hasOwnProperty(territory)) {
-            territory = territory;
-        } else {
+        if (!supportedTerritories.hasOwnProperty(territory)) {
             territory = 'default';
         }
         return territory;
@@ -35,14 +77,12 @@ var _ = require("lodash"),
     * @returns {string} the determined language
     */
     determineLanguage = function (territory, language) {
-        if (supportedLanguages.hasOwnProperty(language)) {
-            //TODO don't need this step
-            language = language;
-            //TODO if cluase too big bascally saying if the territory has default language use that
-        } else if (supportedTerritories.hasOwnProperty(territory) && supportedTerritories[territory].hasOwnProperty("territoryDefaultLanguage")) {
-            language = supportedTerritories[territory].territoryDefaultLanguage;
-        } else {
-            language = 'default';
+        if (!supportedLanguages.hasOwnProperty(language)) {
+            if (defaultLanguageExistsForTerritory(territory)) {
+                language = supportedTerritories[territory].territoryDefaultLanguage;
+            } else {
+                language = 'default';
+            }            
         }
         return language;
     },
@@ -55,11 +95,8 @@ var _ = require("lodash"),
     * @returns {object} the determined territory config
     */
     determineTerritoryConfig = function (territory, language) {
-        //TODO if (weHaveLanguageOverridesForTerritory())
-        if (supportedTerritories.hasOwnProperty(territory) && 
-            supportedTerritories[territory].hasOwnProperty('languageOverrides') && 
-            supportedTerritories[territory].languageOverrides.hasOwnProperty(language)) {
-            //TODO merge language overides with terriroty
+        if (languageOverridesExistForTerritory(territory, language)) {
+            // merge language overrides with territory config
             territoryConfig = _.extend(supportedTerritories[territory], supportedTerritories[territory].languageOverrides[language]);
         } else {
             territoryConfig = supportedTerritories[territory];
@@ -75,10 +112,8 @@ var _ = require("lodash"),
     * @returns {object} the determined language config
     */
     determineLanguageConfig = function (territory, language) {
-        //TODO if (thereAreLanguageOveridesFOrTerriroty()) { ...
-        if (supportedLanguages.hasOwnProperty(language) && 
-            supportedLanguages[language].hasOwnProperty('territoryOverrides') && 
-            supportedLanguages[language].territoryOverrides.hasOwnProperty(territory)) {
+        if (territoryOverridesExistForLanguage(territory, language)) {
+            // merge territory overrides with language config
             languageConfig = _.extend(supportedLanguages[language], supportedLanguages[language].territoryOverrides[territory]);
         } else {
             languageConfig = supportedLanguages[language];
@@ -94,14 +129,11 @@ var _ = require("lodash"),
     * @returns {string} the determined locale
     */
     getLocale = function (territory, language) {
-        var locale = false,
-            //TODO move to top of file as global config
-            defaultLocale = 'default-DEFAULT';
+        var locale = false;
 
         if (territory) {
-            //TODO use dtermined territory to determine lang?
             var determinedTerritory = determineTerritory(territory),
-                determinedLanguage = determineLanguage(territory, language);
+                determinedLanguage = determineLanguage(determinedTerritory, language);
             locale = determinedLanguage.toLowerCase() + '-' + determinedTerritory.toUpperCase();
         } else {
             locale = defaultLocale;
@@ -117,9 +149,6 @@ var _ = require("lodash"),
     * @returns {object} the determined config
     */
     getConfig = function (territory, language) {
-        //TODO no need to init config
-        var config = {};
-
         if (_.isUndefined(language)) {
             language = determineLanguage(territory);
         }
@@ -131,9 +160,7 @@ var _ = require("lodash"),
         territoryConfig = _.omit(territoryConfig, 'languageOverrides');
         languageConfig = _.omit(languageConfig, 'territoryOverrides');
 
-        config = _.extend(languageConfig, territoryConfig);
-
-        return config;        
+        return _.extend(territoryConfig, languageConfig);       
     };    
 
 module.exports = {

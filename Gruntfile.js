@@ -36,20 +36,11 @@ registerTasks = function (grunt) {
         'jasmine:client'
     ]);
 
-    //TODO kill
     // ci task to give a uniform entry point for jenkins - might not be needed?
     grunt.registerTask('ci', [
         'process_js'
     ]);
 
-    //TODO kill
-    /**
-     * Prepares the JS for distribution
-     * Does the common tasks, but then minimises the JS using uglify
-     */
-    // grunt.registerTask('process_js_dist', [
-    //     'process_js'
-    // ]);
 
     /**
      * The default task that will be run.
