@@ -39,8 +39,7 @@ registerTasks = function (grunt) {
 
     // ci task to give a uniform entry point for jenkins - might not be needed?
     grunt.registerTask('ci', [
-        'process_js',
-        'jsdoc'
+        'process_js'
     ]);
 
     /**

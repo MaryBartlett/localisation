@@ -8,5 +8,6 @@ module.exports = function (grunt) {
 
         // increment the version number of the package
         grunt.task.run('bump');
+        grunt.task.run('jsdoc');
     });
 };
