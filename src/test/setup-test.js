@@ -3,12 +3,11 @@
  */
 'use strict';
 
-
-var rewire = require('rewire'),
+var _ = require("lodash"),
+    rewire = require('rewire'),
     setup = rewire('../../src/main/setup.js');
 
 describe('setup', function () {
-
 
     it('exists', function () {
         expect(setup).toBeDefined();
@@ -20,11 +19,11 @@ describe('setup', function () {
         expect(setup.getConfig).toBeFunction();
         expect(setup.getLocale).toBeFunction();
     });
-
 });
 
 describe('setup determineTerritory', function () {
     var supportedTerritoriesFixture = require('./supportedTerritoriesFixture');
+
     beforeEach(function  () {
         setup.__set__('supportedTerritories', supportedTerritoriesFixture);
     });
@@ -39,18 +38,17 @@ describe('setup determineTerritory', function () {
 
     it('should return default territory if an unsupported territory given', function () {
         expect(setup.determineTerritory('sa')).toEqual('default');
-    });    
-    
+    });
 });
 
 describe('setup determineLanguage', function () {
+
     var supportedTerritoriesFixture = require('./supportedTerritoriesFixture'),
         supportedLanguagesFixture = require('./supportedLanguagesFixture');
 
     beforeEach(function  () {
         setup.__set__('supportedTerritories', supportedTerritoriesFixture);
         setup.__set__('supportedLanguages', supportedLanguagesFixture);
-
     });
 
     it('should return "default" if no language given', function () {
@@ -86,13 +84,13 @@ describe('setup determineLanguage', function () {
     });
 
     describe('setup getLocale', function () {
+
         var supportedTerritoriesFixture = require('./supportedTerritoriesFixture'),
             supportedLanguagesFixture = require('./supportedLanguagesFixture');
 
         beforeEach(function  () {
             setup.__set__('supportedTerritories', supportedTerritoriesFixture);
             setup.__set__('supportedLanguages', supportedLanguagesFixture);
-
         });
 
         it('should return "default" if no parameters given', function () {
@@ -106,7 +104,6 @@ describe('setup determineLanguage', function () {
         it('should return valid locale if both territory and language given', function () {
             expect(setup.getLocale('gb', 'en')).toEqual('en-GB');
         });
-
     });
 
     describe('setup getConfig', function () {
@@ -116,7 +113,6 @@ describe('setup determineLanguage', function () {
         beforeEach(function  () {
             setup.__set__('supportedTerritories', supportedTerritoriesFixture);
             setup.__set__('supportedLanguages', supportedLanguagesFixture);
-
         });
 
         it('should return empty object if no parameters given', function () {
@@ -129,15 +125,10 @@ describe('setup determineLanguage', function () {
 
         it('should return object if valid territory and language given', function () {
             expect(setup.getConfig('gb', 'en')).toEqual(_.extend(supportedTerritoriesFixture.gb, supportedLanguagesFixture.en));
-
         });
 
         it('should return correct object for territory and language combination', function () {
             expect(setup.getConfig('gb', 'fr')).toEqual(_.extend(supportedTerritoriesFixture.gb, supportedLanguagesFixture.fr));
-
         });        
     });
-
-
-
 });

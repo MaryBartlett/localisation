@@ -11,7 +11,8 @@ module.exports = function(grunt) {
         webpack: require('./config/grunt/webpack'),
         jshint: require('./config/grunt/jshint'),
         jasmine: require('./config/grunt/jasmine'),
-        bump: require('./config/grunt/bump')
+        bump: require('./config/grunt/bump'),
+        jsdoc: require('./config/grunt/jsdoc')
     });
 
     loadNpmTasks(grunt);
@@ -75,4 +76,6 @@ loadNpmTasks = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-bump');
+    grunt.loadNpmTasks('grunt-jsdoc');
+
 };
