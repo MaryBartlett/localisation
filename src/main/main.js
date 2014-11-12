@@ -3,11 +3,6 @@
  */
 'use strict';
 
-// _ = require("lodash"),
-//     i18n = require("i18n-js"),
-//     con = require("service-console"),
-
-
 var  _ = require("lodash"),
     i18n = require("i18n-js"),
     configureI18n = require("configureI18n"),

@@ -28,6 +28,12 @@ var  _ = require("lodash"),
         i18n.defaultLocale = determinedLocale;
         i18n.translations[determinedLocale] = determinedConfig.translations;
 
+        return {
+            i18n: i18n,
+            territory: determinedTerritory,
+            language: determinedLanguage,
+            locale: determinedLocale
+        };
     };
 
 module.exports = configureI18n;

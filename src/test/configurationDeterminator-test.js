@@ -80,7 +80,6 @@ describe('configurationDeterminator', function () {
 
     describe('createConfig', function () {
 
-
         it('should return empty object if no parameters given', function () {
             expect(configurationDeterminator.createConfig(supportedTerritoriesFixture, supportedLanguagesFixture)).toEqual({});
         });

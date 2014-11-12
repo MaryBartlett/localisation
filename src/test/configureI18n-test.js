@@ -72,7 +72,7 @@ describe('configureI18n', function () {
         configurationDeterminatorSpy.determineTerritory.and.returnValue(resolvedTerritory);
         configurationDeterminatorSpy.determineLanguage.and.returnValue(resolvedLanguage);
         configureI18n(i18nObj, validConfig);
-        
+
         expect(configurationDeterminatorSpy.createConfig).toHaveBeenCalledWith(validConfig.supportedTerritories, validConfig.supportedLanguages, resolvedTerritory, resolvedLanguage);        
     });
 
@@ -96,4 +96,17 @@ describe('configureI18n', function () {
 
         expect(i18nObj.translations[resolvedLocale]).toBe(resolvedConfig.translations);
     });    
+
+    it('has a defined api', function () {
+        configurationDeterminatorSpy.determineTerritory.and.returnValue(resolvedTerritory);
+        configurationDeterminatorSpy.determineLanguage.and.returnValue(resolvedLanguage);
+        configurationDeterminatorSpy.createLocale.and.returnValue(resolvedLocale);
+        
+        var configuredI18n = configureI18n(i18nObj, validConfig);
+
+        expect(configuredI18n.i18n).toBe(i18nObj);
+        expect(configuredI18n.language).toBe(resolvedLanguage);
+        expect(configuredI18n.territory).toBe(resolvedTerritory);
+        expect(configuredI18n.locale).toBe(resolvedLocale);
+    });
 });
