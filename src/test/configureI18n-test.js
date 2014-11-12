@@ -105,8 +105,8 @@ describe('configureI18n', function () {
         var configuredI18n = configureI18n(i18nObj, validConfig);
 
         expect(configuredI18n.i18n).toBe(i18nObj);
-        expect(configuredI18n.language).toBe(resolvedLanguage);
         expect(configuredI18n.territory).toBe(resolvedTerritory);
+        expect(configuredI18n.language).toBe(resolvedLanguage);
         expect(configuredI18n.locale).toBe(resolvedLocale);
     });
 });
