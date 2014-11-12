@@ -8,7 +8,7 @@ var  _ = require("lodash"),
     configureI18n = require("configureI18n"),
     LocaliserApi = require("localiserApi"),
     createLocaliser = function (configuration) {
-        var configuredI18n;
+        var i18nConfiguration;
         if (!(_.isObject(configuration) && 
             _.isObject(configuration.supportedTerritories) && 
             _.isObject(configuration.supportedLanguages) && 
@@ -16,9 +16,9 @@ var  _ = require("lodash"),
             throw new Error('createLocaliser did not receive the required arguments');
         }
 
-        configuredI18n = configureI18n(i18n, configuration);
+        i18nConfiguration = configureI18n(i18n, configuration);
 
-        return new LocaliserApi(configuredI18n);
+        return new LocaliserApi(i18nConfiguration);
     };
 
 module.exports = {

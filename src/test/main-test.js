@@ -26,7 +26,7 @@ describe('main', function () {
             revertConfigSpy,
             reverti18nSpy,
             revertLocaliserApiSpy,
-            configuredI18n = {
+            i18nConfiguration = {
                 i18n: {},
                 territory: "str",
                 language: "ing",
@@ -60,7 +60,7 @@ describe('main', function () {
         it('language is optional', function () {
             var localiserInstance = {foo: "bar"},
                 missingLanguage = _.omit(validConfiguration, 'language');
-            configureI18nSpy.and.returnValue(configuredI18n);
+            configureI18nSpy.and.returnValue(i18nConfiguration);
             localiserApiSpy.and.returnValue(localiserInstance);
 
             expect(function () {main.createLocaliser(missingLanguage);}).not.toThrow();
@@ -86,14 +86,14 @@ describe('main', function () {
         it('calls localiserApi with correct arguments', function () {
             var localiserInstance = {foo: "bar"},
                 returnedLocaliser;
-            configureI18nSpy.and.returnValue(configuredI18n);
+            configureI18nSpy.and.returnValue(i18nConfiguration);
             localiserApiSpy.and.returnValue(localiserInstance);
 
             returnedLocaliser = main.createLocaliser(validConfiguration);
 
             expect(returnedLocaliser).toBeObject();
             expect(configureI18nSpy).toHaveBeenCalledWith(i18nSpy, validConfiguration);
-            expect(localiserApiSpy).toHaveBeenCalledWith(configuredI18n);
+            expect(localiserApiSpy).toHaveBeenCalledWith(i18nConfiguration);
             expect(returnedLocaliser).toBe(localiserInstance);
         });
     });
