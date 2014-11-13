@@ -32,8 +32,6 @@ var  _ = require("lodash"),
             i18n.pluralization[determinedLocale] = determinedConfig.pluralization;
         }
 
-        console.log(JSON.stringify(i18n));
-
         return {
             i18n: i18n,
             territory: determinedTerritory,
