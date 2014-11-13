@@ -28,7 +28,7 @@ var _ = require('lodash'),
         }
         // if territory is a something we can't handle, don't return a currency
         if (this._territory === 'default') {
-            return false;
+            throw new Error('formatCurrency could not return a localised currency as territory is unknown');
         }         
 
         return this._i18n.toCurrency(number, {format: currencyFormat, unit: currencySymbol, precision: currencyPrecision, separator: currencySeparator, delimiter: currencyDelimiter});

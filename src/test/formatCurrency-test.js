@@ -35,7 +35,7 @@ describe('formatCurrency', function () {
     it('should return false and not call i18n.toCurrency when territory is "default"', function () {
         localiserScope._territory = 'default';
 
-        expect(formatCurrency.call(localiserScope, '10')).toBe(false);
+        expect(function () {formatCurrency.call(localiserScope, '10');}).toThrow();
         expect(localiserScope._i18n.toCurrency).not.toHaveBeenCalled();
 
     });
