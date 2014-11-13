@@ -23,6 +23,9 @@ describe('configureI18n', function () {
         resolvedConfig = {
             translations: {
                 foo: "bar"
+            }, 
+            pluralization: {
+                pluralization: "rule"
             }
         };
 
@@ -30,10 +33,11 @@ describe('configureI18n', function () {
 
         configurationDeterminatorSpy = jasmine.createSpyObj('setup', ["determineTerritory", "determineLanguage", "createConfig", "createLocale"]);
         i18nObj = {
-            translations: {}
+            translations: {},
+            pluralization: {}
         };
-        revert = configureI18n.__set__('configDeterminator', configurationDeterminatorSpy);
         configurationDeterminatorSpy.createConfig.and.returnValue(resolvedConfig);
+        revert = configureI18n.__set__('configDeterminator', configurationDeterminatorSpy);
 
     });
 
@@ -93,9 +97,21 @@ describe('configureI18n', function () {
         configurationDeterminatorSpy.createLocale.and.returnValue(resolvedLocale);
         
         configureI18n(i18nObj, validConfig);
-
+        
         expect(i18nObj.translations[resolvedLocale]).toBe(resolvedConfig.translations);
+    });
+
+
+    it('should configure i18n with configuration for the determined locale if pluralization rules present', function () {
+        configurationDeterminatorSpy.determineTerritory.and.returnValue(resolvedTerritory);
+        configurationDeterminatorSpy.determineLanguage.and.returnValue(resolvedLanguage);
+        configurationDeterminatorSpy.createLocale.and.returnValue(resolvedLocale);
+        
+        configureI18n(i18nObj, validConfig);
+
+        expect(i18nObj.pluralization[resolvedLocale]).toBe(resolvedConfig.pluralization);
     });    
+
 
     it('has a defined api', function () {
         configurationDeterminatorSpy.determineTerritory.and.returnValue(resolvedTerritory);

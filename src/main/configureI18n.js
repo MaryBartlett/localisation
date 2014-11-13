@@ -28,6 +28,12 @@ var  _ = require("lodash"),
         i18n.defaultLocale = determinedLocale;
         i18n.translations[determinedLocale] = determinedConfig.translations;
 
+        if (determinedConfig.hasOwnProperty('pluralization')) {
+            i18n.pluralization[determinedLocale] = determinedConfig.pluralization;
+        }
+
+        console.log(JSON.stringify(i18n));
+
         return {
             i18n: i18n,
             territory: determinedTerritory,
