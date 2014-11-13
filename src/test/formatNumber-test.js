@@ -6,15 +6,16 @@
 var formatNumber = require('../../src/main/formatNumber.js');
 
 describe('formatNumber', function () {
-    var localiserScope = {
-        _i18n: {
-            numberPrecision: "3",
-            numberSeparator: ",",
-            numberDelimiter: "."
-        }
-    };
+    var localiserScope;
 
     beforeEach(function() {
+        localiserScope = {
+            _i18n: {
+                numberPrecision: "3",
+                numberSeparator: ",",
+                numberDelimiter: "."
+            }
+        };
         localiserScope._i18n.toNumber = jasmine.createSpy('toNumber');
     });  
 
