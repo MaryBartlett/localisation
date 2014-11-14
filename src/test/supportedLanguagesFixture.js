@@ -11,7 +11,8 @@ module.exports = {
         translations: 'de.json'
     },    
     'en': {
-        translations: 'en.json'
+        translations: 'en.json',
+        pluralization: 'function'
     },
     'pt': {
         territoryOverrides: {
