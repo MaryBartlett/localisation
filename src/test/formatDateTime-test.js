@@ -42,7 +42,7 @@ describe('formatDateTime', function () {
         it('should call i18n.strftime when given a Unix Epoch date', function () {
             formatDateTime.call(localiserScope, 1412604094352, "date");
 
-            expect(localiserScope._i18n.strftime).toHaveBeenCalledWith(new Date(1412604094352), "defaultDateFormat");
+            expect(localiserScope._i18n.strftime).toHaveBeenCalledWith(new Date("2014-10-06T14:01:34.352Z"), "defaultDateFormat");
         });
 
         it('should call i18n.strftime when given a dateString date', function () {
@@ -80,7 +80,7 @@ describe('formatDateTime', function () {
         it('should call i18n.strftime when given a Unix Epoch date', function () {
             formatDateTime.call(localiserScope, 1412604094352, "dateTime");
 
-            expect(localiserScope._i18n.strftime).toHaveBeenCalledWith(new Date(1412604094352), "defaultDateTimeFormat");
+            expect(localiserScope._i18n.strftime).toHaveBeenCalledWith(new Date("2014-10-06T14:01:34.352Z"), "defaultDateTimeFormat");
         });
 
         it('should call i18n.strftime when given a dateString date', function () {
@@ -118,7 +118,7 @@ describe('formatDateTime', function () {
         it('should call i18n.strftime when given a Unix Epoch date', function () {
             formatDateTime.call(localiserScope, 1412604094352, "time");
 
-            expect(localiserScope._i18n.strftime).toHaveBeenCalledWith(new Date(1412604094352), "defaultTimeFormat");
+            expect(localiserScope._i18n.strftime).toHaveBeenCalledWith(new Date("2014-10-06T14:01:34.352Z"), "defaultTimeFormat");
         });
 
         it('should call i18n.strftime when given a dateString date', function () {
