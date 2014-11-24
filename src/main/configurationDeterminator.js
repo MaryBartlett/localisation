@@ -97,11 +97,11 @@ var _ = require("lodash"),
     * @returns {object} the determined territory config
     */
     determineTerritoryConfig = function (supportedTerritories, territory, language) {
+        territoryConfig = supportedTerritories[territory];
+
         if (languageOverridesExistForTerritory(supportedTerritories, territory, language)) {
             // merge language overrides with territory config
-            territoryConfig = _.extend(supportedTerritories[territory], supportedTerritories[territory].languageOverrides[language]);
-        } else {
-            territoryConfig = supportedTerritories[territory];
+            territoryConfig = _.extend(territoryConfig, territoryConfig.languageOverrides[language]);
         }
         return territoryConfig;
     },
