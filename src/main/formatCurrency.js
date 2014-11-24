@@ -31,7 +31,13 @@ var _ = require('lodash'),
             throw new Error('formatCurrency could not return a localised currency as territory is unknown');
         }         
 
-        return this._i18n.toCurrency(number, {format: currencyFormat, unit: currencySymbol, precision: currencyPrecision, separator: currencySeparator, delimiter: currencyDelimiter});
+        return this._i18n.toCurrency(number, {
+            format: currencyFormat, 
+            unit: currencySymbol, 
+            precision: currencyPrecision, 
+            separator: currencySeparator, 
+            delimiter: currencyDelimiter
+        });
     };
 
 module.exports = formatCurrency;
