@@ -35,4 +35,13 @@ describe('main', function () {
         }));
     });
 
+    it('should translate', function () {
+        var config = returnConfig('gb'),
+            localiser = main.createLocaliser(config);
+
+        expect(localiser.translate).toBeFunction();
+        expect(localiser.translate('string')).toEqual('translatedString');
+
+    });    
+
 });

@@ -11,7 +11,18 @@ module.exports = {
         translations: 'de.json'
     },    
     'en': {
-        translations: 'en.json',
+        translations: {
+            "string": "translatedString",
+            "pluralizationString": {
+                "one": "{{count}} pluralizationStringOne",
+                "other": "{{count}} pluralizationStringOther"
+            },
+            "stringReplacementString": "string replacement {{word}} string",
+            "pluralizationAndStringReplacement": {
+                "one": "string replacement {{count}} {{word}} string one",
+                "other": "string replacement {{count}} {{word}} string other"
+            }
+        },
         pluralization: 'function'
     },
     'pt': {
