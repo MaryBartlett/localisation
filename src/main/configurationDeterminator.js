@@ -31,11 +31,9 @@ var _ = require("lodash"),
     * @returns {bool} whether a territory has language overrides or not
     */
     languageOverridesExistForTerritory = function (supportedTerritories, territory, language) {
-        if (supportedTerritories.hasOwnProperty(territory) && 
+        return (supportedTerritories.hasOwnProperty(territory) && 
             supportedTerritories[territory].hasOwnProperty('languageOverrides') && 
-            supportedTerritories[territory].languageOverrides.hasOwnProperty(language)) {
-            return true;
-        } return false;
+            supportedTerritories[territory].languageOverrides.hasOwnProperty(language));
     },
 
     /**
@@ -47,11 +45,9 @@ var _ = require("lodash"),
     * @returns {bool} whether a language has territory overrides or not
     */
     territoryOverridesExistForLanguage = function (supportedLanguages, territory, language) {
-        if (supportedLanguages.hasOwnProperty(language) && 
+        return (supportedLanguages.hasOwnProperty(language) && 
             supportedLanguages[language].hasOwnProperty('territoryOverrides') && 
-            supportedLanguages[language].territoryOverrides.hasOwnProperty(territory)) {
-            return true;
-        } return false;
+            supportedLanguages[language].territoryOverrides.hasOwnProperty(territory));
     },    
 
     /**
