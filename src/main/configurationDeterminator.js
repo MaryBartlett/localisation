@@ -15,11 +15,8 @@ var _ = require("lodash"),
     * @returns {bool} whether a territory has a default language or not
     */    
     defaultLanguageExistsForTerritory = function (supportedTerritories, territory) {
-        if (supportedTerritories.hasOwnProperty(territory) && 
-            supportedTerritories[territory].hasOwnProperty("territoryDefaultLanguage")) {
-            return true;
-        } return false;
-
+        return (supportedTerritories.hasOwnProperty(territory) && 
+            supportedTerritories[territory].hasOwnProperty("territoryDefaultLanguage"));
     },
 
     /**
