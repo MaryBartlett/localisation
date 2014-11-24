@@ -115,11 +115,11 @@ var _ = require("lodash"),
     * @returns {object} the determined language config
     */
     determineLanguageConfig = function (supportedLanguages, territory, language) {
+        languageConfig = supportedLanguages[language];
+
         if (territoryOverridesExistForLanguage(supportedLanguages, territory, language)) {
             // merge territory overrides with language config
-            languageConfig = _.extend(supportedLanguages[language], supportedLanguages[language].territoryOverrides[territory]);
-        } else {
-            languageConfig = supportedLanguages[language];
+            languageConfig = _.extend(languageConfig, languageConfig.territoryOverrides[territory]);
         }
         return languageConfig;
     },
