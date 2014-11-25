@@ -25,7 +25,7 @@ describe('translate', function () {
     it('should call i18n.t when given a simple string', function () {
         translate.call(localiserScope, 'hello');
 
-        expect(localiserScope._i18n.t).toHaveBeenCalledWith('hello');
+        expect(localiserScope._i18n.t).toHaveBeenCalledWith('hello', undefined);
     });
 
     it('should call i18n.t and pass parameters through when provided', function () {
@@ -37,7 +37,7 @@ describe('translate', function () {
     it('should call i18n.p when given a string to pluralize', function () {
         translate.call(localiserScope, 'hello', 2);
 
-        expect(localiserScope._i18n.p).toHaveBeenCalledWith(2, 'hello');
+        expect(localiserScope._i18n.p).toHaveBeenCalledWith(2, 'hello', undefined);
     });
 
     it('should call i18n.p when given a string to pluralize and parameters to pass through', function () {

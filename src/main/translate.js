@@ -36,20 +36,20 @@
 
 var _ = require('lodash'),
     translate = function (key, pluralization, templateValues) {
-        var translatedString = false;
+        if (!key) {
+            throw new Error('translate did not receive a key');
+        }
+
+        templateValues = _.isObject(templateValues) ? templateValues : undefined;
 
         if (_.isNumber(pluralization)) {
-            if (_.isObject(templateValues)) {
-                translatedString = this._i18n.p(pluralization, key, templateValues);
-            } else {
-                translatedString = this._i18n.p(pluralization, key);
-            }
-        } else if (_.isObject(templateValues) && !pluralization) {
-            translatedString = this._i18n.t(key, templateValues);
-        } else {
-            translatedString = this._i18n.t(key);
+            return this._i18n.p(pluralization, key, templateValues);
+        } 
+
+        if (!pluralization) {
+            return this._i18n.t(key, templateValues);
         }
-        return translatedString;
+        return;
     };
 
 module.exports = translate;
