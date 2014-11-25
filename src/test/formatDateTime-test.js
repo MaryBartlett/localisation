@@ -38,6 +38,24 @@ describe('formatDateTime', function () {
 
     });
 
+    it('should throw an error when incorrect characters given for date', function () {
+        expect(function () {formatDateTime(localiserScope, {year: "***", month: "**", day: "**"}, "date", "default");}).toThrow();
+        expect(localiserScope._i18n.strftime).not.toHaveBeenCalled();
+    });
+
+    it('should throw an error when incorrect characters given', function () {
+        expect(function () {formatDateTime(localiserScope, {hour: "***", minute: "**", second: "**"}, "time", "default");}).toThrow();
+        expect(localiserScope._i18n.strftime).not.toHaveBeenCalled();
+    });
+
+    it('should throw an error when incorrect characters given', function () {
+        expect(function () {formatDateTime(localiserScope, {year: "***", month: "**", day: "**", hour: "***", minute: "**", second: "**"}, "dateTime", "default");}).toThrow();
+        expect(localiserScope._i18n.strftime).not.toHaveBeenCalled();
+    });
+      
+
+
+
     describe('should support a type of date', function () {
         it('should call i18n.strftime when given a Unix Epoch date', function () {
             formatDateTime.call(localiserScope, 1412604094352, "date");

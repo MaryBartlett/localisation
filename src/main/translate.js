@@ -35,18 +35,28 @@
     */    
 
 var _ = require('lodash'),
-    translate = function (key, pluralization, templateValues) {
+    validateParams = function (key, pluralization, templateValues) {
         if (!key) {
             throw new Error('translate did not receive a key');
         }
 
+        if (pluralization && pluralization !== 0 && !_.isNumber(pluralization)) {
+            throw new Error('translate did not receive a integer for pluralization');
+        }
+
+        if (templateValues && !_.isObject(templateValues)) {
+            throw new Error('translate did not receive an object for templateValues');
+        }
+    },
+    translate = function (key, pluralization, templateValues) {
+        validateParams(key, pluralization, templateValues);
+
         templateValues = _.isObject(templateValues) ? templateValues : undefined;
 
+        // n.b. has to be isNumber here to cater for pluralization being 0
         if (_.isNumber(pluralization)) {
             return this._i18n.p(pluralization, key, templateValues);
-        } 
-
-        if (!pluralization) {
+        } else {
             return this._i18n.t(key, templateValues);
         }
         return;

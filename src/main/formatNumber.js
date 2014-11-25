@@ -16,7 +16,8 @@ var _ = require('lodash'),
             numberSeparator = this._i18n.numberSeparator,
             numberDelimiter = this._i18n.numberDelimiter;
 
-        if (!number) {
+        // n.b. has to be isUndefined here to cater for number being 0
+        if (_.isUndefined(number)) {
             throw new Error('formatNumber did not receive a number');
         }
         if (_.isString(number)) {

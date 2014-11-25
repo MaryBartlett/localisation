@@ -1,5 +1,6 @@
 /**
  * @module configureI18n entry point for configuring i18n-js
+ * @desc Sets up all the things on I18n that it is expecting e.g. locale, defaultLocale, translations and pluralization rules  
  */
 'use strict';
 

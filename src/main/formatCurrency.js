@@ -17,7 +17,8 @@ var _ = require('lodash'),
             currencySeparator = this._i18n.currencySeparator,
             currencyDelimiter = this._i18n.currencyDelimiter;
 
-        if (!number) {
+        // n.b. has to be isUndefined here to cater for number being 0
+        if (_.isUndefined(number)) {
             throw new Error('formatCurrency did not receive a number');
         }
         if (_.isString(number)) {

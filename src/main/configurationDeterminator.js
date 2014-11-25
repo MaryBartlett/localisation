@@ -120,8 +120,8 @@ var _ = require("lodash"),
     /**
     * @function createLocale 
     * @desc function that determines the locale 
-    * @param {string} territory - the determined territory, two character lower case expected
-    * @param {string} language - the determined language, two character lower case expected
+    * @param {string} territory - the determined territory, two character lower case expected (unless "default")
+    * @param {string} language - the determined language, two character lower case expected (unless "default")
     * @returns {string} the determined locale
     */
     createLocale = function (territory, language) {
