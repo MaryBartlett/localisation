@@ -32,5 +32,8 @@ module.exports = {
                 currencySymbol: "$DE"
             }            
         }
+    },
+    'pl': {
+        territoryDefaultLanguage: "pl"
     }
 };

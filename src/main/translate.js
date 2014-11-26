@@ -40,7 +40,7 @@ var _ = require('lodash'),
             throw new Error('translate did not receive a key');
         }
 
-        if (pluralization && pluralization !== 0 && !_.isNumber(pluralization)) {
+        if (pluralization && pluralization !== 0 && !_.isNumber(pluralization) && _.isNaN(pluralization)) {
             throw new Error('translate did not receive a integer for pluralization');
         }
 
@@ -49,6 +49,9 @@ var _ = require('lodash'),
         }
     },
     translate = function (key, pluralization, templateValues) {
+        if (_.isString(pluralization)) {
+            pluralization = parseInt(pluralization, 10);
+        }
         validateParams(key, pluralization, templateValues);
 
         templateValues = _.isObject(templateValues) ? templateValues : undefined;

@@ -32,6 +32,11 @@ describe('translate', function () {
         expect(localiserScope._i18n.t).not.toHaveBeenCalled();
     });    
 
+    it('should throw an error when given a string to pluralize with an invalid pluralization value', function () {
+        expect(function () {translate('dog', 'cat', []);}).toThrow();
+        expect(localiserScope._i18n.p).not.toHaveBeenCalled();
+    });
+
     it('should call i18n.t when given a simple string', function () {
         translate.call(localiserScope, 'hello');
 
@@ -46,6 +51,12 @@ describe('translate', function () {
 
     it('should call i18n.p when given a string to pluralize', function () {
         translate.call(localiserScope, 'hello', 2);
+
+        expect(localiserScope._i18n.p).toHaveBeenCalledWith(2, 'hello', undefined);
+    });
+
+    it('should call i18n.p when given a string to pluralize with a number as a string', function () {
+        translate.call(localiserScope, 'hello', '2');
 
         expect(localiserScope._i18n.p).toHaveBeenCalledWith(2, 'hello', undefined);
     });
