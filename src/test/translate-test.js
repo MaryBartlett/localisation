@@ -22,10 +22,20 @@ describe('translate', function () {
         expect(localiserScope._i18n.t).not.toHaveBeenCalled();
     });
 
+    it('should throw an error when non integer is given to translate for pluralization', function () {
+        expect(function () {translate('dog', '%');}).toThrow();
+        expect(localiserScope._i18n.t).not.toHaveBeenCalled();
+    });
+
+    it('should throw an error when non object is given to translate for templateValues', function () {
+        expect(function () {translate('dog', 3, []);}).toThrow();
+        expect(localiserScope._i18n.t).not.toHaveBeenCalled();
+    });    
+
     it('should call i18n.t when given a simple string', function () {
         translate.call(localiserScope, 'hello');
 
-        expect(localiserScope._i18n.t).toHaveBeenCalledWith('hello');
+        expect(localiserScope._i18n.t).toHaveBeenCalledWith('hello', undefined);
     });
 
     it('should call i18n.t and pass parameters through when provided', function () {
@@ -37,8 +47,14 @@ describe('translate', function () {
     it('should call i18n.p when given a string to pluralize', function () {
         translate.call(localiserScope, 'hello', 2);
 
-        expect(localiserScope._i18n.p).toHaveBeenCalledWith(2, 'hello');
+        expect(localiserScope._i18n.p).toHaveBeenCalledWith(2, 'hello', undefined);
     });
+
+    it('should call i18n.p when given a string to pluralize with a negative number', function () {
+        translate.call(localiserScope, 'hello', -2);
+
+        expect(localiserScope._i18n.p).toHaveBeenCalledWith(-2, 'hello', undefined);
+    });    
 
     it('should call i18n.p when given a string to pluralize and parameters to pass through', function () {
         translate.call(localiserScope, 'hello', 2, {foo: 'bar'});
@@ -46,10 +62,10 @@ describe('translate', function () {
         expect(localiserScope._i18n.p).toHaveBeenCalledWith(2, 'hello', {foo: 'bar'});
     });
 
-    it('should call i18n.p when given a string to pluralize with a value of 0 and parameters to pass through', function () {
+    it('should call i18n.p when given a string to pluralize with a value of zero and parameters to pass through', function () {
         translate.call(localiserScope, 'hello', 0, {foo: 'bar'});
 
         expect(localiserScope._i18n.p).toHaveBeenCalledWith(0, 'hello', {foo: 'bar'});
-    });      
+    });
 
 });

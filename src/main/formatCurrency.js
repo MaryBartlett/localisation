@@ -17,7 +17,8 @@ var _ = require('lodash'),
             currencySeparator = this._i18n.currencySeparator,
             currencyDelimiter = this._i18n.currencyDelimiter;
 
-        if (!number) {
+        // n.b. has to be isUndefined here to cater for number being 0
+        if (_.isUndefined(number)) {
             throw new Error('formatCurrency did not receive a number');
         }
         if (_.isString(number)) {
@@ -31,7 +32,13 @@ var _ = require('lodash'),
             throw new Error('formatCurrency could not return a localised currency as territory is unknown');
         }         
 
-        return this._i18n.toCurrency(number, {format: currencyFormat, unit: currencySymbol, precision: currencyPrecision, separator: currencySeparator, delimiter: currencyDelimiter});
+        return this._i18n.toCurrency(number, {
+            format: currencyFormat, 
+            unit: currencySymbol, 
+            precision: currencyPrecision, 
+            separator: currencySeparator, 
+            delimiter: currencyDelimiter
+        });
     };
 
 module.exports = formatCurrency;

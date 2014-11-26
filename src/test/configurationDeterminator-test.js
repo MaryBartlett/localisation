@@ -27,6 +27,18 @@ describe('configurationDeterminator', function () {
             expect(configurationDeterminator.determineTerritory(supportedTerritoriesFixture)).toEqual('default');
         });
 
+        it('should return "default" if numeric territory given', function () {
+            expect(configurationDeterminator.determineTerritory(supportedTerritoriesFixture, 123)).toEqual('default');
+        });
+
+        it('should return "default" if special character territory given', function () {
+            expect(configurationDeterminator.determineTerritory(supportedTerritoriesFixture, "**")).toEqual('default');
+        });        
+
+        it('should return "default" if invalid territory given', function () {
+            expect(configurationDeterminator.determineTerritory(supportedTerritoriesFixture, "bananas")).toEqual('default');
+        });        
+
         it('should return the territory if a supported territory given', function () {
             expect(configurationDeterminator.determineTerritory(supportedTerritoriesFixture, 'fr')).toEqual('fr');
         });
@@ -41,6 +53,18 @@ describe('configurationDeterminator', function () {
         it('should return "default" if no language given', function () {
             expect(configurationDeterminator.determineLanguage(supportedTerritoriesFixture, supportedLanguagesFixture)).toEqual('default');
         });
+
+        it('should return "default" if numeric language given', function () {
+            expect(configurationDeterminator.determineLanguage(supportedTerritoriesFixture, supportedLanguagesFixture, 123)).toEqual('default');
+        });
+
+        it('should return "default" if special character language given', function () {
+            expect(configurationDeterminator.determineLanguage(supportedTerritoriesFixture, supportedLanguagesFixture, "**")).toEqual('default');
+        });        
+
+        it('should return "default" if invalid language given', function () {
+            expect(configurationDeterminator.determineLanguage(supportedTerritoriesFixture, supportedLanguagesFixture, "bananas")).toEqual('default');
+        });        
 
         it('should return default language for a territory if no language given', function () {
             expect(configurationDeterminator.determineLanguage(supportedTerritoriesFixture, supportedLanguagesFixture, 'gb')).toEqual('en');

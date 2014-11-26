@@ -51,7 +51,12 @@ var _ = require('lodash'),
                     return dateParts;
                 });
 
-                dateTime = new Date(dateParts.year, dateParts.month, dateParts.day, dateParts.hour, dateParts.minute, dateParts.second, dateParts.millisecond);
+                if (dateParts.year && dateParts.month && dateParts.day || dateParts.hour && dateParts.minute && dateParts.second) {
+                    dateTime = new Date(dateParts.year, dateParts.month, dateParts.day, dateParts.hour, dateParts.minute, dateParts.second, dateParts.millisecond);
+                } else {
+                    throw new Error('configureDateTime did not receive a value it could turn into a valid date');
+                }
+
             } else {
                 // dateString given
                 dateTime = value;
@@ -90,11 +95,7 @@ var _ = require('lodash'),
 
         dateTimeValue = configureDateTime(value);
 
-        if (format) {
-            dateTimeFormat = this._i18n[type + 'Format'][format + 'Format'];
-        } else {
-            dateTimeFormat = this._i18n[type + 'Format'].defaultFormat;
-        }
+        dateTimeFormat = this._i18n[type + 'Format'][(format || 'default') + 'Format'];
 
         return this._i18n.strftime(dateTimeValue, dateTimeFormat);
     };

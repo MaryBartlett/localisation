@@ -15,11 +15,8 @@ var _ = require("lodash"),
     * @returns {bool} whether a territory has a default language or not
     */    
     defaultLanguageExistsForTerritory = function (supportedTerritories, territory) {
-        if (supportedTerritories.hasOwnProperty(territory) && 
-            supportedTerritories[territory].hasOwnProperty("territoryDefaultLanguage")) {
-            return true;
-        } return false;
-
+        return (supportedTerritories.hasOwnProperty(territory) && 
+            supportedTerritories[territory].hasOwnProperty("territoryDefaultLanguage"));
     },
 
     /**
@@ -31,11 +28,9 @@ var _ = require("lodash"),
     * @returns {bool} whether a territory has language overrides or not
     */
     languageOverridesExistForTerritory = function (supportedTerritories, territory, language) {
-        if (supportedTerritories.hasOwnProperty(territory) && 
+        return (supportedTerritories.hasOwnProperty(territory) && 
             supportedTerritories[territory].hasOwnProperty('languageOverrides') && 
-            supportedTerritories[territory].languageOverrides.hasOwnProperty(language)) {
-            return true;
-        } return false;
+            supportedTerritories[territory].languageOverrides.hasOwnProperty(language));
     },
 
     /**
@@ -47,11 +42,9 @@ var _ = require("lodash"),
     * @returns {bool} whether a language has territory overrides or not
     */
     territoryOverridesExistForLanguage = function (supportedLanguages, territory, language) {
-        if (supportedLanguages.hasOwnProperty(language) && 
+        return (supportedLanguages.hasOwnProperty(language) && 
             supportedLanguages[language].hasOwnProperty('territoryOverrides') && 
-            supportedLanguages[language].territoryOverrides.hasOwnProperty(territory)) {
-            return true;
-        } return false;
+            supportedLanguages[language].territoryOverrides.hasOwnProperty(territory));
     },    
 
     /**
@@ -97,11 +90,11 @@ var _ = require("lodash"),
     * @returns {object} the determined territory config
     */
     determineTerritoryConfig = function (supportedTerritories, territory, language) {
+        territoryConfig = supportedTerritories[territory];
+
         if (languageOverridesExistForTerritory(supportedTerritories, territory, language)) {
             // merge language overrides with territory config
-            territoryConfig = _.extend(supportedTerritories[territory], supportedTerritories[territory].languageOverrides[language]);
-        } else {
-            territoryConfig = supportedTerritories[territory];
+            territoryConfig = _.extend(territoryConfig, territoryConfig.languageOverrides[language]);
         }
         return territoryConfig;
     },
@@ -115,11 +108,11 @@ var _ = require("lodash"),
     * @returns {object} the determined language config
     */
     determineLanguageConfig = function (supportedLanguages, territory, language) {
+        languageConfig = supportedLanguages[language];
+
         if (territoryOverridesExistForLanguage(supportedLanguages, territory, language)) {
             // merge territory overrides with language config
-            languageConfig = _.extend(supportedLanguages[language], supportedLanguages[language].territoryOverrides[territory]);
-        } else {
-            languageConfig = supportedLanguages[language];
+            languageConfig = _.extend(languageConfig, languageConfig.territoryOverrides[territory]);
         }
         return languageConfig;
     },
@@ -127,8 +120,8 @@ var _ = require("lodash"),
     /**
     * @function createLocale 
     * @desc function that determines the locale 
-    * @param {string} territory - the determined territory, two character lower case expected
-    * @param {string} language - the determined language, two character lower case expected
+    * @param {string} territory - the determined territory, two character lower case expected (unless "default")
+    * @param {string} language - the determined language, two character lower case expected (unless "default")
     * @returns {string} the determined locale
     */
     createLocale = function (territory, language) {
