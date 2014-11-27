@@ -6,7 +6,8 @@
 var _ = require("lodash"),
     configurationDeterminator = require('../../src/main/configurationDeterminator.js'),
     supportedTerritoriesFixture = require('./supportedTerritoriesFixture'),
-    supportedLanguagesFixture = require('./supportedLanguagesFixture');    
+    supportedLanguagesFixture = require('./supportedLanguagesFixture'),
+    exportedAPIs = ['determineTerritory','determineLanguage','createConfig','createLocale'];
 
 describe('configurationDeterminator', function () {
 
@@ -15,10 +16,19 @@ describe('configurationDeterminator', function () {
     });
 
     it('has a defined api', function () {
-        expect(configurationDeterminator.determineTerritory).toBeFunction();
-        expect(configurationDeterminator.determineLanguage).toBeFunction();
-        expect(configurationDeterminator.createConfig).toBeFunction();
-        expect(configurationDeterminator.createLocale).toBeFunction();
+        _.each(exportedAPIs, function(apiProperty) {
+            expect(configurationDeterminator[apiProperty]).toBeFunction();
+        });
+    });
+
+    it('doesn\'t export anything un-expected (eg. untested code)', function () {
+        _.each(
+            /* first filter out private api's which either start with _ or __ */
+            _.filter( Object.getOwnPropertyNames(configurationDeterminator), function(propName) { return propName[0] !== '_'; } ),
+            function(propName) {
+                expect(_.contains(exportedAPIs, propName)).toBe(true);
+            }
+        );
     });
 
     describe('determineTerritory', function () {
@@ -33,11 +43,11 @@ describe('configurationDeterminator', function () {
 
         it('should return "default" if special character territory given', function () {
             expect(configurationDeterminator.determineTerritory(supportedTerritoriesFixture, "**")).toEqual('default');
-        });        
+        });
 
         it('should return "default" if invalid territory given', function () {
             expect(configurationDeterminator.determineTerritory(supportedTerritoriesFixture, "bananas")).toEqual('default');
-        });        
+        });
 
         it('should return the territory if a supported territory given', function () {
             expect(configurationDeterminator.determineTerritory(supportedTerritoriesFixture, 'fr')).toEqual('fr');
@@ -60,11 +70,11 @@ describe('configurationDeterminator', function () {
 
         it('should return "default" if special character language given', function () {
             expect(configurationDeterminator.determineLanguage(supportedTerritoriesFixture, supportedLanguagesFixture, "**")).toEqual('default');
-        });        
+        });
 
         it('should return "default" if invalid language given', function () {
             expect(configurationDeterminator.determineLanguage(supportedTerritoriesFixture, supportedLanguagesFixture, "bananas")).toEqual('default');
-        });        
+        });
 
         it('should return default language for a territory if no language given', function () {
             expect(configurationDeterminator.determineLanguage(supportedTerritoriesFixture, supportedLanguagesFixture, 'gb')).toEqual('en');
