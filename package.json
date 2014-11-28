@@ -30,6 +30,8 @@
     "jasmine-expect": "^1.22.2",
     "request": "^2.45.0",
     "rewire-webpack": "0.2.0",
+    "jscs": "1.7.3",
+    "web-jscs-options": "https://github.brislabs.com/web/jscs-options/archive/v1.0.4.tar.gz",    
     "webpack": "1.4.3"
   }
 }

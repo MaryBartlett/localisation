@@ -10,6 +10,7 @@ module.exports = function(grunt) {
         watch: require('./config/grunt/watch'),
         webpack: require('./config/grunt/webpack'),
         jshint: require('./config/grunt/jshint'),
+        jscs: require('./config/grunt/jscs'),
         jasmine: require('./config/grunt/jasmine'),
         bump: require('./config/grunt/bump'),
         jsdoc: require('./config/grunt/jsdoc')
@@ -32,6 +33,7 @@ registerTasks = function (grunt) {
      */
     grunt.registerTask('process_js', [
         'jshint',
+        'jscs',
         'webpack',
         'jasmine:client'
     ]);
@@ -63,6 +65,7 @@ registerReleaseTasks = function (grunt) {
 
 loadNpmTasks = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-jscs');    
     grunt.loadNpmTasks('grunt-webpack');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jasmine');

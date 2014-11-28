@@ -7,7 +7,7 @@ var _ = require('lodash'),
     /** 
     * @function formatNumber
     * @desc sets up i18n number from the settings in config
-    * @param {number/stringified number} the number to localise
+    * @param {number | string} the number to localise
     * @returns {string} the localised number
     */
 

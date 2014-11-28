@@ -7,7 +7,7 @@ var _ = require('lodash'),
     /** 
     * @function formatCurrency
     * @desc sets up i18n currency from the settings in config
-    * @param {number/stringified number} the currency to localise
+    * @param {number | string} the currency to localise
     * @returns {string} the localised currency
     */
     formatCurrency = function (number) {
