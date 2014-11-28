@@ -131,22 +131,40 @@ describe('localiser acceptance tests', function () {
         expect(localiser.formatCurrency(-20000000000)).toEqual('£-20,000,000,000.00');
     });
 
-    it('should localise a currency', function () {
+    it('should localise and format a currency with correct currency format, symbol and precision', function () {
         config = returnConfig('vn');
         localiser = main.createLocaliser(config);
 
         expect(localiser.formatCurrency).toBeFunction();
-        expect(localiser.formatCurrency('20')).toEqual('$VN 20');
-        expect(localiser.formatCurrency('1.2')).toEqual('$VN 1');
-        expect(localiser.formatCurrency('20000000000')).toEqual('$VN 20,000,000,000');
+        expect(localiser.formatCurrency('20')).toEqual('20 $VN');
+        expect(localiser.formatCurrency('1.2')).toEqual('1 $VN');
+        expect(localiser.formatCurrency('20000000000')).toEqual('20,000,000,000 $VN');
         // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
-        expect(localiser.formatCurrency('-20000000000')).toEqual('$VN -20,000,000,000');
+        expect(localiser.formatCurrency('-20000000000')).toEqual('-20,000,000,000 $VN');
 
-        expect(localiser.formatCurrency(20)).toEqual('$VN 20');
-        expect(localiser.formatCurrency(1.2)).toEqual('$VN 1');
-        expect(localiser.formatCurrency(20000000000)).toEqual('$VN 20,000,000,000');
+        expect(localiser.formatCurrency(20)).toEqual('20 $VN');
+        expect(localiser.formatCurrency(1.2)).toEqual('1 $VN');
+        expect(localiser.formatCurrency(20000000000)).toEqual('20,000,000,000 $VN');
         // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
-        expect(localiser.formatCurrency(-20000000000)).toEqual('$VN -20,000,000,000');
+        expect(localiser.formatCurrency(-20000000000)).toEqual('-20,000,000,000 $VN');
+    });
+
+    it('should localise and format a currency with correct currency separator and delimiter', function () {
+        config = returnConfig('pl');
+        localiser = main.createLocaliser(config);
+
+        expect(localiser.formatCurrency).toBeFunction();
+        expect(localiser.formatCurrency('20')).toEqual('PL£20;00');
+        expect(localiser.formatCurrency('1.2')).toEqual('PL£1;20');
+        expect(localiser.formatCurrency('20000000000')).toEqual('PL£20-000-000-000;00');
+        // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
+        expect(localiser.formatCurrency('-20000000000')).toEqual('PL£-20-000-000-000;00');
+
+        expect(localiser.formatCurrency(20)).toEqual('PL£20;00');
+        expect(localiser.formatCurrency(1.2)).toEqual('PL£1;20');
+        expect(localiser.formatCurrency(20000000000)).toEqual('PL£20-000-000-000;00');
+        // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
+        expect(localiser.formatCurrency(-20000000000)).toEqual('PL£-20-000-000-000;00');
     });
 
 

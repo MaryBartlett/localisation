@@ -9,6 +9,7 @@ var _ = require('lodash'),
 
 describe('configureI18n', function () {
     var configurationDeterminatorSpy,
+        resetSpy,
         i18nObj,
         revert,
         validConfig = {
@@ -32,10 +33,11 @@ describe('configureI18n', function () {
     beforeEach(function () {
 
         configurationDeterminatorSpy = jasmine.createSpyObj('setup', ["determineTerritory", "determineLanguage", "createConfig", "createLocale"]);
+        resetSpy = jasmine.createSpy('reset');
         i18nObj = {
             translations: {},
             pluralization: {},
-            reset: jasmine.createSpy('reset'),
+            reset: resetSpy,
             config: 'config'
         };
         configurationDeterminatorSpy.createConfig.and.returnValue(resolvedConfig);
@@ -45,6 +47,16 @@ describe('configureI18n', function () {
 
     afterEach(function () {
         revert();
+    });
+
+    it('should reset i18n each time', function () {
+        configureI18n(i18nObj, validConfig);
+        expect(resetSpy).toHaveBeenCalled();
+    });
+
+    it('should reset i18n.config each time', function () {
+        configureI18n(i18nObj, validConfig);
+        expect(i18nObj.config).toEqual({});
     });
 
     it('should determine territory', function () {

@@ -29,7 +29,7 @@ module.exports = {
         currencyPrecision: 0,
         languageOverrides: {
             'de': {
-                currencyFormat: "%u %n",
+                currencyFormat: "%n %u",
                 currencySymbol: "$VN"
             }            
         }
@@ -37,6 +37,7 @@ module.exports = {
     'pl': {
         territoryDefaultLanguage: "pl",
         currencyDelimiter: '-',
-        currencySeparator: ';'
+        currencySeparator: ';',
+        currencySymbol: "PL£"
     }
 };
