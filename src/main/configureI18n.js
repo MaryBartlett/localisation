@@ -7,11 +7,30 @@
 var  _ = require("lodash"),
     configDeterminator = require("./configurationDeterminator"),
 
+    createConfig = function (locale, config) {
+        var createdConfig;
+
+        createdConfig = _.cloneDeep(config);
+        _.omit(createdConfig, 'translations');
+        _.omit(createdConfig, 'pluralization');
+        createdConfig.translations = {};
+        createdConfig.translations[locale] = config.translations;
+        if (config.hasOwnProperty('pluralization')) {
+            createdConfig.pluralization = {};
+            createdConfig.pluralization[locale] = config.pluralization;
+        }
+        createdConfig.locale = locale;
+        createdConfig.defaultLocale = locale;
+
+        return createdConfig;
+    },
+
     configureI18n = function (i18n, config) {
         var determinedTerritory,
             determinedLanguage,
             determinedConfig,
-            determinedLocale;
+            determinedLocale,
+            i18nConfig;
 
         determinedTerritory = configDeterminator.determineTerritory(config.supportedTerritories, config.territory);
 
@@ -25,13 +44,10 @@ var  _ = require("lodash"),
 
         determinedConfig = configDeterminator.createConfig(config.supportedTerritories, config.supportedLanguages, determinedTerritory, determinedLanguage);
 
-        i18n.locale = determinedLocale;
-        i18n.defaultLocale = determinedLocale;
-        i18n.translations[determinedLocale] = determinedConfig.translations;
+        i18nConfig = createConfig(determinedLocale, determinedConfig);
 
-        if (determinedConfig.hasOwnProperty('pluralization')) {
-            i18n.pluralization[determinedLocale] = determinedConfig.pluralization;
-        }
+        _.merge(i18n, i18nConfig);
+
 
         return {
             i18n: i18n,

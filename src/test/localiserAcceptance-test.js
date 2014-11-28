@@ -3,18 +3,24 @@
  */
 'use strict';
 
-var _ = require('lodash'),
-    main = require('../../src/main/main.js');
+var main = require('../../src/main/main.js');
 
 describe('localiser acceptance tests', function () {
-    _.noop();
-    var returnConfig = function (terr) {
-        return {
-            supportedTerritories: require('./supportedTerritoriesFixture.js'),
-            supportedLanguages: require('./supportedLanguagesFixture.js'),
-            territory: terr
+    var returnConfig;
+    beforeEach(function() {
+        returnConfig = function (terr) {
+            return {
+                supportedTerritories: require('./supportedTerritoriesFixture.js'),
+                supportedLanguages: require('./supportedLanguagesFixture.js'),
+                territory: terr
+            };
         };
-    };
+    }); 
+
+    afterEach(function() {
+        returnConfig = false;
+    });
+
 
     it('should set up i18n as expected', function () {
         var config = returnConfig('gb'),
@@ -101,6 +107,15 @@ describe('localiser acceptance tests', function () {
         expect(localiser.translate('pluralizationAndStringReplacement', 1.2, {word: 'has worked successfully'})).toEqual('string replacement 1.2 has worked successfully string other');
         expect(localiser.translate('pluralizationAndStringReplacement', -1, {word: 'has worked successfully'})).toEqual('string replacement -1 has worked successfully string other');
         expect(localiser.translate('pluralizationAndStringReplacement', "10", {word: 'has worked successfully'})).toEqual('string replacement 10 has worked successfully string many');            
+    });
+
+    it('should localise a currency', function () {
+        var config = returnConfig('gb'),
+            localiser = main.createLocaliser(config);
+
+        expect(localiser.formatCurrency).toBeFunction();
+        expect(localiser.formatCurrency('20')).toEqual('£20.00');
+
     });
 
 });

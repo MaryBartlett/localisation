@@ -98,7 +98,7 @@ describe('configureI18n', function () {
         
         configureI18n(i18nObj, validConfig);
         
-        expect(i18nObj.translations[resolvedLocale]).toBe(resolvedConfig.translations);
+        expect(i18nObj.translations[resolvedLocale]).toEqual(resolvedConfig.translations);
     });
 
 
@@ -109,7 +109,7 @@ describe('configureI18n', function () {
         
         configureI18n(i18nObj, validConfig);
 
-        expect(i18nObj.pluralization[resolvedLocale]).toBe(resolvedConfig.pluralization);
+        expect(i18nObj.pluralization[resolvedLocale]).toEqual(resolvedConfig.pluralization);
     });    
 
 
