@@ -30,7 +30,7 @@ module.exports = {
         languageOverrides: {
             'de': {
                 currencyFormat: "%u %n",
-                currencySymbol: "$DE"
+                currencySymbol: "$VN"
             }            
         }
     },

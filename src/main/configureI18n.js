@@ -19,8 +19,6 @@ var  _ = require("lodash"),
         config = _.omit(config, 'translations');
         config = _.omit(config, 'pluralization');
 
-        console.log("config " + JSON.stringify(config));
-
         if (!_.isEmpty(config)) {
             createdConfig.config = _.cloneDeep(config);
         }
@@ -35,8 +33,6 @@ var  _ = require("lodash"),
         createdConfig.locale = locale;
         createdConfig.defaultLocale = locale;
 
-        console.log("createdConfig " + JSON.stringify(createdConfig));
-
         return createdConfig;
     },
 
@@ -46,6 +42,10 @@ var  _ = require("lodash"),
             determinedConfig,
             determinedLocale,
             i18nConfig;
+        // reset i18n to prevent bleeding of configuration
+        i18n.reset();
+        i18n.config = {};
+
 
         determinedTerritory = configDeterminator.determineTerritory(config.supportedTerritories, config.territory);
 
