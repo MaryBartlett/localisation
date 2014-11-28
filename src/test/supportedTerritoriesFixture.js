@@ -26,6 +26,7 @@ module.exports = {
         territoryDefaultLanguage: "pt"
     },
     'vn': {
+        currencyPrecision: 0,
         languageOverrides: {
             'de': {
                 currencyFormat: "%u %n",
@@ -34,6 +35,8 @@ module.exports = {
         }
     },
     'pl': {
-        territoryDefaultLanguage: "pl"
+        territoryDefaultLanguage: "pl",
+        currencyDelimiter: '-',
+        currencySeparator: ';'
     }
 };

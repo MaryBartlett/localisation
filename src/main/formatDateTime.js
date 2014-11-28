@@ -95,7 +95,7 @@ var _ = require('lodash'),
 
         dateTimeValue = configureDateTime(value);
 
-        dateTimeFormat = this._i18n[type + 'Format'][(format || 'default') + 'Format'];
+        dateTimeFormat = this._i18n.config[type + 'Format'][(format || 'default') + 'Format'];
 
         return this._i18n.strftime(dateTimeValue, dateTimeFormat);
     };

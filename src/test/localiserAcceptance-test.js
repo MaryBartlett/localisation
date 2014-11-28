@@ -6,7 +6,9 @@
 var main = require('../../src/main/main.js');
 
 describe('localiser acceptance tests', function () {
-    var returnConfig;
+    var returnConfig,
+        config,
+        localiser;
     beforeEach(function() {
         returnConfig = function (terr) {
             return {
@@ -18,13 +20,15 @@ describe('localiser acceptance tests', function () {
     }); 
 
     afterEach(function() {
+        config = false;
+        localiser = false;
         returnConfig = false;
     });
 
 
     it('should set up i18n as expected', function () {
-        var config = returnConfig('gb'),
-            localiser = main.createLocaliser(config);
+        config = returnConfig('gb');
+        localiser = main.createLocaliser(config);
 
         expect(localiser._territory).toBe('gb');
         expect(localiser._language).toBe('en');
@@ -42,16 +46,16 @@ describe('localiser acceptance tests', function () {
     });
 
     it('should translate', function () {
-        var config = returnConfig('gb'),
-            localiser = main.createLocaliser(config);
+        config = returnConfig('gb');
+        localiser = main.createLocaliser(config);
 
         expect(localiser.translate).toBeFunction();
         expect(localiser.translate('string')).toEqual('translatedString');
     });
 
     it('should correctly pluralize strings', function () {
-        var config = returnConfig('gb'),
-            localiser = main.createLocaliser(config);
+        config = returnConfig('gb');
+        localiser = main.createLocaliser(config);
 
         expect(localiser.translate('pluralizationString', 0)).toEqual('0 pluralizationStringOther');
         expect(localiser.translate('pluralizationString', 1)).toEqual('1 pluralizationStringOne');
@@ -62,8 +66,8 @@ describe('localiser acceptance tests', function () {
     });
 
     it('should correctly pluralize strings when the pluralization rules are complex', function () {
-        var config = returnConfig('pl'),
-            localiser = main.createLocaliser(config);
+        config = returnConfig('pl');
+        localiser = main.createLocaliser(config);
 
         expect(localiser.translate('pluralizationString', 0)).toEqual('0 pluralizationStringMany');
         expect(localiser.translate('pluralizationString', 1)).toEqual('1 pluralizationStringOne');
@@ -74,8 +78,8 @@ describe('localiser acceptance tests', function () {
     });    
 
     it('should correctly translate and replace any template values for a given key', function () {
-        var config = returnConfig('gb'),
-            localiser = main.createLocaliser(config);
+        config = returnConfig('gb');
+        localiser = main.createLocaliser(config);
 
         expect(localiser.translate('stringReplacementString', false, {word: 'has worked successfully'})).toEqual('string replacement has worked successfully string');
         expect(localiser.translate('stringReplacementString', false, {word: 1})).toEqual('string replacement 1 string');
@@ -90,16 +94,16 @@ describe('localiser acceptance tests', function () {
     });
 
     it('should correctly translate, pluralize and replace any template values for a given key', function () {
-        var config = returnConfig('gb'),
-            localiser = main.createLocaliser(config);
+        config = returnConfig('gb');
+        localiser = main.createLocaliser(config);
 
         expect(localiser.translate('pluralizationAndStringReplacement', 1, {word: 'has worked successfully'})).toEqual('string replacement 1 has worked successfully string one');
         expect(localiser.translate('pluralizationAndStringReplacement', 3, {word: 'has worked successfully'})).toEqual('string replacement 3 has worked successfully string other');
     });    
 
     it('should correctly translate, pluralize and replace any template values for a given key', function () {
-        var config = returnConfig('pl'),
-            localiser = main.createLocaliser(config);
+        config = returnConfig('pl');
+        localiser = main.createLocaliser(config);
 
         expect(localiser.translate('pluralizationAndStringReplacement', 0, {word: 'has worked successfully'})).toEqual('string replacement 0 has worked successfully string many');
         expect(localiser.translate('pluralizationAndStringReplacement', 1, {word: 'has worked successfully'})).toEqual('string replacement 1 has worked successfully string one');
@@ -110,12 +114,40 @@ describe('localiser acceptance tests', function () {
     });
 
     it('should localise a currency', function () {
-        var config = returnConfig('gb'),
-            localiser = main.createLocaliser(config);
+        config = returnConfig('gb');
+        localiser = main.createLocaliser(config);
 
         expect(localiser.formatCurrency).toBeFunction();
         expect(localiser.formatCurrency('20')).toEqual('£20.00');
+        expect(localiser.formatCurrency('1.2')).toEqual('£1.20');
+        expect(localiser.formatCurrency('20000000000')).toEqual('£20,000,000,000.00');
+        // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
+        expect(localiser.formatCurrency('-20000000000')).toEqual('£-20,000,000,000.00');
 
+        expect(localiser.formatCurrency(20)).toEqual('£20.00');
+        expect(localiser.formatCurrency(1.2)).toEqual('£1.20');
+        expect(localiser.formatCurrency(20000000000)).toEqual('£20,000,000,000.00');
+        // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
+        expect(localiser.formatCurrency(-20000000000)).toEqual('£-20,000,000,000.00');
     });
+
+    it('should localise a currency', function () {
+        config = returnConfig('vn');
+        localiser = main.createLocaliser(config);
+
+        expect(localiser.formatCurrency).toBeFunction();
+        expect(localiser.formatCurrency('20')).toEqual('£20');
+        expect(localiser.formatCurrency('1.2')).toEqual('£1');
+        expect(localiser.formatCurrency('20000000000')).toEqual('£20,000,000,000');
+        // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
+        expect(localiser.formatCurrency('-20000000000')).toEqual('£-20,000,000,000');
+
+        expect(localiser.formatCurrency(20)).toEqual('£20');
+        expect(localiser.formatCurrency(1.2)).toEqual('£1');
+        expect(localiser.formatCurrency(20000000000)).toEqual('£20,000,000,000');
+        // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
+        expect(localiser.formatCurrency(-20000000000)).toEqual('£-20,000,000,000');
+    });
+
 
 });

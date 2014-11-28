@@ -50,7 +50,7 @@ var _ = require('lodash'),
     },
     translate = function (key, pluralization, templateValues) {
         if (_.isString(pluralization)) {
-            pluralization = parseInt(pluralization, 10);
+            pluralization = parseFloat(pluralization);
         }
         validateParams(key, pluralization, templateValues);
 
