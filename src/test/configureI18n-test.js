@@ -34,7 +34,9 @@ describe('configureI18n', function () {
         configurationDeterminatorSpy = jasmine.createSpyObj('setup', ["determineTerritory", "determineLanguage", "createConfig", "createLocale"]);
         i18nObj = {
             translations: {},
-            pluralization: {}
+            pluralization: {},
+            reset: jasmine.createSpy('reset'),
+            config: 'config'
         };
         configurationDeterminatorSpy.createConfig.and.returnValue(resolvedConfig);
         revert = configureI18n.__set__('configDeterminator', configurationDeterminatorSpy);
