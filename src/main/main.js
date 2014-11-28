@@ -16,12 +16,7 @@ var  _ = require("lodash"),
             throw new Error('createLocaliser did not receive the required arguments');
         }
 
-        console.log("i18n");
-        console.log(JSON.stringify(i18n));
-        console.log("i18n");
-
         i18nConfiguration = configureI18n(i18n, configuration);
-        console.log('here' + JSON.stringify(i18nConfiguration));
 
         return new LocaliserApi(i18nConfiguration);
     };

@@ -8,7 +8,7 @@ var  _ = require("lodash"),
     configDeterminator = require("./configurationDeterminator"),
 
     createConfig = function (locale, config) {
-        var createdConfig,
+        var createdConfig = {},
             translations = config.translations,
             pluralization = false;
         
@@ -19,15 +19,23 @@ var  _ = require("lodash"),
         config = _.omit(config, 'translations');
         config = _.omit(config, 'pluralization');
 
-        createdConfig.config = _.cloneDeep(config);
+        console.log("config " + JSON.stringify(config));
+
+        if (!_.isEmpty(config)) {
+            createdConfig.config = _.cloneDeep(config);
+        }
+
         createdConfig.translations = {};
         createdConfig.translations[locale] = translations;
+
         if (pluralization) {
             createdConfig.pluralization = {};
             createdConfig.pluralization[locale] = pluralization;
         }
         createdConfig.locale = locale;
         createdConfig.defaultLocale = locale;
+
+        console.log("createdConfig " + JSON.stringify(createdConfig));
 
         return createdConfig;
     },
@@ -38,8 +46,6 @@ var  _ = require("lodash"),
             determinedConfig,
             determinedLocale,
             i18nConfig;
-
-        console.log("YEAAAAAAAAAAAAAAA");
 
         determinedTerritory = configDeterminator.determineTerritory(config.supportedTerritories, config.territory);
 
