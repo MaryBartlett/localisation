@@ -167,5 +167,54 @@ describe('localiser acceptance tests', function () {
         expect(localiser.formatCurrency(-20000000000)).toEqual('PL£-20-000-000-000;00');
     });
 
+    it('should localise a number', function () {
+        config = returnConfig('gb');
+        localiser = main.createLocaliser(config);
+
+        expect(localiser.formatNumber).toBeFunction();
+        expect(localiser.formatNumber('20')).toEqual('20.000');
+        expect(localiser.formatNumber('1.2')).toEqual('1.200');
+        expect(localiser.formatNumber('20000000000')).toEqual('20,000,000,000.000');
+        expect(localiser.formatNumber('-20000000000')).toEqual('-20,000,000,000.000');
+
+        expect(localiser.formatNumber(20)).toEqual('20.000');
+        expect(localiser.formatNumber(1.2)).toEqual('1.200');
+        expect(localiser.formatNumber(20000000000)).toEqual('20,000,000,000.000');
+        expect(localiser.formatNumber(-20000000000)).toEqual('-20,000,000,000.000');
+    });
+
+    it('should localise and format a number with correct precision', function () {
+        config = returnConfig('vn');
+        localiser = main.createLocaliser(config);
+
+        expect(localiser.formatNumber).toBeFunction();
+        expect(localiser.formatNumber('20')).toEqual('20');
+        expect(localiser.formatNumber('1.2')).toEqual('1');
+        expect(localiser.formatNumber('20000000000')).toEqual('20,000,000,000');
+        expect(localiser.formatNumber('-20000000000')).toEqual('-20,000,000,000');
+
+        expect(localiser.formatNumber(20)).toEqual('20');
+        expect(localiser.formatNumber(1.2)).toEqual('1');
+        expect(localiser.formatNumber(20000000000)).toEqual('20,000,000,000');
+        expect(localiser.formatNumber(-20000000000)).toEqual('-20,000,000,000');
+    });
+
+    it('should localise and format a number with correct separator and delimiter', function () {
+        config = returnConfig('pl');
+        localiser = main.createLocaliser(config);
+
+        expect(localiser.formatNumber).toBeFunction();
+        expect(localiser.formatNumber('20')).toEqual('20-000');
+        expect(localiser.formatNumber('1.2')).toEqual('1-200');
+        expect(localiser.formatNumber('20000000000')).toEqual('20;000;000;000-000');
+        expect(localiser.formatNumber('-20000000000')).toEqual('-20;000;000;000-000');
+
+        expect(localiser.formatNumber(20)).toEqual('20-000');
+        expect(localiser.formatNumber(1.2)).toEqual('1-200');
+        expect(localiser.formatNumber(20000000000)).toEqual('20;000;000;000-000');
+        expect(localiser.formatNumber(-20000000000)).toEqual('-20;000;000;000-000');
+    });
+
+
 
 });
