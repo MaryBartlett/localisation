@@ -28,7 +28,7 @@ module.exports = {
         strict: true,
         maxparams: 4,
         maxdepth: 3,
-        maxstatements: 20,
+        maxstatements: 50,
         maxcomplexity: 50,
         maxlen: 200,
         white: true,

@@ -33,7 +33,7 @@ registerTasks = function (grunt) {
      */
     grunt.registerTask('process_js', [
         'jshint',
-        'jscs',
+        // 'jscs',
         'webpack',
         'jasmine:client'
     ]);

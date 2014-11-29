@@ -63,7 +63,6 @@ var  _ = require("lodash"),
 
         _.merge(i18n, i18nConfig);
 
-
         return {
             i18n: i18n,
             territory: determinedTerritory,

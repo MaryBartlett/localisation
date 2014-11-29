@@ -5,8 +5,8 @@
 
 var _ = require("lodash"),
     configurationDeterminator = require('../../src/main/configurationDeterminator.js'),
-    supportedTerritoriesFixture = require('./supportedTerritoriesFixture'),
-    supportedLanguagesFixture = require('./supportedLanguagesFixture');    
+    supportedTerritoriesFixture = require('./fixtures/supportedTerr'),
+    supportedLanguagesFixture = require('./fixtures/supportedLang');    
 
 describe('configurationDeterminator', function () {
 
