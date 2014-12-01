@@ -22,6 +22,7 @@
   "devDependencies": {
     "grunt": "0.4.5",
     "grunt-bump": "0.0.15",
+    "grunt-cli": "0.1.13",
     "grunt-contrib-jasmine": "0.8.1",
     "grunt-contrib-jshint": "0.10.0",
     "grunt-contrib-watch": "0.6.1",
@@ -32,9 +33,7 @@
     "rewire-webpack": "0.2.0",
     "grunt-jscs": "0.8.1",
     "jscs": "1.7.3",
-    "web-jscs-options": "https://github.brislabs.com/web/jscs-options/archive/v1.0.4.tar.gz",    
+    "web-jscs-options": "https://github.brislabs.com/web/jscs-options/archive/v1.0.4.tar.gz",
     "webpack": "1.4.3"
   }
 }
-
-
