@@ -28,10 +28,12 @@ module.exports = {
     'vn': {
         currencyPrecision: 0,
         numberPrecision: 0,
+        currencyFormat: "%n %u",
+        currencySymbol: "$VN",    
         languageOverrides: {
             'de': {
                 currencyFormat: "%n %u",
-                currencySymbol: "$VN"
+                currencySymbol: "$VNDE"
             }            
         }
     },

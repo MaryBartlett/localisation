@@ -333,9 +333,9 @@ describe('localiser acceptance tests', function () {
         it('should correctly translate and format a date when passed an object date', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
-            expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "date")).toEqual("6 de OctoberFR de 2014");
+            expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "date")).toEqual("6 de OctoberFR 2014");
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "date", "short")).toEqual("06/10/2014");
-            expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "date", "long")).toEqual("6 de OctoberFR de 2014");
+            expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "date", "long")).toEqual("6 de OctoberFR 2014");
         });        
         it('should correctly translate and format a time when passed an object date', function () {
             config = returnConfig('gb');
