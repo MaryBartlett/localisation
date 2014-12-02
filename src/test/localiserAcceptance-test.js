@@ -232,7 +232,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime(1412604094352, "dateTime", "short")).toEqual("06/10/2014, 15:01 h");
             expect(localiser.formatDateTime(1412604094352, "dateTime", "long")).toEqual("Monday, 06 October 2014, 15:01 h");
         });
-        it('should correctly translate and format a dateTime when passed a Unix Epoch date', function () {
+        it('should correctly translate and format a dateTime when passed a Unix Epoch date (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime(1412604094352, "dateTime")).toEqual("MondayFR, 06 de OctoberFR de 2014, 15:01 heure");
@@ -246,7 +246,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime(1412604094352, "date", "short")).toEqual("06/10/2014");
             expect(localiser.formatDateTime(1412604094352, "date", "long")).toEqual("6 October 2014");
         });
-        it('should correctly translate and format a date when passed a Unix Epoch date', function () {
+        it('should correctly translate and format a date when passed a Unix Epoch date (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime(1412604094352, "date")).toEqual("6 de OctoberFR 2014");
@@ -260,7 +260,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime(1412604094352, "time", "short")).toEqual("15:01 h");
             expect(localiser.formatDateTime(1412604094352, "time", "long")).toEqual("15:01:34 h");
         });    
-        it('should correctly translate and format a time when passed a Unix Epoch date', function () {
+        it('should correctly translate and format a time when passed a Unix Epoch date (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime(1412604094352, "time")).toEqual("15:01 heure");
@@ -274,7 +274,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime("Mon Oct 06 2014 15:10:48 GMT+0100 (BST)", "dateTime", "short")).toEqual("06/10/2014, 15:10 h");
             expect(localiser.formatDateTime("Mon Oct 06 2014 15:10:48 GMT+0100 (BST)", "dateTime", "long")).toEqual("Monday, 06 October 2014, 15:10 h");
         });
-        it('should correctly translate and format a dateTime when passed a dateString date', function () {
+        it('should correctly translate and format a dateTime when passed a dateString date (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime("Mon Oct 06 2014 15:10:48 GMT+0100 (BST)", "dateTime")).toEqual("MondayFR, 06 de OctoberFR de 2014, 15:10 heure");
@@ -288,7 +288,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime("Mon Oct 06 2014 15:10:48 GMT+0100 (BST)", "date", "short")).toEqual("06/10/2014");
             expect(localiser.formatDateTime("Mon Oct 06 2014 15:10:48 GMT+0100 (BST)", "date", "long")).toEqual("6 October 2014");
         });
-        it('should correctly translate and format a date when passed a dateString date', function () {
+        it('should correctly translate and format a date when passed a dateString date (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime("Mon Oct 06 2014 15:10:48 GMT+0100 (BST)", "date")).toEqual("6 de OctoberFR 2014");
@@ -302,7 +302,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime("Mon Oct 06 2014 15:10:48 GMT+0100 (BST)", "time", "short")).toEqual("15:10 h");
             expect(localiser.formatDateTime("Mon Oct 06 2014 15:10:48 GMT+0100 (BST)", "time", "long")).toEqual("15:10:48 h");
         });
-        it('should correctly translate and format a time when passed a dateString date', function () {
+        it('should correctly translate and format a time when passed a dateString date (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime("Mon Oct 06 2014 15:10:48 GMT+0100 (BST)", "time")).toEqual("15:10 heure");
@@ -316,7 +316,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "dateTime", "short")).toEqual("06/10/2014, 15:22 h");
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "dateTime", "long")).toEqual("Monday, 06 October 2014, 15:22 h");
         });
-        it('should correctly translate and format a dateTime when passed an object date', function () {
+        it('should correctly translate and format a dateTime when passed an object date (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "dateTime")).toEqual("MondayFR, 06 de OctoberFR de 2014, 15:22 heure");
@@ -330,7 +330,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "date", "short")).toEqual("06/10/2014");
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "date", "long")).toEqual("6 October 2014");
         });
-        it('should correctly translate and format a date when passed an object date', function () {
+        it('should correctly translate and format a date when passed an object date (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "date")).toEqual("6 de OctoberFR 2014");
@@ -344,7 +344,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "time", "short")).toEqual("15:22 h");
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "time", "long")).toEqual("15:22:39 h");
         });
-        it('should correctly translate and format a time when passed an object date', function () {
+        it('should correctly translate and format a time when passed an object date (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39}, "time")).toEqual("15:22 heure");
@@ -358,7 +358,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime({year: "2014", month: "10", day: "6", hour: "15", minute: "22", second: "39"}, "time", "short")).toEqual("15:22 h");
             expect(localiser.formatDateTime({year: "2014", month: "10", day: "6", hour: "15", minute: "22", second: "39"}, "time", "long")).toEqual("15:22:39 h");
         });
-        it('should correctly translate and format a time when passed an object date consisting of strings', function () {
+        it('should correctly translate and format a time when passed an object date consisting of strings (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime({year: "2014", month: "10", day: "6", hour: "15", minute: "22", second: "39"}, "time")).toEqual("15:22 heure");
@@ -372,7 +372,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime({year: "2014", month: "10", day: 6, hour: "15", minute: "22", second: 39}, "time", "short")).toEqual("15:22 h");
             expect(localiser.formatDateTime({year: "2014", month: "10", day: 6, hour: "15", minute: "22", second: 39}, "time", "long")).toEqual("15:22:39 h");
         });
-        it('should correctly translate and format a time when passed an object date consisting of strings and numbers', function () {
+        it('should correctly translate and format a time when passed an object date consisting of strings and numbers (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime({year: "2014", month: "10", day: 6, hour: "15", minute: "22", second: 39}, "time")).toEqual("15:22 heure");
@@ -386,7 +386,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6}, "dateTime", "short")).toEqual("06/10/2014, 00:00 h");
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6}, "dateTime", "long")).toEqual("Monday, 06 October 2014, 00:00 h");
         });
-        it('should correctly translate and format a dateTime when passed an object date with missing parameters', function () {
+        it('should correctly translate and format a dateTime when passed an object date with missing parameters (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6}, "dateTime")).toEqual("MondayFR, 06 de OctoberFR de 2014, 00:00 heure");
@@ -401,7 +401,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6}, "date", "short")).toEqual("06/10/2014");
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6}, "date", "long")).toEqual("6 October 2014");
         });
-        it('should correctly translate and format a dateTime when passed an object date with missing parameters', function () {
+        it('should correctly translate and format a dateTime when passed an object date with missing parameters (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime({year: 2014, month: 10, day: 6}, "date")).toEqual("6 de OctoberFR 2014");
@@ -419,7 +419,7 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatDateTime({hour: 15, minute: 22, second: 39}, "time", "short")).toEqual("15:22 h");
             expect(localiser.formatDateTime({hour: 15, minute: 22, second: 39}, "time", "long")).toEqual("15:22:39 h");
         });
-        it('should correctly translate and format a time when passed an object date with missing parameters', function () {
+        it('should correctly translate and format a time when passed an object date with missing parameters (fr)', function () {
             config = returnConfig('fr');
             localiser = main.createLocaliser(config);
             expect(localiser.formatDateTime({year: false, month: false, day: false, hour: 15, minute: 22, second: 39}, "time")).toEqual("15:22 heure");
