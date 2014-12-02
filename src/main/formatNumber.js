@@ -4,6 +4,7 @@
 'use strict';
 
 var _ = require('lodash'),
+
     /** 
     * @function formatNumber
     * @desc sets up i18n number from the settings in config
@@ -11,7 +12,6 @@ var _ = require('lodash'),
     * @returns {string} the localised number
     * @throws error if missing or incorrect parameters 
     */
-
     formatNumber = function (number) {
         var numberPrecision = this._i18n.config.numberPrecision,
             numberSeparator = this._i18n.config.numberSeparator,

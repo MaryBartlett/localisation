@@ -5,8 +5,8 @@
 
 var  _ = require("lodash"),
     i18n = require("i18n-js"),
-    configureI18n = require("configureI18n"),
-    LocaliserApi = require("localiserApi"),
+    configureI18n = require("./configureI18n"),
+    LocaliserApi = require("./localiserApi"),
     createLocaliser = function (configuration) {
         var i18nConfiguration;
         if (!(_.isObject(configuration) && 
@@ -23,4 +23,4 @@ var  _ = require("lodash"),
 
 module.exports = {
     createLocaliser: createLocaliser
-};    
+};

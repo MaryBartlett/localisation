@@ -87,8 +87,8 @@ var _ = require('lodash'),
     * @returns {string} the localised date
     */
     formatDateTime = function (value, type, format) {
-        var dateTimeValue = false,
-            dateTimeFormat = false;
+        var dateTimeValue,
+            dateTimeFormat;
 
         if (!value) {
             throw new Error('formatDateTime did not receive a value');

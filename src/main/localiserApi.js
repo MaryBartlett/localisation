@@ -16,8 +16,7 @@ var _ = require("lodash"),
         this._i18n = configuredI18n.i18n;
         this._territory = configuredI18n.territory;       
         this._language = configuredI18n.language;       
-        this._locale = configuredI18n.locale;       
-
+        this._locale = configuredI18n.locale;
     };
 
 LocaliserApi.prototype.getI18n = function () {
@@ -44,5 +43,4 @@ LocaliserApi.prototype.formatNumber = require('./formatNumber');
 
 LocaliserApi.prototype.formatCurrency = require('./formatCurrency');
 
-module.exports = LocaliserApi; 
-
+module.exports = LocaliserApi;

@@ -46,7 +46,6 @@ var  _ = require("lodash"),
         i18n.reset();
         i18n.config = {};
 
-
         determinedTerritory = configDeterminator.determineTerritory(config.supportedTerritories, config.territory);
 
         if (_.isUndefined(config.language)) {
