@@ -32,6 +32,7 @@
     * }
     * translate('product-trackCount', 10, {word: 'bananas'});
     * returns "10 songsOTHER bananas"
+    * @throws error if missing or incorrect parameters 
     */    
 
 var _ = require('lodash'),

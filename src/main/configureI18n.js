@@ -29,7 +29,7 @@ var  _ = require("lodash"),
         i18n.defaultLocale = determinedLocale;
         i18n.translations[determinedLocale] = determinedConfig.translations;
 
-        if (determinedConfig.hasOwnProperty('pluralization')) {
+        if (_.has(determinedConfig, 'pluralization')) {
             i18n.pluralization[determinedLocale] = determinedConfig.pluralization;
         }
 
