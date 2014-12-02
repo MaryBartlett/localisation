@@ -9,6 +9,7 @@ var _ = require('lodash'),
     * @desc sets up i18n currency from the settings in config
     * @param {number | string} the currency to localise
     * @returns {string} the localised currency
+    * @throws error if missing or incorrect parameters 
     */
     formatCurrency = function (number) {
         var currencyFormat = this._i18n.config.currencyFormat,

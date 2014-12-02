@@ -15,8 +15,8 @@ var _ = require("lodash"),
     * @returns {bool} whether a territory has a default language or not
     */    
     defaultLanguageExistsForTerritory = function (supportedTerritories, territory) {
-        return (supportedTerritories.hasOwnProperty(territory) && 
-            supportedTerritories[territory].hasOwnProperty("territoryDefaultLanguage"));
+        return (_.has(supportedTerritories, territory) && 
+            _.has(supportedTerritories[territory], "territoryDefaultLanguage"));
     },
 
     /**
@@ -28,9 +28,9 @@ var _ = require("lodash"),
     * @returns {bool} whether a territory has language overrides or not
     */
     languageOverridesExistForTerritory = function (supportedTerritories, territory, language) {
-        return (supportedTerritories.hasOwnProperty(territory) && 
-            supportedTerritories[territory].hasOwnProperty('languageOverrides') && 
-            supportedTerritories[territory].languageOverrides.hasOwnProperty(language));
+        return (_.has(supportedTerritories, territory) && 
+            _.has(supportedTerritories[territory], "languageOverrides") &&
+            _.has(supportedTerritories[territory].languageOverrides, language));
     },
 
     /**
@@ -42,9 +42,9 @@ var _ = require("lodash"),
     * @returns {bool} whether a language has territory overrides or not
     */
     territoryOverridesExistForLanguage = function (supportedLanguages, territory, language) {
-        return (supportedLanguages.hasOwnProperty(language) && 
-            supportedLanguages[language].hasOwnProperty('territoryOverrides') && 
-            supportedLanguages[language].territoryOverrides.hasOwnProperty(territory));
+        return (_.has(supportedLanguages, language) && 
+            _.has(supportedLanguages[language], "territoryOverrides") &&
+            _.has(supportedLanguages[language].territoryOverrides, territory));
     },    
 
     /**
@@ -55,7 +55,7 @@ var _ = require("lodash"),
     * @returns {string} the determined territory
     */    
     determineTerritory = function (supportedTerritories, territory) {
-        if (!supportedTerritories.hasOwnProperty(territory)) {
+        if (!_.has(supportedTerritories, territory)) {
             territory = 'default';
         }
         return territory;
@@ -71,7 +71,7 @@ var _ = require("lodash"),
     * @returns {string} the determined language
     */
     determineLanguage = function (supportedTerritories, supportedLanguages, territory, language) {
-        if (!supportedLanguages.hasOwnProperty(language)) {
+        if (!_.has(supportedLanguages, language)) {
             if (defaultLanguageExistsForTerritory(supportedTerritories, territory)) {
                 language = supportedTerritories[territory].territoryDefaultLanguage;
             } else {

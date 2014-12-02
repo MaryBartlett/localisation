@@ -19,6 +19,7 @@ var _ = require('lodash'),
     *     millisecond: integer/string optional for type of date and time
     * }
     * @returns {string} the formatted date
+    * @throws error if missing or incorrect parameters 
     */
     configureDateTime = function (value) {
         var dateTime,
@@ -37,8 +38,8 @@ var _ = require('lodash'),
             // Object given
             // minimum requirements to create a date are year, month and day
             // minimum requirement to create a time are hour, minute and second
-            if ((value.hasOwnProperty('year') && value.hasOwnProperty('month') && value.hasOwnProperty('day')) || 
-                (value.hasOwnProperty('hour') && value.hasOwnProperty('minute') && value.hasOwnProperty('second'))) {
+            if ((_.has(value, 'year') && _.has(value, 'month') && _.has(value, 'day')) || 
+                (_.has(value, 'hour') && _.has(value, 'minute') && _.has(value, 'second'))) {
                 // if values given are strings, turn them into integers
                 _.map(dateParts, function (property, key) {
                     if (_.isString(property)) {
