@@ -9,14 +9,26 @@ var _ = require('lodash'),
 
 describe('main', function () {
     var validConfiguration = {
-        territory: 'gb',
-        language: 'en',
-        supportedTerritories: require('./supportedTerritoriesFixture'),
-        supportedLanguages: require('./supportedLanguagesFixture')
-    };
+            territory: 'gb',
+            language: 'en',
+            supportedTerritories: require('./supportedTerritoriesFixture'),
+            supportedLanguages: require('./supportedLanguagesFixture')
+        },
+        exportedAPIs = ['createLocaliser'];
 
-    it('has a create localiser function', function () {
-        expect(main.createLocaliser).toBeFunction();
+    it('has a defined api', function () {
+        _.each(exportedAPIs, function(apiProperty) {
+            expect(main[apiProperty]).toBeFunction();
+        });
+    });
+
+    it('doesn\'t export anything un-expected (eg. untested code)', function () {
+        _.each(
+            _.filter( Object.getOwnPropertyNames(main), function(propName) { return propName[0] !== '_'; } ),
+            function(propName) {
+                expect(_.contains(exportedAPIs, propName)).toBe(true);
+            }
+        );
     });
 
     describe('createLocaliser function', function () {
@@ -69,7 +81,7 @@ describe('main', function () {
             var missingSupportedLanguages =  _.omit(validConfiguration, 'supportedLanguages');
 
             expect(function () {main.createLocaliser(missingSupportedLanguages);}).toThrow();
-        });        
+        });
         it('expects configuration object to contain supportedTerritories', function () {
             var missingSupportedTerritories =  _.omit(validConfiguration, 'supportedTerritories');
 
