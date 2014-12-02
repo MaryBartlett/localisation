@@ -1,6 +1,6 @@
 {
   "name": "localisation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "api for localising translations, currency, number and date",
   "main": "src/main/index.js",
   "scripts": {
