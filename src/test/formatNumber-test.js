@@ -11,9 +11,11 @@ describe('formatNumber', function () {
     beforeEach(function() {
         localiserScope = {
             _i18n: {
-                numberPrecision: "3",
-                numberSeparator: ",",
-                numberDelimiter: "."
+                config: {
+                    numberPrecision: "3",
+                    numberSeparator: ",",
+                    numberDelimiter: "."
+                }
             }
         };
         localiserScope._i18n.toNumber = jasmine.createSpy('toNumber');
@@ -39,41 +41,43 @@ describe('formatNumber', function () {
         formatNumber.call(localiserScope, 10);
 
         expect(localiserScope._i18n.toNumber).toHaveBeenCalledWith
-        (10, {precision: localiserScope._i18n.numberPrecision, separator: localiserScope._i18n.numberSeparator, delimiter: localiserScope._i18n.numberDelimiter});
+        (10, {precision: localiserScope._i18n.config.numberPrecision, separator: localiserScope._i18n.config.numberSeparator, delimiter: localiserScope._i18n.config.numberDelimiter});
     });
 
     it('should call i18n.toNumber when given zero', function () {
         formatNumber.call(localiserScope, 0);
 
         expect(localiserScope._i18n.toNumber).toHaveBeenCalledWith
-        (0, {precision: localiserScope._i18n.numberPrecision, separator: localiserScope._i18n.numberSeparator, delimiter: localiserScope._i18n.numberDelimiter});
+        (0, {precision: localiserScope._i18n.config.numberPrecision, separator: localiserScope._i18n.config.numberSeparator, delimiter: localiserScope._i18n.config.numberDelimiter});
     }); 
 
     it('should call i18n.toNumber when given a big number', function () {
         formatNumber.call(localiserScope, 1000000000000000000000000000000);
 
         expect(localiserScope._i18n.toNumber).toHaveBeenCalledWith
-        (1000000000000000000000000000000, {precision: localiserScope._i18n.numberPrecision, separator: localiserScope._i18n.numberSeparator, delimiter: localiserScope._i18n.numberDelimiter});
+        (1000000000000000000000000000000, 
+            {precision: localiserScope._i18n.config.numberPrecision, separator: localiserScope._i18n.config.numberSeparator, delimiter: localiserScope._i18n.config.numberDelimiter});
     });    
 
     it('should call i18n.toNumber when given a small number', function () {
         formatNumber.call(localiserScope, 0.0000000000000000000000000000001);
 
         expect(localiserScope._i18n.toNumber).toHaveBeenCalledWith
-        (0.0000000000000000000000000000001, {precision: localiserScope._i18n.numberPrecision, separator: localiserScope._i18n.numberSeparator, delimiter: localiserScope._i18n.numberDelimiter});
+        (0.0000000000000000000000000000001, 
+            {precision: localiserScope._i18n.config.numberPrecision, separator: localiserScope._i18n.config.numberSeparator, delimiter: localiserScope._i18n.config.numberDelimiter});
     }); 
 
     it('should call i18n.toNumber when given a negative number', function () {
         formatNumber.call(localiserScope, -10);
 
         expect(localiserScope._i18n.toNumber).toHaveBeenCalledWith
-        (-10, {precision: localiserScope._i18n.numberPrecision, separator: localiserScope._i18n.numberSeparator, delimiter: localiserScope._i18n.numberDelimiter});
+        (-10, {precision: localiserScope._i18n.config.numberPrecision, separator: localiserScope._i18n.config.numberSeparator, delimiter: localiserScope._i18n.config.numberDelimiter});
     });     
 
     it('should call i18n.toNumber when given a string that is a number', function () {
         formatNumber.call(localiserScope, '10');
 
         expect(localiserScope._i18n.toNumber).toHaveBeenCalledWith
-        (10, {precision: localiserScope._i18n.numberPrecision, separator: localiserScope._i18n.numberSeparator, delimiter: localiserScope._i18n.numberDelimiter});
+        (10, {precision: localiserScope._i18n.config.numberPrecision, separator: localiserScope._i18n.config.numberSeparator, delimiter: localiserScope._i18n.config.numberDelimiter});
     });
 });

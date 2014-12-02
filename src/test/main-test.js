@@ -11,8 +11,8 @@ describe('main', function () {
     var validConfiguration = {
             territory: 'gb',
             language: 'en',
-            supportedTerritories: require('./supportedTerritoriesFixture'),
-            supportedLanguages: require('./supportedLanguagesFixture')
+            supportedTerritories: require('./fixtures/supportedTerr'),
+            supportedLanguages: require('./fixtures/supportedLang')
         },
         exportedAPIs = ['createLocaliser'];
 

@@ -5,8 +5,8 @@
 
 var _ = require("lodash"),
     configurationDeterminator = require('../../src/main/configurationDeterminator.js'),
-    supportedTerritoriesFixture = require('./supportedTerritoriesFixture'),
-    supportedLanguagesFixture = require('./supportedLanguagesFixture'),
+    supportedTerritoriesFixture = _.cloneDeep(require('./fixtures/supportedTerr')),
+    supportedLanguagesFixture = _.cloneDeep(require('./fixtures/supportedLang')),
     exportedAPIs = ['determineTerritory','determineLanguage','createConfig','createLocale'];
 
 describe('configurationDeterminator', function () {

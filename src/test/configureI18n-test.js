@@ -9,6 +9,7 @@ var _ = require('lodash'),
 
 describe('configureI18n', function () {
     var configurationDeterminatorSpy,
+        resetSpy,
         i18nObj,
         revert,
         validConfig = {
@@ -32,9 +33,12 @@ describe('configureI18n', function () {
     beforeEach(function () {
 
         configurationDeterminatorSpy = jasmine.createSpyObj('setup', ["determineTerritory", "determineLanguage", "createConfig", "createLocale"]);
+        resetSpy = jasmine.createSpy('reset');
         i18nObj = {
             translations: {},
-            pluralization: {}
+            pluralization: {},
+            reset: resetSpy,
+            config: 'config'
         };
         configurationDeterminatorSpy.createConfig.and.returnValue(resolvedConfig);
         revert = configureI18n.__set__('configDeterminator', configurationDeterminatorSpy);
@@ -43,6 +47,16 @@ describe('configureI18n', function () {
 
     afterEach(function () {
         revert();
+    });
+
+    it('should reset i18n each time', function () {
+        configureI18n(i18nObj, validConfig);
+        expect(resetSpy).toHaveBeenCalled();
+    });
+
+    it('should reset i18n.config each time', function () {
+        configureI18n(i18nObj, validConfig);
+        expect(i18nObj.config).toEqual({});
     });
 
     it('should determine territory', function () {
@@ -98,7 +112,7 @@ describe('configureI18n', function () {
         
         configureI18n(i18nObj, validConfig);
         
-        expect(i18nObj.translations[resolvedLocale]).toBe(resolvedConfig.translations);
+        expect(i18nObj.translations[resolvedLocale]).toEqual(resolvedConfig.translations);
     });
 
 
@@ -109,7 +123,7 @@ describe('configureI18n', function () {
         
         configureI18n(i18nObj, validConfig);
 
-        expect(i18nObj.pluralization[resolvedLocale]).toBe(resolvedConfig.pluralization);
+        expect(i18nObj.pluralization[resolvedLocale]).toEqual(resolvedConfig.pluralization);
     });    
 
 

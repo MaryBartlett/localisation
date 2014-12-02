@@ -8,7 +8,7 @@ var _ = require('lodash'),
     /** 
     * @function configureDateTime
     * @desc takes the value passed in and whether it is of type date, dateTime or time (assumes that the month given is 1 indexed i.e. Jan = 1, Feb = 2)
-    * @param {object/dateString/integer (Unix Epoch)} the value to localise. If object, expects the following structure:
+    * @param {object | dateString | integer} the value to localise. If object, expects the following structure:
     * value = {
     *     year: integer/string optional for type of time
     *     month: integer/string optional for type of time
@@ -72,7 +72,7 @@ var _ = require('lodash'),
     /** 
     * @function formatDateTime
     * @desc sets up i18n date, time or dateTime from the settings in this._i18n.
-    * @param {object/dateString/integer (Unix Epoch)} the value to localise. If object, expects the following structure:
+    * @param {object | dateString | integer} the value to localise. If object, expects the following structure:
     * value = {
     *     year: integer/string
     *     month: integer/string
@@ -96,7 +96,7 @@ var _ = require('lodash'),
 
         dateTimeValue = configureDateTime(value);
 
-        dateTimeFormat = this._i18n[type + 'Format'][(format || 'default') + 'Format'];
+        dateTimeFormat = this._i18n.config[type + 'Format'][(format || 'default') + 'Format'];
 
         return this._i18n.strftime(dateTimeValue, dateTimeFormat);
     };

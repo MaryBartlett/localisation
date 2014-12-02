@@ -26,11 +26,23 @@ module.exports = {
         territoryDefaultLanguage: "pt"
     },
     'vn': {
+        currencyPrecision: 0,
+        numberPrecision: 0,
+        currencyFormat: "%n %u",
+        currencySymbol: "$VN",    
         languageOverrides: {
             'de': {
-                currencyFormat: "%u %n",
-                currencySymbol: "$DE"
+                currencyFormat: "%n %u",
+                currencySymbol: "$VNDE"
             }            
         }
+    },
+    'pl': {
+        territoryDefaultLanguage: "pl",
+        currencyDelimiter: '-',
+        currencySeparator: ';',
+        currencySymbol: "PL£",
+        numberDelimiter: ';',
+        numberSeparator: '-'
     }
 };

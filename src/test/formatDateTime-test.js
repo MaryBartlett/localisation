@@ -11,22 +11,23 @@ describe('formatDateTime', function () {
     beforeEach(function() {
         localiserScope = {
             _i18n: {
-                dateFormat: {
-                    defaultFormat: "defaultDateFormat",
-                    shortFormat: "shortDateFormat",
-                    longFormat: "longDateFormat"
-                },
-                timeFormat: {
-                    defaultFormat: "defaultTimeFormat",
-                    shortFormat: "shortTimeFormat",
-                    longFormat: "longTimeFormat"                      
-                },
-                dateTimeFormat: {
-                    defaultFormat: "defaultDateTimeFormat",
-                    shortFormat: "shortDateTimeFormat",
-                    longFormat: "longDateTimeFormat"                    
+                config: {
+                    dateFormat: {
+                        defaultFormat: "defaultDateFormat",
+                        shortFormat: "shortDateFormat",
+                        longFormat: "longDateFormat"
+                    },
+                    timeFormat: {
+                        defaultFormat: "defaultTimeFormat",
+                        shortFormat: "shortTimeFormat",
+                        longFormat: "longTimeFormat"                      
+                    },
+                    dateTimeFormat: {
+                        defaultFormat: "defaultDateTimeFormat",
+                        shortFormat: "shortDateTimeFormat",
+                        longFormat: "longDateTimeFormat"                    
+                    }
                 }
-
             }
         };
         localiserScope._i18n.strftime = jasmine.createSpy('strftime');
