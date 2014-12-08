@@ -3,21 +3,49 @@
 <div class="mermaid">
     graph TD;
         A[Territory resolution]---B{Territory supplied};
-        B-->|Yes|C{Territory valid};
+        B-->|Yes|C{Territory supported};
         C-->|Yes|D[Territory is given territory];
         B-->|No|E[Territory is default];
-        C-->|No|F[Territory is default];
+        C-->|No|E;
+        style A fill:#0bd;
+        style D fill:#ff2e80;
+        style E fill:#ff2e80;
 </div>
 
 <div class="mermaid">
     graph TD;
         A[Language resolution]---B{Language supplied};
-        B-->|Yes|C{Language valid};
+        B-->|Yes|C{Language supported};
         C-->|Yes|D[Language is given language];
         C-->|No|E{Territory provided};
         E-->|Yes|F{Default language given for territory};
         E-->|No|G[Language is default];
         F-->|Yes|H[Language is default language for territory];
-        F-->|No|I[Language is default];
-        B-->|No|J[Territory is default];
+        F-->|No|G;
+        B-->|No|E;
+        style A fill:#0bd;
+        style D fill:#ff2e80;
+        style G fill:#ff2e80;
+        style H fill:#ff2e80;
+</div>
+
+<div class="mermaid">
+    graph TD;
+        A[Territory configuration resolution]-->B{Language overrides for territory};
+        B-->|Yes|C[Config is a merge of language overrides ontop of territory config];
+        B-->|No|D[Config is the territory config];
+        style A fill:#0bd;
+        style C fill:#ff2e80;
+        style D fill:#ff2e80;        
+</div>
+
+
+<div class="mermaid">
+    graph TD;
+        A[Language configuration resolution]-->B{Territory overrides for language};
+        B-->|Yes|C[Config is a merge of territory overrides ontop of language config];
+        B-->|No|D[Config is the language config];
+        style A fill:#0bd;
+        style C fill:#ff2e80;
+        style D fill:#ff2e80;
 </div>
