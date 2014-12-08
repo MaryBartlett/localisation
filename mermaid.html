@@ -1,0 +1,23 @@
+<script src="mermaid.full.min.js"></script>
+
+<div class="mermaid">
+    graph TD;
+        A[Territory resolution]---B{Territory supplied};
+        B-->|Yes|C{Territory valid};
+        C-->|Yes|D[Territory is given territory];
+        B-->|No|E[Territory is default];
+        C-->|No|F[Territory is default];
+</div>
+
+<div class="mermaid">
+    graph TD;
+        A[Language resolution]---B{Language supplied};
+        B-->|Yes|C{Language valid};
+        C-->|Yes|D[Language is given language];
+        C-->|No|E{Territory provided};
+        E-->|Yes|F{Default language given for territory};
+        E-->|No|G[Language is default];
+        F-->|Yes|H[Language is default language for territory];
+        F-->|No|I[Language is default];
+        B-->|No|J[Territory is default];
+</div>
