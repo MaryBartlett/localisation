@@ -13,7 +13,9 @@ module.exports = function(grunt) {
         jscs: require('./config/grunt/jscs'),
         jasmine: require('./config/grunt/jasmine'),
         bump: require('./config/grunt/bump'),
-        jsdoc: require('./config/grunt/jsdoc')
+        jsdoc: require('./config/grunt/jsdoc'),
+        "gh-pages": require('./config/grunt/gh-pages')
+
     });
 
     loadNpmTasks(grunt);
@@ -71,5 +73,6 @@ loadNpmTasks = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-bump');
     grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-gh-pages');    
 
 };
