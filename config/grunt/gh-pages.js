@@ -1,6 +1,7 @@
 module.exports = {
    options: {
-      base: 'target'
+      base: 'src',
+      add: true
     },
     src: ['**']    
 }
