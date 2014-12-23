@@ -50,8 +50,6 @@ Alternatively you may wish to wrap this as a service - the following block is ho
 var _ = require('lodash'),
     localisation = require('localisation'),
     localeConfig = require('localisation-configuration'),
-    nativeStuff = require('app/native'),
-    API = require('services/api'),
     localisationService = {},
     bindLocalisationFunctions;
 
