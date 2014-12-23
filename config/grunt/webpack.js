@@ -3,7 +3,7 @@ var RewirePlugin = require("rewire-webpack");
 module.exports = {
     app: {
         context: "./src/main",
-        entry: "./index.js",
+        entry: "./main.js",
         output: {
             path: "./target",
             filename: "localisation.js"
