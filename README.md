@@ -42,7 +42,7 @@ var configuredLocaliser = localisation.createLocaliser(config)
 
 configuredLocaliser then should have the expected 'translate', 'formatDateTime', 'fornatNumber' and 'formatCurrency'.
 
-Alternatively you may wish to wrap this as a service - the following block is how we have wrapped it as a localisationService; 'services/localisation'.
+Alternatively you may wish to wrap this as a service - the following block is how we have wrapped it as a localisationService; 'services/localisation' in <a href="https://github.brislabs.com/web/mixrad-app/blob/master/src/services/localisation.js">mixrad-app</a>
 
 ```js
 'use strict';
@@ -64,16 +64,11 @@ localisationService.init = function () {
 };
 
 localisationService.detectTerritory = function () {
-    API('root').resource('territory').single()
-        .then(function ( data ) {
-            localisationService.territory = data.body.items[0].territory;
-            console.log( localisationService.territory );
-        });
-    return 'gb';
+    ...
 };
 
 localisationService.detectLanguage = function () {
-    return _.first(nativeStuff.window.navigator.language, 2).join('');
+    ...
 };
 
 localisationService.createConfig = function () {
