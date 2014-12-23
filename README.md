@@ -96,13 +96,14 @@ module.exports = localisationService;
 
 Assuming it is being used as configuredLocaliser
 
+```js
 var translation = configuredLocaliser.translate('key'),
 	date = configuredLocaliser.formatDateTime(new Date(), 'date'),
 	time = configuredLocaliser.formatDateTime(new Date(), 'time'),
 	dateTime = configuredLocaliser.formatDateTime(new Date(), 'dateTime'),
 	number = configuredLocaliser.formatNumber(1000),
 	currency = configuredLocaliser.formatCurrency(1000);
-
+```
 
 Assuming it is being used as the service
 
