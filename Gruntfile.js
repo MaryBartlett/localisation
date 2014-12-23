@@ -62,7 +62,6 @@ registerTasks = function (grunt) {
 
 registerReleaseTasks = function (grunt) {
     require('./grunt-tasks/release')(grunt);
-    require('./grunt-tasks/jenkins')(grunt);
 };
 
 loadNpmTasks = function (grunt) {
