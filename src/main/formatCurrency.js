@@ -4,12 +4,12 @@
 'use strict';
 
 var _ = require('lodash'),
-    /** 
+    /**
     * @function formatCurrency
     * @desc sets up i18n currency from the settings in config
     * @param {number | string} the currency to localise
     * @returns {string} the localised currency
-    * @throws error if missing or incorrect parameters 
+    * @throws error if missing or incorrect parameters
     */
     formatCurrency = function (number) {
         var currencyFormat = this._i18n.config.currencyFormat,
@@ -31,13 +31,13 @@ var _ = require('lodash'),
         // if territory is a something we can't handle, don't return a currency
         if (this._territory === 'default') {
             throw new Error('formatCurrency could not return a localised currency as territory is unknown');
-        }         
+        }
 
         return this._i18n.toCurrency(number, {
-            format: currencyFormat, 
-            unit: currencySymbol, 
-            precision: currencyPrecision, 
-            separator: currencySeparator, 
+            format: currencyFormat,
+            unit: currencySymbol,
+            precision: currencyPrecision,
+            separator: currencySeparator,
             delimiter: currencyDelimiter
         });
     };

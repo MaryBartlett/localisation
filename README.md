@@ -111,3 +111,27 @@ var localisation = require('services/localisation'),
 	number = localisation.formatNumber(1000),
 	currency = localisation.formatCurrency(1000);
 ```
+
+## Grunt
+
+Uses grunt to lint, test and package the assets.
+
+```command
+    grunt             // process_js and then watch
+    grunt process_js  // run jshint, jscs, bundle using webpack, then test with jasmine
+    grunt test        // run jshint, jscs, bundle using webpack, then test with jasmine
+```
+`grunt test` exists to allow the package.json to reference it so you can also run
+
+```command
+    npm test
+```
+
+### Releasing a new version
+
+To release a new version when you are happy with the code, run:
+
+```command
+    grunt release
+```
+This will lint, bundle and test increment the version number in the package.json file and upload to github.

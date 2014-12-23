@@ -24,7 +24,7 @@ describe('configureI18n', function () {
         resolvedConfig = {
             translations: {
                 foo: "bar"
-            }, 
+            },
             pluralization: {
                 pluralization: "rule"
             }
@@ -68,14 +68,14 @@ describe('configureI18n', function () {
         configurationDeterminatorSpy.determineTerritory.and.returnValue(resolvedTerritory);
         configureI18n(i18nObj, validConfig);
 
-        expect(configurationDeterminatorSpy.determineLanguage).toHaveBeenCalledWith(validConfig.supportedTerritories, validConfig.supportedLanguages, resolvedTerritory, validConfig.language);        
+        expect(configurationDeterminatorSpy.determineLanguage).toHaveBeenCalledWith(validConfig.supportedTerritories, validConfig.supportedLanguages, resolvedTerritory, validConfig.language);
     });
 
     it('should determine language if language not given', function () {
         configurationDeterminatorSpy.determineTerritory.and.returnValue(resolvedTerritory);
         configureI18n(i18nObj, _.omit(validConfig, 'language'));
 
-        expect(configurationDeterminatorSpy.determineLanguage).toHaveBeenCalledWith(validConfig.supportedTerritories, validConfig.supportedLanguages, resolvedTerritory);          
+        expect(configurationDeterminatorSpy.determineLanguage).toHaveBeenCalledWith(validConfig.supportedTerritories, validConfig.supportedLanguages, resolvedTerritory);
     });
 
     it('should create the locale for the given territory and language', function () {
@@ -91,14 +91,14 @@ describe('configureI18n', function () {
         configurationDeterminatorSpy.determineLanguage.and.returnValue(resolvedLanguage);
         configureI18n(i18nObj, validConfig);
 
-        expect(configurationDeterminatorSpy.createConfig).toHaveBeenCalledWith(validConfig.supportedTerritories, validConfig.supportedLanguages, resolvedTerritory, resolvedLanguage);        
+        expect(configurationDeterminatorSpy.createConfig).toHaveBeenCalledWith(validConfig.supportedTerritories, validConfig.supportedLanguages, resolvedTerritory, resolvedLanguage);
     });
 
     it('should configure i18n with the determined locale', function () {
         configurationDeterminatorSpy.determineTerritory.and.returnValue(resolvedTerritory);
         configurationDeterminatorSpy.determineLanguage.and.returnValue(resolvedLanguage);
         configurationDeterminatorSpy.createLocale.and.returnValue(resolvedLocale);
-        
+
         configureI18n(i18nObj, validConfig);
 
         expect(i18nObj.defaultLocale).toBe(resolvedLocale);
@@ -109,9 +109,9 @@ describe('configureI18n', function () {
         configurationDeterminatorSpy.determineTerritory.and.returnValue(resolvedTerritory);
         configurationDeterminatorSpy.determineLanguage.and.returnValue(resolvedLanguage);
         configurationDeterminatorSpy.createLocale.and.returnValue(resolvedLocale);
-        
+
         configureI18n(i18nObj, validConfig);
-        
+
         expect(i18nObj.translations[resolvedLocale]).toEqual(resolvedConfig.translations);
     });
 
@@ -120,18 +120,18 @@ describe('configureI18n', function () {
         configurationDeterminatorSpy.determineTerritory.and.returnValue(resolvedTerritory);
         configurationDeterminatorSpy.determineLanguage.and.returnValue(resolvedLanguage);
         configurationDeterminatorSpy.createLocale.and.returnValue(resolvedLocale);
-        
+
         configureI18n(i18nObj, validConfig);
 
         expect(i18nObj.pluralization[resolvedLocale]).toEqual(resolvedConfig.pluralization);
-    });    
+    });
 
 
     it('has a defined api', function () {
         configurationDeterminatorSpy.determineTerritory.and.returnValue(resolvedTerritory);
         configurationDeterminatorSpy.determineLanguage.and.returnValue(resolvedLanguage);
         configurationDeterminatorSpy.createLocale.and.returnValue(resolvedLocale);
-        
+
         var configuredI18n = configureI18n(i18nObj, validConfig);
 
         expect(configuredI18n.i18n).toBe(i18nObj);

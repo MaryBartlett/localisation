@@ -9,9 +9,9 @@ var  _ = require("lodash"),
     LocaliserApi = require("./localiserApi"),
     createLocaliser = function (configuration) {
         var i18nConfiguration;
-        if (!(_.isObject(configuration) && 
-            _.isObject(configuration.supportedTerritories) && 
-            _.isObject(configuration.supportedLanguages) && 
+        if (!(_.isObject(configuration) &&
+            _.isObject(configuration.supportedTerritories) &&
+            _.isObject(configuration.supportedLanguages) &&
             _.isString(configuration.territory))) {
             throw new Error('createLocaliser did not receive the required arguments');
         }

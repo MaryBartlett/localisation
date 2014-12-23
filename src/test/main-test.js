@@ -17,15 +17,17 @@ describe('main', function () {
         exportedAPIs = ['createLocaliser'];
 
     it('has a defined api', function () {
-        _.each(exportedAPIs, function(apiProperty) {
+        _.each(exportedAPIs, function (apiProperty) {
             expect(main[apiProperty]).toBeFunction();
         });
     });
 
     it('doesn\'t export anything un-expected (eg. untested code)', function () {
         _.each(
-            _.filter( Object.getOwnPropertyNames(main), function(propName) { return propName[0] !== '_'; } ),
-            function(propName) {
+            _.filter(Object.getOwnPropertyNames(main), function (propName) {
+                return propName[0] !== '_';
+            }),
+            function (propName) {
                 expect(_.contains(exportedAPIs, propName)).toBe(true);
             }
         );
@@ -45,7 +47,7 @@ describe('main', function () {
                 locale: "str-ING"
             };
 
-        beforeEach(function() {
+        beforeEach(function () {
             configureI18nSpy = jasmine.createSpy('configureI18n');
             localiserApiSpy = jasmine.createSpy('LocaliserApi');
 
@@ -55,48 +57,60 @@ describe('main', function () {
 
         });
 
-        afterEach(function() {
+        afterEach(function () {
             revertConfigSpy();
             reverti18nSpy();
             revertLocaliserApiSpy();
         });
 
         it('requires configuration object', function () {
-            expect(function () {main.createLocaliser(null);}).toThrow();
+            expect(function () {
+                    main.createLocaliser(null);
+                }).toThrow();
         });
         it('configuration object requires territory string', function () {
             var missingTerritory = _.omit(validConfiguration, 'territory');
 
-            expect(function () {main.createLocaliser(missingTerritory);}).toThrow();
+            expect(function () {
+                    main.createLocaliser(missingTerritory);
+                }).toThrow();
         });
         it('language is optional', function () {
-            var localiserInstance = {foo: "bar"},
+            var localiserInstance = { foo: "bar" },
                 missingLanguage = _.omit(validConfiguration, 'language');
             configureI18nSpy.and.returnValue(i18nConfiguration);
             localiserApiSpy.and.returnValue(localiserInstance);
 
-            expect(function () {main.createLocaliser(missingLanguage);}).not.toThrow();
+            expect(function () {
+                    main.createLocaliser(missingLanguage);
+                }).not.toThrow();
         });
         it('expects configuration object to contain supportedLanguages', function () {
             var missingSupportedLanguages =  _.omit(validConfiguration, 'supportedLanguages');
 
-            expect(function () {main.createLocaliser(missingSupportedLanguages);}).toThrow();
+            expect(function () {
+                    main.createLocaliser(missingSupportedLanguages);
+                }).toThrow();
         });
         it('expects configuration object to contain supportedTerritories', function () {
             var missingSupportedTerritories =  _.omit(validConfiguration, 'supportedTerritories');
 
-            expect(function () {main.createLocaliser(missingSupportedTerritories);}).toThrow();
+            expect(function () {
+                    main.createLocaliser(missingSupportedTerritories);
+                }).toThrow();
         });
 
         it('throws an exception if i18n configuration is invalid', function () {
             configureI18nSpy.and.throwError("Invalid configuration for i18n");
 
-            expect(function () {main.createLocaliser(validConfiguration);}).toThrow();
+            expect(function () {
+                    main.createLocaliser(validConfiguration);
+                }).toThrow();
             expect(configureI18nSpy).toHaveBeenCalledWith(i18nSpy, validConfiguration);
         });
 
         it('calls localiserApi with correct arguments', function () {
-            var localiserInstance = {foo: "bar"},
+            var localiserInstance = { foo: "bar" },
                 returnedLocaliser;
             configureI18nSpy.and.returnValue(i18nConfiguration);
             localiserApiSpy.and.returnValue(localiserInstance);

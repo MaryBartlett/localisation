@@ -8,19 +8,19 @@ var _ = require("lodash"),
     languageConfig,
 
     /**
-    * @function defaultLanguageExistsForTerritory  
-    * @desc function that checks if there is a default language for a territory 
+    * @function defaultLanguageExistsForTerritory
+    * @desc function that checks if there is a default language for a territory
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config
     * @param {string} territory - the territory, two character lower case expected
     * @returns {bool} whether a territory has a default language or not
-    */    
+    */
     defaultLanguageExistsForTerritory = function (supportedTerritories, territory) {
-        return (_.has(supportedTerritories, territory) && 
+        return (_.has(supportedTerritories, territory) &&
             _.has(supportedTerritories[territory], "territoryDefaultLanguage"));
     },
 
     /**
-    * @function languageOverridesExistForTerritory 
+    * @function languageOverridesExistForTerritory
     * @desc function that checks if given territory has language overrides
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config
     * @param {string} territory - the territory, two character lower case expected
@@ -28,32 +28,32 @@ var _ = require("lodash"),
     * @returns {bool} whether a territory has language overrides or not
     */
     languageOverridesExistForTerritory = function (supportedTerritories, territory, language) {
-        return (_.has(supportedTerritories, territory) && 
+        return (_.has(supportedTerritories, territory) &&
             _.has(supportedTerritories[territory], "languageOverrides") &&
             _.has(supportedTerritories[territory].languageOverrides, language));
     },
 
     /**
-    * @function territoryOverridesExistForLanguage 
-    * @desc function that checks if given language has territory overrides 
+    * @function territoryOverridesExistForLanguage
+    * @desc function that checks if given language has territory overrides
     * @param {object} supportedLanguages - an object containing all the languages we support and the language config
     * @param {string} territory - the territory, two character lower case expected
     * @param {string} language - the language, two character lower case expected
     * @returns {bool} whether a language has territory overrides or not
     */
     territoryOverridesExistForLanguage = function (supportedLanguages, territory, language) {
-        return (_.has(supportedLanguages, language) && 
+        return (_.has(supportedLanguages, language) &&
             _.has(supportedLanguages[language], "territoryOverrides") &&
             _.has(supportedLanguages[language].territoryOverrides, territory));
-    },    
+    },
 
     /**
-    * @function determineTerritory  
-    * @desc function that checks if given territory is supported 
+    * @function determineTerritory
+    * @desc function that checks if given territory is supported
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config
     * @param {string} territory - the territory, two character lower case expected
     * @returns {string} the determined territory
-    */    
+    */
     determineTerritory = function (supportedTerritories, territory) {
         if (!_.has(supportedTerritories, territory)) {
             territory = 'default';
@@ -62,8 +62,8 @@ var _ = require("lodash"),
     },
 
     /**
-    * @function determineLanguage 
-    * @desc function that checks if given language is supported 
+    * @function determineLanguage
+    * @desc function that checks if given language is supported
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config
     * @param {object} supportedLanguages - an object containing all the languages we support and the language config
     * @param {string} territory - the territory, two character lower case expected
@@ -76,13 +76,13 @@ var _ = require("lodash"),
                 language = supportedTerritories[territory].territoryDefaultLanguage;
             } else {
                 language = 'default';
-            }            
+            }
         }
         return language;
     },
 
     /**
-    * @function determineTerritoryConfig 
+    * @function determineTerritoryConfig
     * @desc function that determines the config for a given territory
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config
     * @param {string} territory - the territory, two character lower case expected
@@ -100,7 +100,7 @@ var _ = require("lodash"),
     },
 
     /**
-    * @function determineLanguageConfig 
+    * @function determineLanguageConfig
     * @desc function that determines the config for a given language
     * @param {object} supportedLanguages - an object containing all the languages we support and the language config
     * @param {string} territory - the territory, two character lower case expected
@@ -118,18 +118,18 @@ var _ = require("lodash"),
     },
 
     /**
-    * @function createLocale 
-    * @desc function that determines the locale 
+    * @function createLocale
+    * @desc function that determines the locale
     * @param {string} territory - the determined territory, two character lower case expected (unless "default")
     * @param {string} language - the determined language, two character lower case expected (unless "default")
     * @returns {string} the determined locale
     */
     createLocale = function (territory, language) {
-        return  language.toLowerCase() + '-' + territory.toUpperCase();    
+        return language.toLowerCase() + '-' + territory.toUpperCase();
     },
 
     /**
-    * @function createConfig  
+    * @function createConfig
     * @desc function that determines the config, assumes that the territory and language passed in are supported (i.e. determineTerritory and determineLanguage have been called)
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config
     * @param {object} supportedLanguages - an object containing all the languages we support and the language config
@@ -145,8 +145,8 @@ var _ = require("lodash"),
         territoryConfig = _.omit(territoryConfig, 'languageOverrides');
         languageConfig = _.omit(languageConfig, 'territoryOverrides');
 
-        return _.extend(territoryConfig, languageConfig);       
-    };    
+        return _.extend(territoryConfig, languageConfig);
+    };
 
 module.exports = {
     determineTerritory: determineTerritory,
@@ -154,4 +154,4 @@ module.exports = {
     createConfig: createConfig,
     createLocale: createLocale
 };
- 
+

@@ -5,7 +5,7 @@
 
 var _ = require('lodash'),
 
-    /** 
+    /**
     * @function configureDateTime
     * @desc takes the value passed in and whether it is of type date, dateTime or time (assumes that the month given is 1 indexed i.e. Jan = 1, Feb = 2)
     * @param {object | dateString | integer} the value to localise. If object, expects the following structure:
@@ -19,7 +19,7 @@ var _ = require('lodash'),
     *     millisecond: integer/string optional for type of date and time
     * }
     * @returns {string} the formatted date
-    * @throws error if missing or incorrect parameters 
+    * @throws error if missing or incorrect parameters
     */
     configureDateTime = function (value) {
         var dateTime,
@@ -38,7 +38,7 @@ var _ = require('lodash'),
             // Object given
             // minimum requirements to create a date are year, month and day
             // minimum requirement to create a time are hour, minute and second
-            if ((_.has(value, 'year') && _.has(value, 'month') && _.has(value, 'day')) || 
+            if ((_.has(value, 'year') && _.has(value, 'month') && _.has(value, 'day')) ||
                 (_.has(value, 'hour') && _.has(value, 'minute') && _.has(value, 'second'))) {
                 // if values given are strings, turn them into integers
                 _.map(dateParts, function (property, key) {
@@ -69,7 +69,7 @@ var _ = require('lodash'),
         return dateTime;
     },
 
-    /** 
+    /**
     * @function formatDateTime
     * @desc sets up i18n date, time or dateTime from the settings in this._i18n.
     * @param {object | dateString | integer} the value to localise. If object, expects the following structure:

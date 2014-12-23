@@ -3,7 +3,7 @@ var loadNpmTasks,
     registerTasks,
     registerReleaseTasks;
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     grunt.initConfig({
         branch: 'master',
@@ -35,14 +35,22 @@ registerTasks = function (grunt) {
      */
     grunt.registerTask('process_js', [
         'jshint',
-        // 'jscs',
+        'jscs',
         'webpack',
-        'jasmine:client'
+        'jasmine'
     ]);
 
-    // ci task to give a uniform entry point for jenkins - might not be needed?
+    // ci task to give a uniform entry point for jenkins
     grunt.registerTask('ci', [
         'process_js'
+    ]);
+
+
+    grunt.registerTask('test', [
+        'jshint',
+        'jscs',
+        'webpack',
+        'jasmine'
     ]);
 
 
@@ -66,12 +74,12 @@ registerReleaseTasks = function (grunt) {
 
 loadNpmTasks = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-jscs');    
+    grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-webpack');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-bump');
     grunt.loadNpmTasks('grunt-jsdoc');
-    grunt.loadNpmTasks('grunt-gh-pages');    
+    grunt.loadNpmTasks('grunt-gh-pages');
 
 };

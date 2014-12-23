@@ -1,6 +1,6 @@
 /**
  * @module configureI18n entry point for configuring i18n-js
- * @desc Sets up all the things on I18n that it is expecting e.g. locale, defaultLocale, translations and pluralization rules  
+ * @desc Sets up all the things on I18n that it is expecting e.g. locale, defaultLocale, translations and pluralization rules
  */
 'use strict';
 
@@ -11,7 +11,7 @@ var  _ = require("lodash"),
         var createdConfig = {},
             translations = config.translations,
             pluralization = false;
-        
+
         if (config.hasOwnProperty('pluralization')) {
             pluralization = config.pluralization;
         }

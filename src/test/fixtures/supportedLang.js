@@ -31,11 +31,11 @@ module.exports = {
             defaultFormat: "%H:%M heure",
             shortFormat: "%H:%M heure",
             longFormat: "%H:%M heure"
-        }        
+        }
     },
     'de': {
         translations: 'de.json'
-    },    
+    },
     'en': {
         translations: {
             "string": "translatedString",
@@ -55,7 +55,7 @@ module.exports = {
                 "month_names": [null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                 "abbr_month_names": [null, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"],
                 "meridian": ["am", "pm"]
-            }            
+            }
 
         },
         pluralization: function (count) {
@@ -70,7 +70,7 @@ module.exports = {
         dateFormat: {
             defaultFormat: "%-d %B %Y",
             shortFormat: "%d/%m/%Y",
-            longFormat: "%-d %B %Y"                
+            longFormat: "%-d %B %Y"
         },
         timeFormat: {
             defaultFormat: "%H:%M h",
@@ -80,7 +80,7 @@ module.exports = {
         dateTimeFormat: {
             defaultFormat: "%A, %d %B %Y, %H:%M h",
             shortFormat: "%d/%m/%Y, %H:%M h",
-            longFormat: "%A, %d %B %Y, %H:%M h"                
+            longFormat: "%A, %d %B %Y, %H:%M h"
         }
     },
     'pt': {
@@ -103,7 +103,7 @@ module.exports = {
                 "few": "string replacement {{count}} {{word}} string few",
                 "many": "string replacement {{count}} {{word}} string many",
                 "other": "string replacement {{count}} {{word}} string other"
-            }                 
+            }
         },
         pluralization: function (count) {
             var key = false;
@@ -118,6 +118,6 @@ module.exports = {
             }
             return [key];
         }
-    }    
+    }
 
 };

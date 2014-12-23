@@ -3,7 +3,7 @@
  */
 'use strict';
     /**
-    * @function translate  
+    * @function translate
     * @desc function translates a given key
     * @param {string} key - the key, the string that is required to be translated
     * @param {number/boolean} [pluralization] - the number to use for pluralization
@@ -15,7 +15,7 @@
     *   "Der Eintrag wurde zu deinen Favoriten hinzugefügt."
     * ]
     * translate('favouriteArtists-favouriteFtuMessage');
-    * returns "Der Eintrag wurde zu deinen Favoriten hinzugefügt."    
+    * returns "Der Eintrag wurde zu deinen Favoriten hinzugefügt."
     * @example
     * json is:
     * "product-trackCount": {
@@ -32,8 +32,8 @@
     * }
     * translate('product-trackCount', 10, {word: 'bananas'});
     * returns "10 songsOTHER bananas"
-    * @throws error if missing or incorrect parameters 
-    */    
+    * @throws error if missing or incorrect parameters
+    */
 
 var _ = require('lodash'),
     validateParams = function (key, pluralization, templateValues) {

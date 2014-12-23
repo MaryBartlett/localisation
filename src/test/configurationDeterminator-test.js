@@ -16,16 +16,17 @@ describe('configurationDeterminator', function () {
     });
 
     it('has a defined api', function () {
-        _.each(exportedAPIs, function(apiProperty) {
+        _.each(exportedAPIs, function (apiProperty) {
             expect(configurationDeterminator[apiProperty]).toBeFunction();
         });
     });
 
     it('doesn\'t export anything un-expected (eg. untested code)', function () {
         _.each(
-            /* first filter out private api's which either start with _ or __ */
-            _.filter( Object.getOwnPropertyNames(configurationDeterminator), function(propName) { return propName[0] !== '_'; } ),
-            function(propName) {
+            _.filter(Object.getOwnPropertyNames(configurationDeterminator), function (propName) {
+                return propName[0] !== '_';
+            }),
+            function (propName) {
                 expect(_.contains(exportedAPIs, propName)).toBe(true);
             }
         );
