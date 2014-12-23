@@ -22,7 +22,9 @@ Add the following line to package.json using the required release version
 
 ## Configuring localisation
 
-$ var localisation = require('localisation');
+```js
+var localisation = require('localisation');
+```
 
 Then localisation needs to be configured by calling the createLocaliser function with a configuration object containing a supportedTerritories object, a supportedLanguages object, the territory as a string and optionally the language as a string. The supportedTerritories and supportedLanguages localeConfig that we use can be found in the <a href="https://github.brislabs.com/web/localisation-configuration">localisation-configuration repo<a/>. It is assumed that this has been installed via NPM already in the following example.
 
