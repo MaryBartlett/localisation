@@ -1,5 +1,5 @@
 /*
- * Localiser acceptance tests
+ * localiser acceptance tests
  */
 'use strict';
 

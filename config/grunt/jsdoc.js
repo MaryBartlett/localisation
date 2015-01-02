@@ -1,8 +1,7 @@
 module.exports = {
     dist : {
         src: [
-            './src/main/**/*.js',
-            './src/test/**/*.js'
+            './src/main/**/*.js'
         ], 
         options: {
             destination: 'documentation',

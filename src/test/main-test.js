@@ -1,5 +1,5 @@
 /*
- * Main tests
+ * main tests
  */
 'use strict';
 

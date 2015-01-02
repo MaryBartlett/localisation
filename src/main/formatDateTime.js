@@ -1,14 +1,18 @@
 /**
- * @module Localise date, time and dateTime
- */
+ * @module formatDateTime
+ * @desc module that formats and localises date, time and dateTime
+ * @returns formatDateTime function
+ * @requires lodash 
+ */ 
 'use strict';
 
 var _ = require('lodash'),
 
     /**
+    * @private
     * @function configureDateTime
     * @desc takes the value passed in and whether it is of type date, dateTime or time (assumes that the month given is 1 indexed i.e. Jan = 1, Feb = 2)
-    * @param {object | dateString | integer} the value to localise. If object, expects the following structure:
+    * @param {object | dateString | integer} value - the value to localise. If object, expects the following structure:
     * value = {
     *     year: integer/string optional for type of time
     *     month: integer/string optional for type of time
@@ -70,9 +74,10 @@ var _ = require('lodash'),
     },
 
     /**
+    * @public
     * @function formatDateTime
-    * @desc sets up i18n date, time or dateTime from the settings in this._i18n.
-    * @param {object | dateString | integer} the value to localise. If object, expects the following structure:
+    * @desc sets up i18n date, time or dateTime from the settings in config and localises date, time or dateTime
+    * @param {object | dateString | integer} value - the value to localise. If object, expects the following structure:
     * value = {
     *     year: integer/string
     *     month: integer/string
@@ -82,8 +87,8 @@ var _ = require('lodash'),
     *     second: integer/string
     *     millisecond: integer/string
     * }
-    * @param {string} the type of value given - date, time or dateTime
-    * @param {string} the required format for the returned date - default, long or short
+    * @param {string} type - the type of value given - date, time or dateTime
+    * @param {string} format - the required format for the returned date - default, long or short
     * @returns {string} the localised date
     */
     formatDateTime = function (value, type, format) {

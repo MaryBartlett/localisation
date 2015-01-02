@@ -1,13 +1,17 @@
 /**
- * @module Localise currency
+ * @module formatCurrency
+ * @desc module that formats and localises currency
+ * @returns formatCurrency function
+ * @requires lodash 
  */
 'use strict';
 
 var _ = require('lodash'),
     /**
+    * @public
     * @function formatCurrency
-    * @desc sets up i18n currency from the settings in config
-    * @param {number | string} the currency to localise
+    * @desc sets up i18n currency from the settings in config and localises currency
+    * @param {number | string} number - the currency to localise
     * @returns {string} the localised currency
     * @throws error if missing or incorrect parameters
     */

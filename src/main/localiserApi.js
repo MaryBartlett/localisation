@@ -1,9 +1,20 @@
 /**
  * @module LocaliserApi
+ * @desc constructor function that creates a LocaliserApi
+ * @returns LocaliserApi 
+ * @requires translate, formatDateTime, formatNumber, formatCurrency, lodash 
  */
 'use strict';
 
 var _ = require("lodash"),
+    /**
+    * @public
+    * @function LocaliserApi
+    * @desc checks configuredI18n object is valid and provides access to the configuredI18n object and the localisation functions
+    * @param {object} configuredI18n - the configured localisation object
+    * @returns {object} access to the configuredI18n object and functions for localising strings, dates and times, numbers and currency 
+    * @throws error if missing or incorrect parameters
+    */
     LocaliserApi = function (configuredI18n) {
 
         if (!(_.isObject(configuredI18n) &&

@@ -1,14 +1,18 @@
 /**
- * @module Localise number
+ * @module formatNumber
+ * @desc module that formats and localises numbers
+ * @returns formatNumber function
+ * @requires lodash 
  */
 'use strict';
 
 var _ = require('lodash'),
 
     /**
+    * @public
     * @function formatNumber
-    * @desc sets up i18n number from the settings in config
-    * @param {number | string} the number to localise
+    * @desc sets up i18n number from the settings in config and localises numbers
+    * @param {number | string} number - the number to localise
     * @returns {string} the localised number
     * @throws error if missing or incorrect parameters
     */

@@ -1,5 +1,8 @@
 /**
- * @module ConfigurationDeterminator for localisation
+ * @module configurationDeterminator
+ * @desc module that determines the valid territory and language to be used, and using those will give the valid configuration for the territory/language combination and also the locale
+ * @returns {object} containing the 4 public methods: determineTerritory, determineLanguage, createConfig, createLocale
+ * @requires lodash
  */
 'use strict';
 
@@ -8,6 +11,7 @@ var _ = require("lodash"),
     languageConfig,
 
     /**
+    * @private
     * @function defaultLanguageExistsForTerritory
     * @desc function that checks if there is a default language for a territory
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config
@@ -20,6 +24,7 @@ var _ = require("lodash"),
     },
 
     /**
+    * @private
     * @function languageOverridesExistForTerritory
     * @desc function that checks if given territory has language overrides
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config
@@ -34,6 +39,7 @@ var _ = require("lodash"),
     },
 
     /**
+    * @private
     * @function territoryOverridesExistForLanguage
     * @desc function that checks if given language has territory overrides
     * @param {object} supportedLanguages - an object containing all the languages we support and the language config
@@ -48,6 +54,7 @@ var _ = require("lodash"),
     },
 
     /**
+    * @public
     * @function determineTerritory
     * @desc function that checks if given territory is supported
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config
@@ -62,6 +69,7 @@ var _ = require("lodash"),
     },
 
     /**
+    * @public
     * @function determineLanguage
     * @desc function that checks if given language is supported
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config
@@ -82,6 +90,7 @@ var _ = require("lodash"),
     },
 
     /**
+    * @private
     * @function determineTerritoryConfig
     * @desc function that determines the config for a given territory
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config
@@ -100,6 +109,7 @@ var _ = require("lodash"),
     },
 
     /**
+    * @private
     * @function determineLanguageConfig
     * @desc function that determines the config for a given language
     * @param {object} supportedLanguages - an object containing all the languages we support and the language config
@@ -118,8 +128,9 @@ var _ = require("lodash"),
     },
 
     /**
+    * @public
     * @function createLocale
-    * @desc function that determines the locale
+    * @desc function that returns the locale, assumes that the territory and language passed in are supported (i.e. determineTerritory and determineLanguage have been called) 
     * @param {string} territory - the determined territory, two character lower case expected (unless "default")
     * @param {string} language - the determined language, two character lower case expected (unless "default")
     * @returns {string} the determined locale
@@ -129,6 +140,7 @@ var _ = require("lodash"),
     },
 
     /**
+    * @public
     * @function createConfig
     * @desc function that determines the config, assumes that the territory and language passed in are supported (i.e. determineTerritory and determineLanguage have been called)
     * @param {object} supportedTerritories - an object containing all the territories we support and the territory config

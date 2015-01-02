@@ -1,10 +1,14 @@
-/**
- * @module Localise translate
+ /**
+ * @module translate
+ * @desc module that formats and localises translations
+ * @returns translate function
+ * @requires lodash 
  */
 'use strict';
     /**
+    * @public
     * @function translate
-    * @desc function translates a given key
+    * @desc translates a given key, determines whether the translation requires pluralization and/or template value substitution
     * @param {string} key - the key, the string that is required to be translated
     * @param {number/boolean} [pluralization] - the number to use for pluralization
     * @param {object} [templateValues] - the template values that are required to be substituted into the string

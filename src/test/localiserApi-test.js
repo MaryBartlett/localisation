@@ -1,5 +1,5 @@
 /**
- * LocaliserApi tests
+ * localiserApi tests
  */
 'use strict';
 

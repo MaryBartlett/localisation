@@ -1,5 +1,5 @@
 /*
- * ConfigureI18n tests
+ * configureI18n tests
  */
 'use strict';
 
