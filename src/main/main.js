@@ -1,8 +1,8 @@
 /**
  * @module main
  * @desc entry point to set up localisation
- * @returns createLocaliser function 
- * @requires i18n-js, configureI18n, localiserApi, lodash 
+ * @returns createLocaliser function
+ * @requires i18n-js, configureI18n, localiserApi, lodash
  */
 'use strict';
 
@@ -17,7 +17,7 @@ var  _ = require("lodash"),
     * @param {object} configuration - configuration containing the supportedTerritories, supportedLanguages and the current territory
     * @returns {object} configured localiser set up as properly with the wrapper functions for localisation attached
     * @throws error if missing or incorrect parameters
-    */    
+    */
     createLocaliser = function (configuration) {
         var i18nConfiguration;
         if (!(_.isObject(configuration) &&

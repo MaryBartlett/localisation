@@ -49,7 +49,7 @@ var  _ = require("lodash"),
     /**
     * @public
     * @function configureI18n
-    * @desc function that configures i18n 
+    * @desc function that configures i18n
     * @param {object} i18n - the base i18n object
     * @param {object} config - the base configuration object containing supportedTerritories, supportedLanguages and territory
     * @returns {object} object containing i18n - the configured i18n object, territory - the determined territory, language - the determined language, locale - the determined locale

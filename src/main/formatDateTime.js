@@ -2,8 +2,8 @@
  * @module formatDateTime
  * @desc module that formats and localises date, time and dateTime
  * @returns formatDateTime function
- * @requires lodash 
- */ 
+ * @requires lodash
+ */
 'use strict';
 
 var _ = require('lodash'),

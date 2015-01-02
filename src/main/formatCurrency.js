@@ -2,7 +2,7 @@
  * @module formatCurrency
  * @desc module that formats and localises currency
  * @returns formatCurrency function
- * @requires lodash 
+ * @requires lodash
  */
 'use strict';
 

@@ -2,7 +2,7 @@
  * @module formatNumber
  * @desc module that formats and localises numbers
  * @returns formatNumber function
- * @requires lodash 
+ * @requires lodash
  */
 'use strict';
 

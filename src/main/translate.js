@@ -2,7 +2,7 @@
  * @module translate
  * @desc module that formats and localises translations
  * @returns translate function
- * @requires lodash 
+ * @requires lodash
  */
 'use strict';
     /**
