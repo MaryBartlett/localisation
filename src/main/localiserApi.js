@@ -2,7 +2,7 @@
  * @module LocaliserApi
  * @desc constructor function that creates a LocaliserApi
  * @returns LocaliserApi
- * @requires translate, formatDateTime, formatNumber, formatCurrency, lodash
+ * @requires translate, formatDateTime, formatNumber, formatCurrency, lodash, translationLoader
  */
 'use strict';
 
@@ -53,5 +53,7 @@ LocaliserApi.prototype.formatDateTime = require('./formatDateTime');
 LocaliserApi.prototype.formatNumber = require('./formatNumber');
 
 LocaliserApi.prototype.formatCurrency = require('./formatCurrency');
+
+LocaliserApi.prototype.loadTranslations = require('./translationLoader');
 
 module.exports = LocaliserApi;

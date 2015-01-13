@@ -78,6 +78,10 @@ describe('localiserApi', function () {
             expect(localiserInstance.translate).toBeFunction();
         });
 
+        it('should have a loadTranslations function', function () {
+            expect(localiserInstance.loadTranslations).toBeFunction();
+        });
+
         it('should have a formatDateTime function', function () {
             expect(localiserInstance.formatDateTime).toBeFunction();
         });

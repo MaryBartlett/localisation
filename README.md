@@ -112,6 +112,71 @@ var localisation = require('services/localisation'),
 	currency = localisation.formatCurrency(1000);
 ```
 
+## Loading App-Specific Translations
+
+Assuming that we have a default translation configured with the
+following translations
+
+```js
+var original_translations = {
+    en: {
+        translations: {
+            string: "translatedString",
+            anotherString: "another string"
+        }
+    },
+    fr: {
+        translations: {
+            string: "translatedStringInFrench"
+        },
+        territoryOverrides: {
+            ca: {
+                translations: {
+                    string: "candianTranslatedStringInFrench"
+                }
+            }
+        }
+    }
+}
+```
+
+And you want to load the following translations which are specific to your app
+
+```js
+var new_translations = {
+    en: {
+        translations: {
+            string: "alternative phrase for 'string'"
+            andNow: "for something completely different"
+        }
+    },
+    fr: {
+        translations: {
+            helloWorld: "Bonjour le Monde"
+        },
+        territoryOverrides: {
+            ca: {
+                translations: {
+                    string: "translatedStringInFrenchCanadian",
+                    helloWorld: "Bonjour, Tout le Monde du Canada"
+                }
+            }
+        }
+    }
+```
+
+Create your localisation solution as described above and then (assuming you're
+using the `new_translations` variable in the example above) call:
+
+```js
+    localiser.loadTranslations(new_translations);
+```
+
+following this, the `localiser._i18n.translations` object will contain a merge of
+the translations already loaded in and the new translations supplied. Following this,
+you can just call `localiser.translate('translation_key')` to retrieve the new
+translations.
+
 ## Grunt
 
 Uses grunt to lint, test and package the assets.
