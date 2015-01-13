@@ -3,7 +3,7 @@
  * @desc module that enables additional translations to be loaded
  * @returns loadTranslations function
  * @requires lodash
- t */
+ */
 "use strict";
 
 var _ = require('lodash'),
