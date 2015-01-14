@@ -18,6 +18,11 @@ var _ = require('lodash'),
  * 'supportedLanguages' test fixture file
  * {@see ../test/fixtures/supportedLang.js}
  *
+ * You also need an object that defines the supported territories as the second
+ * parameter. The simplest way is to use the supportedTerritories object from
+ * the localisation-configuration repo
+ * {@link https://github.brislabs.com/web/localisation-configuration}
+ *
  * @example
  * var translations = {
  *     en: {
@@ -42,15 +47,16 @@ var _ = require('lodash'),
  * }
  *
  * @param translations the translations to load
+ * @param territories the territories supported by the new translations
  */
-var loadTranslations = function (translations) {
+var loadTranslations = function (translations, territories) {
     var _i18n = _.cloneDeep(this._i18n);
     var locale = this._i18n.currentLocale();
     var _config = {
         territory: locale.substr(-2, 2).toLowerCase(),
         language: locale.substr(0, 2).toLowerCase(),
         supportedLanguages: translations,
-        supportedTerritories: this._i18n.territories
+        supportedTerritories: territories
     };
     configureI18n(_i18n, _config);
     this._i18n.translations = _.merge(this._i18n.translations, _i18n.translations);

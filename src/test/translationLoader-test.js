@@ -18,7 +18,6 @@ describe('translationLoader', function () {
     beforeEach(function () {
 
         i18n.translations = supportedLanguagesFixture;
-        i18n.territories = supportedTerritoriesFixture;
         var validConfig = {
             territory: 'gb',
             language: 'en',
@@ -63,13 +62,13 @@ describe('translationLoader', function () {
     });
 
     it('should add new translations to the defaults for each locale', function () {
-        loadTranslations.call(localiserScope, translations);
+        loadTranslations.call(localiserScope, translations, supportedTerritoriesFixture);
         expect(localiserScope._i18n.translations).not.toBe(supportedLanguagesFixture);
     });
 
     describe('English Translations', function () {
         beforeEach(function () {
-            loadTranslations.call(localiserScope, translations);
+            loadTranslations.call(localiserScope, translations, supportedTerritoriesFixture);
         });
 
         it('should have the expected english translation for a_key', function () {
@@ -99,7 +98,7 @@ describe('translationLoader', function () {
                 _i18n: i18n,
                 translate: require('../main/translate')
             };
-            loadTranslations.call(localiserScope, translations);
+            loadTranslations.call(localiserScope, translations, supportedTerritoriesFixture);
         });
 
         it('should have the expected french translation for a_key', function () {
@@ -127,7 +126,7 @@ describe('translationLoader', function () {
                     _i18n: i18n,
                     translate: require('../main/translate')
                 };
-                loadTranslations.call(localiserScope, translations);
+                loadTranslations.call(localiserScope, translations, supportedTerritoriesFixture);
             });
 
             it('should have the expected french canadian translation for helloWorld', function () {

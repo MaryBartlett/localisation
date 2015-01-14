@@ -67,7 +67,6 @@ var _ = require('lodash'),
         } else {
             return this._i18n.t(key, templateValues);
         }
-        return;
     };
 
 module.exports = translate;
