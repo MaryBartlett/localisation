@@ -166,10 +166,11 @@ var new_translations = {
 ```
 
 Create your localisation solution as described above and then (assuming you're
-using the `new_translations` variable in the example above) call:
+using the `new_translations` variable in the above example and the supportedTerritories
+object from `localeConfig` in the first code block) call:
 
 ```js
-    localiser.loadTranslations(new_translations);
+    localiser.loadTranslations(new_translations, supported_territories);
 ```
 
 following this, the `localiser._i18n.translations` object will contain a merge of

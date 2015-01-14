@@ -18,6 +18,11 @@ var _ = require('lodash'),
  * 'supportedLanguages' test fixture file
  * {@see ../test/fixtures/supportedLang.js}
  *
+ * You also need an object that defines the supported territories as the second
+ * parameter. The simplest way is to use the supportedTerritories object from
+ * the localisation-configuration repo
+ * {@link https://github.brislabs.com/web/localisation-configuration}
+ *
  * @example
  * var translations = {
  *     en: {
