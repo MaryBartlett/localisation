@@ -104,6 +104,17 @@ describe('localiser acceptance tests', function () {
             expect(localiser.translate('pluralizationAndStringReplacement', -1, { word: 'has worked successfully' })).toEqual('string replacement -1 has worked successfully string other');
             expect(localiser.translate('pluralizationAndStringReplacement', "10", { word: 'has worked successfully' })).toEqual('string replacement 10 has worked successfully string many');
         });
+
+        it('should correctly translate and replace any template values when those template values contain html containing strings that require translation', function () {
+            config = returnConfig('gb');
+            localiser = main.createLocaliser(config);
+
+            expect(localiser.translate('stringContainingHtml', false,
+            { terms:  '<a class="small-link" href="#">' + localiser.translate('terms') + '</a>',
+            privacy: '<a class="small-link" href="#">' + localiser.translate('privacy') + '</a>' }))
+            .toEqual('By proceeding you agree to the MixRadio <a class="small-link" href="#">Terms &amp; Conditions</a> and <a class="small-link" href="#">Privacy Policy</a>.');
+        });
+
     });
 
     describe('formatCurrency', function () {
