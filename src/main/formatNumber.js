@@ -7,6 +7,8 @@
 'use strict';
 
 var _ = require('lodash'),
+    formatNumber,
+    validateNumber;
 
     /**
     * @public
@@ -19,8 +21,24 @@ var _ = require('lodash'),
     formatNumber = function (number) {
         var numberPrecision = this._i18n.config.numberPrecision,
             numberSeparator = this._i18n.config.numberSeparator,
-            numberDelimiter = this._i18n.config.numberDelimiter;
+            numberDelimiter = this._i18n.config.numberDelimiter,
+            numberStripZeros = this._i18n.config.numberStripInsignificantZeros !== false; // default to true
 
+        validateNumber(number);
+
+        if (_.isString(number)) {
+            number = parseFloat(number);
+        }
+
+        return this._i18n.toNumber(number, {
+            precision: numberPrecision,
+            separator: numberSeparator,
+            delimiter: numberDelimiter,
+            'strip_insignificant_zeros': numberStripZeros
+        });
+    };
+
+    validateNumber = function (number) {
         // n.b. has to be isUndefined here to cater for number being 0
         if (_.isUndefined(number)) {
             throw new Error('formatNumber did not receive a number');
@@ -31,9 +49,6 @@ var _ = require('lodash'),
         if (_.isNaN(number) || _.isUndefined(number)) {
             throw new Error('formatNumber did not receive a number');
         }
-
-    return this._i18n.toNumber(number, { precision: numberPrecision, separator: numberSeparator, delimiter: numberDelimiter });
-
     };
 
 module.exports = formatNumber;

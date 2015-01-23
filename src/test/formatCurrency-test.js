@@ -61,7 +61,8 @@ describe('formatCurrency', function () {
 
         expect(localiserScope._i18n.toCurrency).toHaveBeenCalledWith(10,
             { format: localiserScope._i18n.config.currencyFormat, unit: localiserScope._i18n.config.currencySymbol,
-            precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator, delimiter: localiserScope._i18n.config.currencyDelimiter });
+                precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator,
+                delimiter: localiserScope._i18n.config.currencyDelimiter, 'strip_insignificant_zeros': false });
     });
 
     it('should call i18n.toCurrency when given a number', function () {
@@ -69,7 +70,8 @@ describe('formatCurrency', function () {
 
         expect(localiserScope._i18n.toCurrency).toHaveBeenCalledWith(10,
             { format: localiserScope._i18n.config.currencyFormat, unit: localiserScope._i18n.config.currencySymbol,
-            precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator, delimiter: localiserScope._i18n.config.currencyDelimiter });
+                precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator,
+                delimiter: localiserScope._i18n.config.currencyDelimiter, 'strip_insignificant_zeros': false });
     });
 
     it('should call i18n.toCurrency when given a string that is a number', function () {
@@ -77,7 +79,8 @@ describe('formatCurrency', function () {
 
         expect(localiserScope._i18n.toCurrency).toHaveBeenCalledWith(10,
             { format: localiserScope._i18n.config.currencyFormat, unit: localiserScope._i18n.config.currencySymbol,
-            precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator, delimiter: localiserScope._i18n.config.currencyDelimiter });
+                precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator,
+                delimiter: localiserScope._i18n.config.currencyDelimiter, 'strip_insignificant_zeros': false });
     });
 
     it('should call i18n.toCurrency when given a big number', function () {
@@ -85,7 +88,8 @@ describe('formatCurrency', function () {
 
         expect(localiserScope._i18n.toCurrency).toHaveBeenCalledWith(1000000000000000000000000000000,
             { format: localiserScope._i18n.config.currencyFormat, unit: localiserScope._i18n.config.currencySymbol,
-            precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator, delimiter: localiserScope._i18n.config.currencyDelimiter });
+                precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator,
+                delimiter: localiserScope._i18n.config.currencyDelimiter, 'strip_insignificant_zeros': false });
     });
 
     it('should call i18n.toCurrency when given a small number', function () {
@@ -93,7 +97,8 @@ describe('formatCurrency', function () {
 
         expect(localiserScope._i18n.toCurrency).toHaveBeenCalledWith(0.0000000000000000000000000000001,
          { format: localiserScope._i18n.config.currencyFormat, unit: localiserScope._i18n.config.currencySymbol,
-            precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator, delimiter: localiserScope._i18n.config.currencyDelimiter });
+             precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator,
+             delimiter: localiserScope._i18n.config.currencyDelimiter, 'strip_insignificant_zeros': false });
     });
 
     it('should call i18n.toCurrency when given a negative number', function () {
@@ -101,7 +106,8 @@ describe('formatCurrency', function () {
 
         expect(localiserScope._i18n.toCurrency).toHaveBeenCalledWith(-10,
             { format: localiserScope._i18n.config.currencyFormat, unit: localiserScope._i18n.config.currencySymbol,
-            precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator, delimiter: localiserScope._i18n.config.currencyDelimiter });
+                precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator,
+                delimiter: localiserScope._i18n.config.currencyDelimiter, 'strip_insignificant_zeros': false });
     });
 
     it('should call i18n.toCurrency when given zero', function () {
@@ -109,7 +115,19 @@ describe('formatCurrency', function () {
 
         expect(localiserScope._i18n.toCurrency).toHaveBeenCalledWith(0,
             { format: localiserScope._i18n.config.currencyFormat, unit: localiserScope._i18n.config.currencySymbol,
-            precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator, delimiter: localiserScope._i18n.config.currencyDelimiter });
+                precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator,
+                delimiter: localiserScope._i18n.config.currencyDelimiter, 'strip_insignificant_zeros': false });
+    });
+
+    it('should allow strip_insignificant_zeros to be overridden', function () {
+        localiserScope._i18n.config.currencyStripInsignificantZeros = true;
+
+        formatCurrency.call(localiserScope, 10);
+
+        expect(localiserScope._i18n.toCurrency).toHaveBeenCalledWith(10,
+            { format: localiserScope._i18n.config.currencyFormat, unit: localiserScope._i18n.config.currencySymbol,
+                precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator,
+                delimiter: localiserScope._i18n.config.currencyDelimiter, 'strip_insignificant_zeros': true });
     });
 
 });
