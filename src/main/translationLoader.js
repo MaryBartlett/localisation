@@ -21,7 +21,7 @@ var _ = require('lodash'),
      * You also need an object that defines the supported territories as the second
      * parameter. The simplest way is to use the supportedTerritories object from
      * the localisation-configuration repo
-     * {@link https://github.brislabs.com/web/localisation-configuration}
+     * {@see https://github.brislabs.com/web/localisation-configuration}
      *
      * @example
      * var translations = {
@@ -50,14 +50,14 @@ var _ = require('lodash'),
      * @param territories the territories supported by the new translations
      */
     loadTranslations = function (translations, territories) {
-        var _i18n = _.cloneDeep(this._i18n);
-        var locale = this._i18n.currentLocale();
-        var _config = {
-            territory: locale.substr(-2, 2).toLowerCase(),
-            language: locale.substr(0, 2).toLowerCase(),
-            supportedLanguages: translations,
-            supportedTerritories: territories
-        };
+        var _i18n = _.cloneDeep(this._i18n),
+            locale = this._i18n.currentLocale(),
+            _config = {
+                territory: locale.substr(-2, 2).toLowerCase(),
+                language: locale.substr(0, 2).toLowerCase(),
+                supportedLanguages: translations,
+                supportedTerritories: territories
+            };
         configureI18n(_i18n, _config);
         this._i18n.translations = _.merge(this._i18n.translations, _i18n.translations);
     };
