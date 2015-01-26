@@ -44,5 +44,18 @@ module.exports = {
         currencySymbol: "PL£",
         numberDelimiter: ';',
         numberSeparator: '-'
+    },
+    'fi': {
+        currencyFormat: "%n %u",
+        currencySymbol: "€",
+        currencyPrecision: 2,
+        currencySeparator: ",",
+        currencyDelimiter: " ",
+        currencyStripInsignificantZeros: true,
+        numberPrecision: 2,
+        numberSeparator: ",",
+        numberDelimiter: " ",
+        numberStripInsignificantZeros: false,
+        territoryDefaultLanguage: "fi"
     }
 };
