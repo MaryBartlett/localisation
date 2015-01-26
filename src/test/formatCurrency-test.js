@@ -119,7 +119,7 @@ describe('formatCurrency', function () {
                 delimiter: localiserScope._i18n.config.currencyDelimiter, 'strip_insignificant_zeros': false });
     });
 
-    it('should allow strip_insignificant_zeros to be overridden', function () {
+    it('should allow strip_insignificant_zeros to be overridden with true', function () {
         localiserScope._i18n.config.currencyStripInsignificantZeros = true;
 
         formatCurrency.call(localiserScope, 10);
@@ -129,5 +129,17 @@ describe('formatCurrency', function () {
                 precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator,
                 delimiter: localiserScope._i18n.config.currencyDelimiter, 'strip_insignificant_zeros': true });
     });
+
+    it('should allow default strip_insignificant_zeros to be explicitly set to false', function () {
+        localiserScope._i18n.config.currencyStripInsignificantZeros = false;
+
+        formatCurrency.call(localiserScope, 10);
+
+        expect(localiserScope._i18n.toCurrency).toHaveBeenCalledWith(10,
+            { format: localiserScope._i18n.config.currencyFormat, unit: localiserScope._i18n.config.currencySymbol,
+                precision: localiserScope._i18n.config.currencyPrecision, separator: localiserScope._i18n.config.currencySeparator,
+                delimiter: localiserScope._i18n.config.currencyDelimiter, 'strip_insignificant_zeros': false });
+    });
+
 
 });

@@ -91,7 +91,7 @@ describe('formatNumber', function () {
                 delimiter: localiserScope._i18n.config.numberDelimiter, 'strip_insignificant_zeros': true });
     });
 
-    it('should allow strip_insignificant_zeros to be overridden', function () {
+    it('should allow strip_insignificant_zeros to be overridden with false', function () {
         localiserScope._i18n.config.numberStripInsignificantZeros = false;
 
         formatNumber.call(localiserScope, 10);
@@ -100,4 +100,15 @@ describe('formatNumber', function () {
             { precision: localiserScope._i18n.config.numberPrecision, separator: localiserScope._i18n.config.numberSeparator,
                 delimiter: localiserScope._i18n.config.numberDelimiter, 'strip_insignificant_zeros': false });
     });
+
+    it('should allow strip_insignificant_zeros to be explicitly set to true', function () {
+        localiserScope._i18n.config.numberStripInsignificantZeros = true;
+
+        formatNumber.call(localiserScope, 10);
+
+        expect(localiserScope._i18n.toNumber).toHaveBeenCalledWith(10,
+            { precision: localiserScope._i18n.config.numberPrecision, separator: localiserScope._i18n.config.numberSeparator,
+                delimiter: localiserScope._i18n.config.numberDelimiter, 'strip_insignificant_zeros': true });
+    });
+
 });
