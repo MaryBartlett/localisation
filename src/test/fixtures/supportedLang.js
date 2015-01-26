@@ -87,9 +87,30 @@ module.exports = {
         }
     },
     'pt': {
+        dateFormat: {
+            defaultFormat: "%-d de %B de %Y",
+            shortFormat: "%Y/%m/%-d",
+            longFormat: "%A, %-d de %B de %Y"
+        },
+        dateTimeFormat: {
+            defaultFormat: "%-d de %B de %Y %-H:%M",
+            shortFormat: "%Y/%m/%-d %-H:%M",
+            longFormat: "%A, %-d de %B de %Y %-H:%M"
+        },
+        timeFormat: {
+            defaultFormat: "%-H:%M",
+            shortFormat: "%-H:%M",
+            longFormat: "%-H:%M:%S"
+        },
         territoryOverrides: {
             'br': {
-                translations: 'pt_BR.json'
+                translations: "pt_BR.json",
+                dateFormat: {
+                    shortFormat: "%-d/%m/%Y"
+                },
+                dateTimeFormat: {
+                    shortFormat: "%-d/%m/%Y %-H:%M"
+                }
             }
         }
     },
