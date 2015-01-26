@@ -20,12 +20,17 @@ var _ = require('lodash'),
     * @throws error if missing or incorrect parameters
     */
     formatCurrency = function (number) {
-        var currencyFormat = this._i18n.config.currencyFormat,
-            currencySymbol = this._i18n.config.currencySymbol,
-            currencyPrecision = this._i18n.config.currencyPrecision,
-            currencySeparator = this._i18n.config.currencySeparator,
-            currencyDelimiter = this._i18n.config.currencyDelimiter,
-            currencyStripZeros = this._i18n.config.currencyStripInsignificantZeros || false;
+        var rawConfig = {
+                currencyFormat: this._i18n.config.currencyFormat,
+                currencySymbol: this._i18n.config.currencySymbol,
+                currencyPrecision: this._i18n.config.currencyPrecision,
+                currencySeparator: this._i18n.config.currencySeparator,
+                currencyDelimiter: this._i18n.config.currencyDelimiter,
+                currencyStripZeros: this._i18n.config.currencyStripInsignificantZeros
+        },
+            config;
+
+        config = _.defaults(rawConfig, { 'currencyStripZeros': false });
 
         validateTerritory(this._territory);
         validateNumber(number);
@@ -35,12 +40,12 @@ var _ = require('lodash'),
         }
 
         return this._i18n.toCurrency(number, {
-            format: currencyFormat,
-            unit: currencySymbol,
-            precision: currencyPrecision,
-            separator: currencySeparator,
-            delimiter: currencyDelimiter,
-            'strip_insignificant_zeros': currencyStripZeros
+            format: config.currencyFormat,
+            unit: config.currencySymbol,
+            precision: config.currencyPrecision,
+            separator: config.currencySeparator,
+            delimiter: config.currencyDelimiter,
+            'strip_insignificant_zeros': config.currencyStripZeros
         });
     };
 

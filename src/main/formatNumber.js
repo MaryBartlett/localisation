@@ -19,10 +19,15 @@ var _ = require('lodash'),
     * @throws error if missing or incorrect parameters
     */
     formatNumber = function (number) {
-        var numberPrecision = this._i18n.config.numberPrecision,
-            numberSeparator = this._i18n.config.numberSeparator,
-            numberDelimiter = this._i18n.config.numberDelimiter,
-            numberStripZeros = this._i18n.config.numberStripInsignificantZeros !== false; // default to true
+        var rawConfig = {
+                numberPrecision: this._i18n.config.numberPrecision,
+                numberSeparator: this._i18n.config.numberSeparator,
+                numberDelimiter: this._i18n.config.numberDelimiter,
+                numberStripZeros: this._i18n.config.numberStripInsignificantZeros
+        },
+            config;
+
+        config = _.defaults(rawConfig, { 'numberStripZeros': true });
 
         validateNumber(number);
 
@@ -31,10 +36,10 @@ var _ = require('lodash'),
         }
 
         return this._i18n.toNumber(number, {
-            precision: numberPrecision,
-            separator: numberSeparator,
-            delimiter: numberDelimiter,
-            'strip_insignificant_zeros': numberStripZeros
+            precision: config.numberPrecision,
+            separator: config.numberSeparator,
+            delimiter: config.numberDelimiter,
+            'strip_insignificant_zeros': config.numberStripZeros
         });
     };
 
