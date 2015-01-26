@@ -103,7 +103,7 @@ var _ = require("lodash"),
 
         if (languageOverridesExistForTerritory(supportedTerritories, territory, language)) {
             // merge language overrides with territory config
-            territoryConfig = _.extend(territoryConfig, territoryConfig.languageOverrides[language]);
+            territoryConfig = _.merge(territoryConfig, territoryConfig.languageOverrides[language]);
         }
         return territoryConfig;
     },
@@ -122,7 +122,7 @@ var _ = require("lodash"),
 
         if (territoryOverridesExistForLanguage(supportedLanguages, territory, language)) {
             // merge territory overrides with language config
-            languageConfig = _.extend(languageConfig, languageConfig.territoryOverrides[territory]);
+            languageConfig = _.merge(languageConfig, languageConfig.territoryOverrides[territory]);
         }
         return languageConfig;
     },
@@ -157,7 +157,7 @@ var _ = require("lodash"),
         territoryConfig = _.omit(territoryConfig, 'languageOverrides');
         languageConfig = _.omit(languageConfig, 'territoryOverrides');
 
-        return _.extend(territoryConfig, languageConfig);
+        return _.merge(territoryConfig, languageConfig);
     };
 
 module.exports = {
