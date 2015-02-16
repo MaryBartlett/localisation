@@ -13,7 +13,14 @@ describe('translationLoader', function () {
 
     var localiserScope,
         translations,
-        config;
+        config,
+        englishTranslations = {
+            translations: {
+                'a_key': 'A Key',
+                'another_key': 'Another Key',
+                helloWorld: 'Hello World...'
+            }
+        };
 
     beforeEach(function () {
 
@@ -31,14 +38,8 @@ describe('translationLoader', function () {
             translate: require('../main/translate')
         };
         translations = {
-            en: {
-                translations: {
-                    'a_key': 'A Key',
-                    'another_key': 'Another Key',
-                    helloWorld: 'Hello World...'
-                }
-
-            },
+            en: englishTranslations,
+            'default': englishTranslations,
             fr: {
                 translations: {
                     'a_key': 'Une clé',
@@ -135,5 +136,32 @@ describe('translationLoader', function () {
         });
     });
 
+    describe('fallback to default translations', function () {
+        beforeEach(function () {
+            var validConfig = {
+                territory: 'default',
+                language: 'default',
+                supportedTerritories: supportedTerritoriesFixture,
+                supportedLanguages: supportedLanguagesFixture
+            };
+            config = configureI18n(i18n, validConfig);
+            localiserScope = {
+                _i18n: i18n,
+                translate: require('../main/translate')
+            };
+            loadTranslations.call(localiserScope, translations, supportedTerritoriesFixture);
+        });
 
+        it('should have the expected english (default) translation for a_key', function () {
+            expect(localiserScope.translate('a_key')).toBe('A Key');
+        });
+
+        it('should have the expected english (default) translation for another_key', function () {
+            expect(localiserScope.translate('another_key')).toBe('Another Key');
+        });
+
+        it('should have the expected english (default) translation for helloWorld', function () {
+            expect(localiserScope.translate('helloWorld')).toBe('Hello World...');
+        });
+    });
 });

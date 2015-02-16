@@ -7,3 +7,5 @@ info.log
 # Don't push the output of the JS compilation to source
 target
 documentation
+
+.DS_Store

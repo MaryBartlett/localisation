@@ -8,6 +8,40 @@
 
 var _ = require('lodash'),
     configureI18n = require('./configureI18n'),
+
+    isDefaultLocale = function (locale) {
+        return locale === 'default-DEFAULT';
+    },
+
+    /**
+     * @private
+     * @desc Creates the config object that will be used to configure i18n.
+     *
+     * Takes into account situations where the locale is not supported by our defined
+     * list of territory|language pairs and has been set to default-DEFAULT.
+     *
+     * In this situation rather than extracting the parts of the locale using the substring,
+     * just set the territory and language to 'default'.
+     *
+     * @param {string} locale - The current locale
+     * @param {object} translations - The translations to load
+     * @param {object} territories - The territories supported by the new translations
+     * @returns {object} The object required by the configureI18n function
+     */
+    createConfig = function (locale, translations, territories) {
+
+        var useDefault = isDefaultLocale(locale),
+            territory = useDefault ? 'default' : locale.substr(-2, 2).toLowerCase(),
+            language = useDefault ? 'default' : locale.substr(0, 2).toLowerCase();
+
+        return {
+            territory: territory,
+            language: language,
+            supportedLanguages: translations,
+            supportedTerritories: territories
+        };
+    },
+
     /**
      * load translations into the current configuration
      *
@@ -46,18 +80,13 @@ var _ = require('lodash'),
      *     }
      * }
      *
-     * @param translations the translations to load
-     * @param territories the territories supported by the new translations
+     * @param {object} translations the translations to load
+     * @param {object} territories the territories supported by the new translations
      */
     loadTranslations = function (translations, territories) {
         var _i18n = _.cloneDeep(this._i18n),
             locale = this._i18n.currentLocale(),
-            _config = {
-                territory: locale.substr(-2, 2).toLowerCase(),
-                language: locale.substr(0, 2).toLowerCase(),
-                supportedLanguages: translations,
-                supportedTerritories: territories
-            };
+            _config = createConfig(locale, translations, territories);
         configureI18n(_i18n, _config);
         this._i18n.translations = _.merge(this._i18n.translations, _i18n.translations);
     };

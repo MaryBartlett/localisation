@@ -57,5 +57,8 @@ module.exports = {
         numberDelimiter: " ",
         numberStripInsignificantZeros: false,
         territoryDefaultLanguage: "fi"
+    },
+    'default': {
+        territoryDefaultLanguage: 'default'
     }
 };

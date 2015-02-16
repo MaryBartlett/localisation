@@ -142,6 +142,23 @@ module.exports = {
             }
             return [key];
         }
+    },
+    'default': {
+        translations: {
+            "string": "translatedString",
+            "pluralizationString": {
+                "one": "{{count}} pluralizationStringOne",
+                "other": "{{count}} pluralizationStringOther"
+            },
+            "stringContainingHtml": "By proceeding you agree to the MixRadio {{terms}} and {{privacy}}.",
+            "terms": "Terms &amp; Conditions",
+            "privacy": "Privacy Policy",
+            "stringReplacementString": "string replacement {{word}} string",
+            "stringReplacementStringMoreThanOne": "string replacement {{word}} string {{otherword}}",
+            "pluralizationAndStringReplacement": {
+                "one": "string replacement {{count}} {{word}} string one",
+                "other": "string replacement {{count}} {{word}} string other"
+            }
+        }
     }
-
 };
