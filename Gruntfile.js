@@ -14,8 +14,8 @@ module.exports = function (grunt) {
         jasmine: require('./config/grunt/jasmine'),
         bump: require('./config/grunt/bump'),
         jsdoc: require('./config/grunt/jsdoc'),
-        "gh-pages": require('./config/grunt/gh-pages')
-
+        "gh-pages": require('./config/grunt/gh-pages'),
+        env: require('./config/grunt/env')
     });
 
     loadNpmTasks(grunt);
@@ -37,6 +37,7 @@ registerTasks = function (grunt) {
         'jshint',
         'jscs',
         'webpack',
+        'env:dev',
         'jasmine'
     ]);
 
@@ -47,10 +48,7 @@ registerTasks = function (grunt) {
 
 
     grunt.registerTask('test', [
-        'jshint',
-        'jscs',
-        'webpack',
-        'jasmine'
+        "process_js"
     ]);
 
 
@@ -81,5 +79,6 @@ loadNpmTasks = function (grunt) {
     grunt.loadNpmTasks('grunt-bump');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-gh-pages');
+    grunt.loadNpmTasks('grunt-env');
 
 };
