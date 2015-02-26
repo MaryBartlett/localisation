@@ -36,6 +36,7 @@
     "request": "2.45.0",
     "rewire-webpack": "0.2.0",
     "web-jscs-options": "https://github.brislabs.com/web/jscs-options/archive/v1.0.4.tar.gz",
+    "web-jshint-options": "git+ssh://git@github.brislabs.com:web/jshint-options.git#v0.0.2",
     "webpack": "1.4.3"
   }
 }

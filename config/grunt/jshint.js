@@ -1,3 +1,4 @@
+var _ = require('lodash');
 module.exports = {
     all: [
         './Gruntfile.js',
@@ -5,56 +6,11 @@ module.exports = {
         './src/main/**/*.js',
         './src/test/**/*.js'
     ],
-    options: {
-        bitwise: true,
-        camelcase: true,
-        curly: true,
-        eqeqeq: true,
-        es3: true,
-        forin: true,
-        freeze: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        node: true,
-        noempty: true,
-        nonbsp: true,
-        nonew: true,
-        plusplus: true,
-        // quotmark: true,
-        undef: true,
-        unused: true,
-        strict: true,
-        maxparams: 4,
-        maxdepth: 3,
-        maxstatements: 30,
-        maxcomplexity: 6,
-        maxlen: 200,
-        white: true,
-        devel: false,
-        browser: true,
-        indent: 4,
-        predef: [
-            'require',
-            'module',
-            '__dirname',
-            'jasmine',
-            'expect',
-            'jasmine',
-            'describe',
-            'xdescribe',
-            'before',
-            'beforeEach',
-            'after',
-            'afterEach',
-            'it',
-            'xit',
-            'it',
-            'inject',
-            'expect',
-            'spyOn',
-            'console'
-        ]
-    }
+    options: 
+        _.merge(require('web-jshint-options'), {
+            // overrides for default values
+            maxstatements: 30,
+            maxcomplexity: 6
+        }
+    )
 };
