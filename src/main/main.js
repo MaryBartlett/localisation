@@ -13,13 +13,14 @@ var  _ = require("lodash"),
     /**
     * @public
     * @function createLocaliser
-    * @desc function that takes supportedTerritories, supportedLanguages and the territory, configures i18n and returns a new, configured LocaliserApi
+    * @desc function that takes supportedTerritories, supportedLanguages and the territory, configures i18n and returns a new, configured LocaliserApi. Object can also have i18nOverrides property.
     * @param {object} configuration - configuration containing the supportedTerritories, supportedLanguages and the current territory
     * @returns {object} configured localiser set up as properly with the wrapper functions for localisation attached
     * @throws error if missing or incorrect parameters
     */
     createLocaliser = function (configuration) {
         var i18nConfiguration;
+        // dont test for i18nOverrides to be present, its not mandatory
         if (!(_.isObject(configuration) &&
             _.isObject(configuration.supportedTerritories) &&
             _.isObject(configuration.supportedLanguages) &&
