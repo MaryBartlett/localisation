@@ -2,11 +2,11 @@
  * @module configureI18n
  * @desc module that sets up all the things on I18n that it is expecting e.g. locale, defaultLocale, translations and pluralization rules
  * @returns configureI18n function
- * @requires configurationDeterminator, lodash
+ * @requires configurationDeterminator, litedash
  */
 'use strict';
 
-var  _ = require("lodash"),
+var _ = require("./litedash"),
     configDeterminator = require("./configurationDeterminator"),
 
     /**

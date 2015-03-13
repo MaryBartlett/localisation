@@ -2,7 +2,7 @@
  * @module translate
  * @desc module that formats and localises translations
  * @returns translate function
- * @requires lodash
+ * @requires litedash
  */
 'use strict';
     /**
@@ -39,7 +39,7 @@
     * @throws error if missing or incorrect parameters
     */
 
-var _ = require('lodash'),
+var _ = require('./litedash'),
     validateParams = function (key, pluralization, templateValues) {
         if (!key) {
             throw new Error('translate did not receive a key');

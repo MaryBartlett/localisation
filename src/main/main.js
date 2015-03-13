@@ -2,11 +2,11 @@
  * @module main
  * @desc entry point to set up localisation
  * @returns createLocaliser function
- * @requires i18n-js, configureI18n, localiserApi, lodash
+ * @requires i18n-js, configureI18n, localiserApi, litedash
  */
 'use strict';
 
-var  _ = require("lodash"),
+var _ = require("./litedash"),
     i18n = require("i18n-js"),
     configureI18n = require("./configureI18n"),
     LocaliserApi = require("./localiserApi"),

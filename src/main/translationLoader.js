@@ -2,11 +2,11 @@
  * @module translationLoader
  * @desc module that enables additional translations to be loaded
  * @returns loadTranslations function
- * @requires lodash
+ * @requires litedash
  */
 "use strict";
 
-var _ = require('lodash'),
+var _ = require('./litedash'),
     configureI18n = require('./configureI18n'),
 
     isDefaultLocale = function (locale) {
