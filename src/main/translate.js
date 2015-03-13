@@ -11,7 +11,7 @@
     * @desc translates a given key, determines whether the translation requires pluralization and/or template value substitution
     * @param {string} key - the key, the string that is required to be translated
     * @param {number/boolean} [pluralization] - the number to use for pluralization
-    * @param {object} [templateValues] - the template values that are required to be substituted into the string
+    * @param {object} [templateValues] - the template values that are required to be substituted into the string. There's one default parameter in template values: count. If its present, it will override anything passed in via [pluralization]. 
     * @returns {string} translated string with pluralization and string substitution if required
     * @example
     * json is:
@@ -27,6 +27,8 @@
     *   "other": "{{number}} songsOTHER"
     * }
     * translate('product-trackCount', 10);
+    * and
+    * translate('product-trackCount', false, { count: 10});
     * returns "10 songsOTHER"
     * @example
     * json is:
@@ -35,6 +37,8 @@
     *   "other": "{{number}} songsOTHER {{word}}"
     * }
     * translate('product-trackCount', 10, {word: 'bananas'});
+    * and
+    * translate('product-trackCount', 0, {count: 10, word: 'bananas'});
     * returns "10 songsOTHER bananas"
     * @throws error if missing or incorrect parameters
     */
@@ -57,16 +61,19 @@ var _ = require('lodash'),
         if (_.isString(pluralization)) {
             pluralization = parseFloat(pluralization);
         }
+
+        if (!_.isNumber(pluralization)) {
+            pluralization = 0;
+        }
+
         validateParams(key, pluralization, templateValues);
 
-        templateValues = _.isObject(templateValues) ? templateValues : undefined;
+        templateValues =
+          _.isObject(templateValues) ?
+            _.defaults(templateValues, { count: pluralization } ) :
+            { count: pluralization };
 
-        // n.b. has to be isNumber here to cater for pluralization being 0
-        if (_.isNumber(pluralization)) {
-            return this._i18n.p(pluralization, key, templateValues);
-        } else {
-            return this._i18n.t(key, templateValues);
-        }
+        return this._i18n.t(key, templateValues);
     };
 
 module.exports = translate;
