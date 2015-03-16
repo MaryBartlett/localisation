@@ -11,7 +11,8 @@
     * @desc translates a given key, determines whether the translation requires pluralization and/or template value substitution
     * @param {string} key - the key, the string that is required to be translated
     * @param {number/boolean} [pluralization] - the number to use for pluralization
-    * @param {object} [templateValues] - the template values that are required to be substituted into the string. There's one default parameter in template values: count. If its present, it will override anything passed in via [pluralization]. 
+    * @param {object} [templateValues] - the template values that are required to be substituted into the string.
+    * There's one default parameter in template values: count. If its present, it will override anything passed in via [pluralization].
     * @returns {string} translated string with pluralization and string substitution if required
     * @example
     * json is:
