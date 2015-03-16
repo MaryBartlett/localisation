@@ -2,11 +2,11 @@
  * @module formatCurrency
  * @desc module that formats and localises currency
  * @returns formatCurrency function
- * @requires lodash
+ * @requires litedash
  */
 'use strict';
 
-var _ = require('lodash'),
+var _ = require('./litedash'),
     formatCurrency,
     validateTerritory,
     validateNumber;

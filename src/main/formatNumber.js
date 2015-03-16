@@ -2,11 +2,11 @@
  * @module formatNumber
  * @desc module that formats and localises numbers
  * @returns formatNumber function
- * @requires lodash
+ * @requires litedash
  */
 'use strict';
 
-var _ = require('lodash'),
+var _ = require('./litedash'),
     formatNumber,
     validateNumber;
 

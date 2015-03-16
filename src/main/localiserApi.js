@@ -2,11 +2,11 @@
  * @module LocaliserApi
  * @desc constructor function that creates a LocaliserApi
  * @returns LocaliserApi
- * @requires translate, formatDateTime, formatNumber, formatCurrency, lodash, translationLoader
+ * @requires translate, formatDateTime, formatNumber, formatCurrency, litedash, translationLoader
  */
 'use strict';
 
-var _ = require("lodash"),
+var _ = require("./litedash"),
     /**
     * @public
     * @function LocaliserApi

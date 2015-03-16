@@ -15,7 +15,7 @@
     "2014-Present, MixRadio"
   ],
   "dependencies": {
-    "lodash": "2.4.1",
+    "lodash": "3.5.0",
     "i18n-js": "git://github.com/fnando/i18n-js#48892bcd128d7888f0c727aae26f9c7926264664", 
     "service-console": "http://github.brislabs.com/web/service-console/archive/v1.0.1.tar.gz"
   },
@@ -37,6 +37,6 @@
     "rewire-webpack": "0.2.0",
     "web-jscs-options": "https://github.brislabs.com/web/jscs-options/archive/v1.0.4.tar.gz",
     "web-jshint-options": "git+ssh://git@github.brislabs.com:web/jshint-options.git#v0.0.2",
-    "webpack": "1.4.3"
+    "webpack": "1.7.3"
   }
 }

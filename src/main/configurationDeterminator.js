@@ -2,11 +2,11 @@
  * @module configurationDeterminator
  * @desc module that determines the valid territory and language to be used, and using those will give the valid configuration for the territory/language combination and also the locale
  * @returns {object} containing the 4 public methods: determineTerritory, determineLanguage, createConfig, createLocale
- * @requires lodash
+ * @requires litedash
  */
 'use strict';
 
-var _ = require("lodash"),
+var _ = require("./litedash"),
     territoryConfig,
     languageConfig,
 
