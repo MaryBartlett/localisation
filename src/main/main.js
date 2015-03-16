@@ -28,7 +28,7 @@ var  _ = require("lodash"),
     * "missingBehaviour": "guess" into createLocalizer.
     *
     * If the key for chosen language is missing, above will then return the
-    * key translitterated into a actual translation. 
+    * key translitterated into a actual translation.
     *
     * Another useful override property is:
     *
