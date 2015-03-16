@@ -26,8 +26,11 @@ var  _ = require("lodash"),
             pluralization = config.pluralization;
         }
 
-        config = _.omit(config, 'translations');
-        config = _.omit(config, 'pluralization');
+        config = _.omit(config, [
+            'translations',
+            'pluralization',
+            'i18nOverrides'
+        ]);
 
         if (!_.isEmpty(config)) {
             createdConfig.config = _.cloneDeep(config);
@@ -59,7 +62,9 @@ var  _ = require("lodash"),
             determinedLanguage,
             determinedConfig,
             determinedLocale,
-            i18nConfig;
+            i18nConfig,
+            overrides = config.i18nOverrides || {};
+
         // reset i18n to prevent bleeding of configuration
         i18n.reset();
         i18n.config = {};
@@ -77,6 +82,10 @@ var  _ = require("lodash"),
         determinedConfig = configDeterminator.createConfig(config.supportedTerritories, config.supportedLanguages, determinedTerritory, determinedLanguage);
 
         i18nConfig = createConfig(determinedLocale, determinedConfig);
+
+        if (!_.isEmpty(overrides)) {
+          _.merge(i18n, overrides );
+        }
 
         _.merge(i18n, i18nConfig);
 

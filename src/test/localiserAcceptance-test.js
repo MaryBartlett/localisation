@@ -35,6 +35,35 @@ describe('localiser acceptance tests', function () {
         }));
     });
 
+    describe('engineering english enabled', function () {
+        beforeEach(function () {
+            config = returnConfig('gb');
+            config.i18nOverrides = {};
+            config.i18nOverrides.missingBehaviour = 'guess';
+            localiser = main.createLocaliser(config);
+        });
+        it('should generate mock translations without prefix', function () {
+            localiser = main.createLocaliser(config);
+            expect(localiser.translate).toBeFunction();
+            expect(localiser.translate('this.is.scope.key.translatedString')).toEqual('translated string');
+            expect(localiser.translate('this.is.scope.key.Translated_String')).toEqual('Translated String');
+            var result = 'And we are doing some really long keys here which can then be shown in readable format while developing';
+            expect(localiser.translate('this.is.scope.key.AndWeAreDoingSomeReallyLongKeysHereWhichCanThenBeShownInReadableFormatWhileDeveloping')).toEqual(result);
+        });
+
+        it('should generate mock translations with prefix', function () {
+            config.i18nOverrides.missingTranslationPrefix = 'XYZ: ';
+            localiser = main.createLocaliser(config);
+
+            expect(localiser.translate).toBeFunction();
+            expect(localiser.translate('this.is.scope.key.translatedString')).toEqual('XYZ: translated string');
+            expect(localiser.translate('this.is.scope.key.Translated_String')).toEqual('XYZ: Translated String');
+            var result = 'XYZ: And we are doing some really long keys here which can then be shown in readable format while deloping';
+            expect(localiser.translate('this.is.scope.key.AndWeAreDoingSomeReallyLongKeysHereWhichCanThenBeShownInReadableFormatWhileDeloping')).toEqual(result);
+        });
+
+    });
+
     describe('translate', function () {
 
         it('should translate', function () {
@@ -127,14 +156,12 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatCurrency('20')).toEqual('£20.00');
             expect(localiser.formatCurrency('1.2')).toEqual('£1.20');
             expect(localiser.formatCurrency('20000000000')).toEqual('£20,000,000,000.00');
-            // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
-            expect(localiser.formatCurrency('-20000000000')).toEqual('£-20,000,000,000.00');
+            expect(localiser.formatCurrency('-20000000000')).toEqual('-£20,000,000,000.00');
 
             expect(localiser.formatCurrency(20)).toEqual('£20.00');
             expect(localiser.formatCurrency(1.2)).toEqual('£1.20');
             expect(localiser.formatCurrency(20000000000)).toEqual('£20,000,000,000.00');
-            // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
-            expect(localiser.formatCurrency(-20000000000)).toEqual('£-20,000,000,000.00');
+            expect(localiser.formatCurrency(-20000000000)).toEqual('-£20,000,000,000.00');
         });
 
         it('should localise and format a currency with correct currency format, symbol and precision', function () {
@@ -163,14 +190,12 @@ describe('localiser acceptance tests', function () {
             expect(localiser.formatCurrency('20')).toEqual('PL£20;00');
             expect(localiser.formatCurrency('1.2')).toEqual('PL£1;20');
             expect(localiser.formatCurrency('20000000000')).toEqual('PL£20-000-000-000;00');
-            // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
-            expect(localiser.formatCurrency('-20000000000')).toEqual('PL£-20-000-000-000;00');
+            expect(localiser.formatCurrency('-20000000000')).toEqual('-PL£20-000-000-000;00');
 
             expect(localiser.formatCurrency(20)).toEqual('PL£20;00');
             expect(localiser.formatCurrency(1.2)).toEqual('PL£1;20');
             expect(localiser.formatCurrency(20000000000)).toEqual('PL£20-000-000-000;00');
-            // n.b. I don't think this is how you correctly show negative currency, but it's the way it's written for now
-            expect(localiser.formatCurrency(-20000000000)).toEqual('PL£-20-000-000-000;00');
+            expect(localiser.formatCurrency(-20000000000)).toEqual('-PL£20-000-000-000;00');
         });
 
         it('should localise and strip off zeros for territories which have no concept of "pence"', function () {
