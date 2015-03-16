@@ -18,6 +18,15 @@ describe('configureI18n', function () {
             supportedTerritories: {},
             supportedLanguages: {}
         },
+        validConfigWithOverrides = {
+            territory: 'gb',
+            language: 'en',
+            supportedTerritories: {},
+            supportedLanguages: {},
+            i18nOverrides: {
+                neverUsedPropertyKey: "FOOBAR"
+            }
+        },
         resolvedTerritory = 'de',
         resolvedLanguage = 'fr',
         resolvedLocale = 'fr-DE',
@@ -138,5 +147,12 @@ describe('configureI18n', function () {
         expect(configuredI18n.territory).toBe(resolvedTerritory);
         expect(configuredI18n.language).toBe(resolvedLanguage);
         expect(configuredI18n.locale).toBe(resolvedLocale);
+    });
+
+    it('honours given i18n config overrides', function () {
+        configureI18n(i18nObj, validConfig);
+        expect(i18nObj.neverUsedPropertyKey).not.toBeDefined();
+        configureI18n(i18nObj, validConfigWithOverrides);
+        expect(i18nObj.neverUsedPropertyKey).toBeDefined();
     });
 });
