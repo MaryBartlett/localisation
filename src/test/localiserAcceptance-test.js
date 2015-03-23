@@ -74,6 +74,24 @@ describe('localiser acceptance tests', function () {
             expect(localiser.translate('string')).toEqual('translatedString');
         });
 
+        it('pluralize strings to default 0 when no count is passed', function () {
+            config = returnConfig('gb');
+            localiser = main.createLocaliser(config);
+
+            expect(localiser.translate('pluralizationString')).toEqual('0 pluralizationStringOther');
+        });
+
+        it('pluralize strings to proper count when its passed in template', function () {
+            expect(localiser.translate('pluralizationString')).toEqual('0 pluralizationStringOther');
+            config = returnConfig('gb');
+            localiser = main.createLocaliser(config);
+
+            expect(localiser.translate('pluralizationString', false, { count: 0 })).toEqual('0 pluralizationStringOther');
+            expect(localiser.translate('pluralizationString', false, { count: 1 })).toEqual('1 pluralizationStringOne');
+            expect(localiser.translate('pluralizationString', 0, { count: 100 })).toEqual('100 pluralizationStringOther');
+            expect(localiser.translate('pluralizationString', 1, { count: 9 })).toEqual('9 pluralizationStringOther');
+        });
+
         it('should correctly pluralize strings', function () {
             config = returnConfig('gb');
             localiser = main.createLocaliser(config);
