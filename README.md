@@ -1,7 +1,7 @@
 #Localisation [![!Build Status](http://btdevapsrvjenkins05.brislabs.com:8080/job/localisation-CI/badge/icon)](http://btdevapsrvjenkins05.brislabs.com:8080/job/localisation-CI/)
 
 
-A project for localising 
+A project for localising
  - translations
  - date
  - currency
@@ -79,7 +79,7 @@ localisationService.createConfig = function () {
 };
 
 bindLocalisationFunctions = function () {
-    _.each(['translate', 'formatDateTime', 'formatNumber', 'formatCurrency'], function (func) {
+    _.each(_.functions(localiser), function (func) {
         localisationService[func] = _.bind(localisationService.localiser[func], localisationService.localiser);
     });
 };
@@ -110,6 +110,7 @@ var localisation = require('services/localisation'),
 	dateTime = localisation.formatDateTime(new Date(), 'dateTime'),
 	number = localisation.formatNumber(1000),
 	currency = localisation.formatCurrency(1000);
+    loadTranslation = localisation.loadTranslations({object: 'containing', all: 'translations'});
 ```
 
 ## Loading App-Specific Translations
@@ -177,6 +178,131 @@ following this, the `localiser._i18n.translations` object will contain a merge o
 the translations already loaded in and the new translations supplied. Following this,
 you can just call `localiser.translate('translation_key')` to retrieve the new
 translations.
+
+## Using the localisation functions
+
+The best documentation for the localisation functions are the tests - particularly the acceptance tests, but this is a quick summary.
+
+### Translate
+
+If the following json was your English translations:
+
+```
+translations = {
+    key: 'value',
+    deeper: {
+        key: 'deeper value'
+    },
+    pluralisation: {
+        string: : {
+            one: '{{count}} pluralisation',
+            other: '{{count}} pluralisations'
+        }
+    },
+    replacement: {
+        string: 'replace my {{word}}',
+        pluralise: {
+            one: 'replace my {{word}}'
+            other: 'replace all {{count}} of my {{words}}'
+        },
+        many: 'replace {{word}} with {{otherWord}}'
+    },
+    complexReplacement: 'string that contains {{aLinkThatRequiresTranslation}} and {{anotherLinkThatRequiresTranslation}}',
+    links: {
+        linkOne: 'link one',
+        linkTwo: 'link two'
+    }
+}
+```
+
+```
+localisation.translate('key');                                                                  will return 'value'
+localisation.translate('deeper.key');                                                           will return 'deeper value'
+localisation.translate('pluralised.string', 1);                                                 will return '1 pluralisation'
+localisation.translate('pluralised.string', 369);                                               will return '369 pluralisations'
+localisation.translate('replacement.string', false, {word: 'string'});                          will return 'replace my string'
+localisation.translate('replacement.pluralise', 1, {word: 'string'});                           will return 'replace my string'
+localisation.translate('replacement.pluralise', 369, {word: 'strings'});                        will return 'replace all 369 of my strings'
+localisation.translate('replacement.many', false, {word: 'string', otherWord: 'strong'});       will return 'replace string with strong'
+localisation.translate('complexReplacement', false, {
+        aLinkThatRequiresTranslation: '<a class="small-link" href="#">' + localiser.translate('links.linkOne') + '</a>',
+        anotherLinkThatRequiresTranslation: '<a class="small-link" href="#">' + localiser.translate('links.linkTwo') + '</a>'
+        });                                                                                     will return 'string that contains <a class="small-link" href="#">link one</a> and <a class="small-link" href="#">link two</a>'
+
+```
+
+### Format currency
+
+Assuming English currency formats
+```
+localisation.formatNumber(20);                will return '£20.00'
+localisation.formatNumber('20');              will return '£20.00'
+localisation.formatNumber('1.2');             will return '£1.20'
+
+```
+
+### Format number
+
+Assuming English number formats
+```
+localisation.formatCurrency(20);                will return '20'
+localisation.formatCurrency('20');              will return '20'
+localisation.formatCurrency('1.2');             will return '1.2'
+
+```
+
+### Format date time
+
+Assuming English date formats. Dates will automatically get translated so January would become janvier in French
+
+#### Unix epoch
+```
+localisation.formatDateTime(1412604094352, 'dateTime');                                                                         will return 'Monday, 06 October 2014, 15:01 h'
+localisation.formatDateTime(1412604094352, 'dateTime', 'short');                                                                will return '06/10/2014, 15:01 h'
+localisation.formatDateTime(1412604094352, 'dateTime', 'long');                                                                 will return 'Monday, 06 October 2014, 15:01 h'
+
+localisation.formatDateTime(1412604094352, 'date');                                                                             will return 'Monday, 06 October 2014'
+localisation.formatDateTime(1412604094352, 'date', 'short');                                                                    will return '06/10/2014'
+localisation.formatDateTime(1412604094352, 'date', 'long');                                                                     will return 'Monday, 06 October 2014'
+
+localisation.formatDateTime(1412604094352, 'time');                                                                             will return '15:01 h'
+localisation.formatDateTime(1412604094352, 'time', 'short');                                                                    will return '15:01 h'
+localisation.formatDateTime(1412604094352, 'time', 'long');                                                                     will return '15:01:34 h'
+
+```
+
+#### Datestring date
+```
+localisation.formatDateTime(Mon Oct 06 2014 15:10:48 GMT+0100 (BST), 'dateTime');                                               will return 'Monday, 06 October 2014, 15:01 h'
+localisation.formatDateTime(Mon Oct 06 2014 15:10:48 GMT+0100 (BST), 'dateTime', 'short');                                      will return '06/10/2014, 15:01 h'
+localisation.formatDateTime(Mon Oct 06 2014 15:10:48 GMT+0100 (BST), 'dateTime', 'long');                                       will return 'Monday, 06 October 2014, 15:01 h'
+
+localisation.formatDateTime(Mon Oct 06 2014 15:10:48 GMT+0100 (BST), 'date');                                                   will return 'Monday, 06 October 2014'
+localisation.formatDateTime(Mon Oct 06 2014 15:10:48 GMT+0100 (BST), 'date', 'short');                                          will return '06/10/2014'
+localisation.formatDateTime(Mon Oct 06 2014 15:10:48 GMT+0100 (BST), 'date', 'long');                                           will return 'Monday, 06 October 2014'
+
+localisation.formatDateTime(Mon Oct 06 2014 15:10:48 GMT+0100 (BST), 'time');                                                   will return '15:01 h'
+localisation.formatDateTime(Mon Oct 06 2014 15:10:48 GMT+0100 (BST), 'time', 'short');                                          will return '15:01 h'
+localisation.formatDateTime(Mon Oct 06 2014 15:10:48 GMT+0100 (BST), 'time', 'long');                                           will return '15:01:34 h'
+
+```
+
+#### Object date
+```
+localisation.formatDateTime({ year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39 }, 'dateTime');                   will return 'Monday, 06 October 2014, 15:01 h'
+localisation.formatDateTime({ year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39 }, 'dateTime', 'short');          will return '06/10/2014, 15:01 h'
+localisation.formatDateTime({ year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39 }, 'dateTime', 'long');           will return 'Monday, 06 October 2014, 15:01 h'
+
+localisation.formatDateTime({ year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39 }, 'date');                       will return 'Monday, 06 October 2014'
+localisation.formatDateTime({ year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39 }, 'date', 'short');              will return '06/10/2014'
+localisation.formatDateTime({ year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39 }, 'date', 'long');               will return 'Monday, 06 October 2014'
+
+localisation.formatDateTime({ year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39 }, 'time');                       will return '15:01 h'
+localisation.formatDateTime({ year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39 }, 'time', 'short');              will return '15:01 h'
+localisation.formatDateTime({ year: 2014, month: 10, day: 6, hour: 15, minute: 22, second: 39 }, 'time', 'long');               will return '15:01:39 h'
+
+```
+
 
 ## Grunt
 
