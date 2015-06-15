@@ -55,7 +55,7 @@ var _ = require('lodash'),
 
 localisationService.init = function () {
     localisationService.territory = localisationService.detectTerritory();
-    localisationService.language  = localisationService.detectLanguage();
+    localisationService.language = localisationService.detectLanguage();
     localisationService.localiser = localisation.createLocaliser(localisationService.createConfig());
     localisationService.locale = localisationService.localiser.getLocale();
     bindLocalisationFunctions();
@@ -79,8 +79,8 @@ localisationService.createConfig = function () {
 };
 
 bindLocalisationFunctions = function () {
-    _.each(_.functions(localiser), function (func) {
-        localisationService[func] = _.bind(localisationService.localiser[func], localisationService.localiser);
+    _.each(_.functions(localisationService.localiser), function (func) {
+        localisationService[ func ] = _.bind(localisationService.localiser[ func ], localisationService.localiser);
     });
 };
 
