@@ -231,6 +231,8 @@ localisation.translate('complexReplacement', false, {
 
 ```
 
+NOTE: it is important that the translation string you are trying to pluralise has the {{count}} where you want the pluralisation number to be injected in.
+
 ### Format currency
 
 Assuming English currency formats

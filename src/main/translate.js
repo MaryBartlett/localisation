@@ -24,8 +24,8 @@
     * @example
     * json is:
     * "product-trackCount": {
-    *   "one": "{{number}} songONE",
-    *   "other": "{{number}} songsOTHER"
+    *   "one": "{{count}} songONE",
+    *   "other": "{{count}} songsOTHER"
     * }
     * translate('product-trackCount', 10);
     * and
@@ -34,8 +34,8 @@
     * @example
     * json is:
     * "product-trackCount": {
-    *   "one": "{{number}} songONE {{word}}",
-    *   "other": "{{number}} songsOTHER {{word}}"
+    *   "one": "{{count}} songONE {{word}}",
+    *   "other": "{{count}} songsOTHER {{word}}"
     * }
     * translate('product-trackCount', 10, {word: 'bananas'});
     * and
