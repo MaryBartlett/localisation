@@ -17,7 +17,7 @@
   "dependencies": {
     "lodash": "3.5.0",
     "i18n-js": "git://github.com/fnando/i18n-js#48892bcd128d7888f0c727aae26f9c7926264664",
-    "service-console": "http://github.brislabs.com/web/service-console/archive/v1.0.2.tar.gz"
+    "service-console": "git+ssh://git@github.brislabs.com:web/service-console#v1.0.2"
   },
   "devDependencies": {
     "grunt": "0.4.5",
@@ -35,7 +35,7 @@
     "jscs": "1.7.3",
     "request": "2.45.0",
     "rewire-webpack": "0.2.0",
-    "web-jscs-options": "https://github.brislabs.com/web/jscs-options/archive/v1.0.4.tar.gz",
+    "web-jscs-options": "git+ssh://git@github.brislabs.com:web/jscs-options#v1.0.4",
     "web-jshint-options": "git+ssh://git@github.brislabs.com:web/jshint-options.git#v0.0.2",
     "webpack": "1.7.3"
   }
