@@ -1,5 +1,6 @@
 #Localisation
 
+## Please note - this does not build at present as the package.json still references things we used to used at MixRadio that are required.
 
 A project for localising
  - translations
