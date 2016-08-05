@@ -55,7 +55,7 @@ var _ = require('./litedash'),
      * You also need an object that defines the supported territories as the second
      * parameter. The simplest way is to use the supportedTerritories object from
      * the localisation-configuration repo
-     * {@see https://github.brislabs.com/web/localisation-configuration}
+     * {@see https://github.com/MaryBartlett/localisation-configuration}
      *
      * @example
      * var translations = {
