@@ -7,7 +7,7 @@ A project for localising
  - currency
  - number
 
-Uses <a href="https://github.com/fnando/i18n-js/">i18n-js</a>, <a href="https://github.brislabs.com/web/localisation-configuration">config<a/> stored as json and translations stored as json.
+Uses <a href="https://github.com/fnando/i18n-js/">i18n-js</a>, <a href="https://github.com/MaryBartlett/localisation-configuration">config<a/> stored as json and translations stored as json.
 
 Further documentation can be found from the <a href="https://github.brislabs.com/pages/web/localisation">jsdoc output</a> and also from <a href="https://github.brislabs.com/pages/web/localisation/diagrams.html">sequence diagrams</a>
 
@@ -17,7 +17,7 @@ Further documentation can be found from the <a href="https://github.brislabs.com
 Add the following line to package.json using the required release version
 
 ```js
-"localisation": "https://github.brislabs.com/web/localisation/archive/v1.0.4.tar.gz"
+"localisation": "https://github.com/MaryBartlett/localisation/archive/v1.0.4.tar.gz"
 ```
 
 ## Configuring localisation
@@ -42,7 +42,7 @@ var configuredLocaliser = localisation.createLocaliser(config)
 
 configuredLocaliser then should have the expected 'translate', 'formatDateTime', 'fornatNumber' and 'formatCurrency'.
 
-Alternatively you may wish to wrap this as a service - the following block is how we have wrapped it as a localisationService; 'services/localisation' in <a href="https://github.brislabs.com/web/mixrad-app/blob/master/src/services/localisation.js">mixrad-app</a>
+Alternatively you may wish to wrap this as a service - the following block is how we have wrapped it as a localisationService
 
 ```js
 'use strict';
