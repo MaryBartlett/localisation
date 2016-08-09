@@ -219,8 +219,8 @@ translations = {
 ```
 localisation.translate('key');                                                                  will return 'value'
 localisation.translate('deeper.key');                                                           will return 'deeper value'
-localisation.translate('pluralised.string', 1);                                                 will return '1 pluralisation'
-localisation.translate('pluralised.string', 369);                                               will return '369 pluralisations'
+localisation.translate('pluralisation.string', 1);                                                 will return '1 pluralisation'
+localisation.translate('pluralisation.string', 369);                                               will return '369 pluralisations'
 localisation.translate('replacement.string', false, {word: 'string'});                          will return 'replace my string'
 localisation.translate('replacement.pluralise', 1, {word: 'string'});                           will return 'replace my string'
 localisation.translate('replacement.pluralise', 369, {word: 'strings'});                        will return 'replace all 369 of my strings'
